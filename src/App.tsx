@@ -4,7 +4,7 @@ import NewSight from './pages/NewSight.tsx';
 import Main from './pages/Main.tsx';
 import EditSight from './pages/EditSight.tsx';
 import About from './pages/About.tsx';
-import Header from './components/Header.tsx';
+import Header from './components/header/Header.tsx';
 import NavBar from './components/NavBar.tsx';
 import Footer from './components/Footer.tsx';
 import Error from './pages/Error.tsx';
