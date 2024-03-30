@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    width: 100%;
+    padding: 0.3rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    justify-content: flex-start;
+    color: var(--text-light);
+    align-items: center;
+}
+
+.header h1 {
+    margin: 1.1rem;
+}
+
+.header svg {
+    width: 25px;
+    height: 25px;
+}
