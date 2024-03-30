@@ -8,6 +8,8 @@
 
 body {
   margin: 0;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
   display: flex;
   padding: 0;
   overflow: hidden;
