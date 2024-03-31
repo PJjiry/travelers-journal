@@ -1,12 +1,12 @@
 import {Route, Routes} from "react-router-dom"
 import PackingList from './pages/PackingList.tsx';
 import NewSight from './pages/NewSight.tsx';
-import Main from './pages/Main.tsx';
+import Main from './pages/Main/Main.tsx';
 import EditSight from './pages/EditSight.tsx';
 import About from './pages/About.tsx';
-import Header from './components/header/Header.tsx';
-import NavBar from './components/navbar/NavBar.tsx';
-import Footer from './components/Footer.tsx';
+import Header from './components/Header/Header.tsx';
+import NavBar from './components/NavBar/NavBar.tsx';
+import Footer from  './components/Footer/Footer.tsx';
 import Error from './pages/Error.tsx';
 
 function App() {

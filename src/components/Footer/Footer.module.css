@@ -1,0 +1,8 @@
+.footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 0.2rem;
+    text-align: center;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: var(--text-light);
+}

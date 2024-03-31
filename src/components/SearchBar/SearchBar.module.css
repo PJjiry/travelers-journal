@@ -1,0 +1,31 @@
+.searchBar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 13px;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--grey);
+    margin-right: 10rem;
+    transition: border-bottom-color 0.4s ease;
+}
+
+.searchContainer svg{
+    width: 22px;
+    height: 22px;
+}
+
+.searchInput {
+    flex-grow: 1;
+    border: none;
+    padding: 8px;
+    outline: none;
+}
+
+.searchContainer:focus-within {
+    border-bottom-color: var(--secondary);
+}

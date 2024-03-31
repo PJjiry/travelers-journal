@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom'
-import classes from './navbar.module.css'
+import classes from './NavBar.module.css'
 import { FaHome } from "react-icons/fa";
 
 const NavBar:React.FC = () => {
