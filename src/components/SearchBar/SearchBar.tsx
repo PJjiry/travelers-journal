@@ -5,6 +5,7 @@ import { MdSearch } from "react-icons/md";
 const SearchBar: React.FC = () => {
     return (
         <section className={classes.searchBar}>
+            <h2>Your places:</h2>
             <div className={classes.searchContainer}>
                 <MdSearch/>
                 <input type="search" className={classes.searchInput} placeholder="Search places..."/>
