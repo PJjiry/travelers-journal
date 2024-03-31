@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImAirplane} from "react-icons/im";
-import classes from './header.module.css'
+import classes from './Header.module.css'
 
 const Header: React.FC = () => {
     return (
