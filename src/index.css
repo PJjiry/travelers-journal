@@ -5,6 +5,10 @@
   --text-dark: #000000;
   --grey: #9f9d9d;
   --background: #ffffff;
+  --dark-grey: #00000026;
+  --city-color: rgba(0, 123, 167, 1);
+  --nature-color: rgb(43, 155, 18);
+  --secondary-transparent: rgba(190, 20, 235, 0.5);
 }
 
 body {
@@ -13,7 +17,7 @@ body {
   font-optical-sizing: auto;
   display: flex;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   justify-content: flex-start;
   flex-direction: column;
   min-width: 320px;

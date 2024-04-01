@@ -1,0 +1,44 @@
+.placesList {
+    display: grid;
+    overflow-y: auto;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 0.5fr));
+    grid-gap: 20px;
+    height: 600px;
+    justify-items: center;
+    padding: 20px;
+}
+
+.place {
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    flex-direction: column;
+    box-shadow: 0 2px 10px var(--dark-grey), 0 3px 20px var(--dark-grey);
+    margin-bottom: 1rem;
+}
+
+.place img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.placeInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.placeInfo h3{
+    margin: 0.2rem;
+    font-size: 1.5em;
+    color: var(--text-light);
+}
+
+.placeInfo p{
+    margin: 0.2rem;
+    font-size: 1em;
+    color: var(--text-dark);
+}

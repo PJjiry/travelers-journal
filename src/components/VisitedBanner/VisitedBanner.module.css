@@ -1,0 +1,9 @@
+.visitedBanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--secondary-transparent);
+    color: var(--text-light);
+    padding: 10px;
+    font-size: 15px;
+}
