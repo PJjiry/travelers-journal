@@ -5,8 +5,8 @@
   --text-dark: #000000;
   --grey: #9f9d9d;
   --background: #ffffff;
-  --dark-grey: #00000026;
-  --city-color: rgba(0, 123, 167, 1);
+  --dark-grey: rgba(0, 0, 0, 0.25);
+  --city-color: rgb(70, 130, 180);
   --nature-color: rgb(43, 155, 18);
   --secondary-transparent: rgba(190, 20, 235, 0.5);
 }

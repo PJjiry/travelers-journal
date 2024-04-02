@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../components/PlacesList/PlacesList.module.css';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
-import {DUMMY_PLACES} from '../components/PlacesList/PlacesList.tsx';
+import {DUMMY_PLACES} from '../dummy_places.ts';
 
 const EditSight:React.FC = () => {
   return(
