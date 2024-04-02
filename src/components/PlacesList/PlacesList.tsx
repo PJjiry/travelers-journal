@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './PlacesList.module.css'
-import {DUMMY_PLACES} from '../../dummy_places.ts';
 import PlaceItem from '../PlaceItem/PlaceItem.tsx';
+import {Place} from '../../types.ts';
 
-const PlacesList: React.FC = () => {
+const PlacesList: React.FC<{places: Place[]}> = ({places}) => {
     return (
         <section className={classes.placesList}>
-            {DUMMY_PLACES.map((place) => {
+            {places && places.map((place) => {
                 return (
                     <PlaceItem key={place.id} place={place}/>
                 )

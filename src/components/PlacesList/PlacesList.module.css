@@ -1,9 +1,10 @@
 .placesList {
     display: grid;
-    overflow-y: auto;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 0.5fr));
+    width: 90%;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 0.5fr));
     grid-gap: 20px;
     height: auto;
     justify-items: center;
     padding: 20px;
+    margin: auto;
 }
