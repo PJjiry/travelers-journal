@@ -3,7 +3,7 @@ import classes from '../components/PlacesList/PlacesList.module.css';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 import {DUMMY_PLACES} from '../dummy_places.ts';
 
-const EditSight:React.FC = () => {
+const EditPlace:React.FC = () => {
   return(
       <section>
         {DUMMY_PLACES.map((place) => {
@@ -40,4 +40,4 @@ const EditSight:React.FC = () => {
       </section>
   )
 }
-export default EditSight
+export default EditPlace
