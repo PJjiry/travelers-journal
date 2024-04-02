@@ -1,0 +1,21 @@
+.continentsContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.placesListDiv {
+    padding: 1rem 2rem 0 2rem;
+}
+
+.placesListDiv h2 {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+    border-bottom: 3px solid var(--text-dark);
+    color: var(--text-dark);
+}
