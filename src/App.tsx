@@ -2,7 +2,7 @@ import {Route, Routes} from "react-router-dom"
 import PackingList from './pages/PackingList.tsx';
 import NewPlace from './pages/NewPlace.tsx';
 import Main from './pages/Main/Main.tsx';
-import EditPlace from './pages/EditPlace.tsx';
+import EditPlace from './pages/EditPlace/EditPlace.tsx';
 import About from './pages/About.tsx';
 import Header from './components/Header/Header.tsx';
 import NavBar from './components/NavBar/NavBar.tsx';
