@@ -5,7 +5,7 @@
 }
 
 .cityBackground {
-    background-image: url("../../assets/city2.jpg");
+    background-image: url("../../assets/city-background.jpg");
     background-size: cover;
     background-position: center;
 }
