@@ -1,0 +1,69 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/travel-form.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 3rem auto;
+    background-color: var(--background);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--dark-grey);
+}
+
+.title{
+    font-size: 2rem;
+    margin:0 0 1rem 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px var(--dark-grey);
+    color: var(--text-dark);
+}
+
+.label {
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.input, .textarea, .select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--text-dark);
+    border-radius: 5px;
+}
+
+.textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: none;
+}
+
+.submit {
+    width: auto;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.submit:hover {
+    background-color: #45a049;
+}
