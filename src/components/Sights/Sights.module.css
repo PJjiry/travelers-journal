@@ -1,0 +1,41 @@
+
+.sight {
+    margin: 1rem;
+    padding: 1.5rem;
+    width: 500px;
+    border-radius: 10px;
+    background-color: var(--city-color);
+    box-shadow: 0 3px 6px var(--dark-grey);
+}
+
+.sightsLabel{
+    font-size: 1.6rem;
+    align-self: flex-start;
+    color: var(--text-dark);
+    margin: 0.5rem 1rem;
+}
+
+.sight h5 {
+    font-size: 1.4rem;
+    color:var(--text-dark);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sight div {
+    display: flex;
+    align-items: baseline;
+}
+
+.sight svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 0.5rem;
+}
+
+.sight p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
