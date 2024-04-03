@@ -20,3 +20,13 @@ export type Place = {
         lng: number
     }
 }
+
+export type PlacesContextProps = {
+    places: Place[],
+    setPlaces: (places: Place[]) => void
+}
+
+export interface CurrentPlaceContextProps {
+    currentPlace: Place | null;
+    setCurrentPlace: (place: Place | null) => void;
+}

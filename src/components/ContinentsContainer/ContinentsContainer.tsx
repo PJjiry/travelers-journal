@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './ContinentsContainer.module.css'
-import {DUMMY_PLACES} from '../../dummy_places.ts';
 import PlacesList from '../PlacesList/PlacesList.tsx';
 import {Place} from '../../types.ts';
+import PlacesContext from '../../store/PlacesContext.tsx';
 
-type GroupedPlaces = Record<string, Place[]>;
+type GroupedPlaces = Record<string, Place[]> | undefined;
 
-type PlacesArray = [string, Place[]][];
+type PlacesArray = [string, Place[]][] | undefined;
 const ContinentsContainer: React.FC = () => {
-    const sortedPlaces = DUMMY_PLACES.sort((a, b) => a.continent.localeCompare(b.continent));
-    const groupedPlaces:GroupedPlaces = sortedPlaces.reduce((acc, place) => {
+    const placesCtx = useContext(PlacesContext);
+    const sortedPlaces = placesCtx?.places.sort((a, b) => a.continent.localeCompare(b.continent));
+    const groupedPlaces:GroupedPlaces = sortedPlaces?.reduce((acc, place) => {
         const continent = place.continent;
         // If the continent hasn't been added to the accumulator, add it with an empty array
-        
+
         // @ts-expect-error type string can't be used to index type {}
         if (!acc[continent]) {
             // @ts-expect-error type string can't be used to index type {}
@@ -24,13 +25,13 @@ const ContinentsContainer: React.FC = () => {
         return acc;
     }, {});
 
-    const placesArray:PlacesArray = Object.entries(groupedPlaces);
+    const placesArray:PlacesArray =groupedPlaces && Object.entries(groupedPlaces);
     return (
         <section className={classes.continentsContainer}>
-            {placesArray.map(([continent, places], index) => (
+            {placesArray && placesArray.map(([continent, places], index) => (
                 <div className={classes.placesListDiv} key={index}>
                     <h2>{continent}</h2>
-                    <PlacesList places={places}/>
+                    <PlacesList sortedPlaces={places}/>
                 </div>
             ))}
         </section>

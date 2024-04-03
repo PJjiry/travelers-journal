@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import classes from './EditPlace.module.css'
-import {DUMMY_PLACES} from '../../dummy_places.ts';
 import {Place} from '../../types.ts';
 import Error from '../Error.tsx';
 import CompletePlaceItem from '../../components/CompletePlaceItem/CompletePlaceItem.tsx';
+import PlacesContext from '../../store/PlacesContext.tsx';
+import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';
 
 const EditPlace: React.FC = () => {
+    const placesCtx = useContext(PlacesContext);
+    const currentPlaceCtx = useContext(CurrentPlaceContext);
     const id: string | undefined = useParams().id;
-    const place: Place | undefined = DUMMY_PLACES.find((place) => place.id === id);
+    const place: Place | undefined = placesCtx?.places.find((place) => place.id === id);
+
+    useEffect(() => {
+        if (place) {
+            currentPlaceCtx?.setCurrentPlace(place);
+        }
+    }, [place, currentPlaceCtx]);
 
     if (!place) return (
         <Error/>
@@ -16,7 +25,7 @@ const EditPlace: React.FC = () => {
 
     return (
         <main className={place.type === "Nature" ? classes.natureBackground : classes.cityBackground}>
-            <CompletePlaceItem place={place} />
+            <CompletePlaceItem />
         </main>
     )
 }
