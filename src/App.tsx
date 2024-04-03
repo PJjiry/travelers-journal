@@ -8,12 +8,14 @@ import Header from './components/Header/Header.tsx';
 import NavBar from './components/NavBar/NavBar.tsx';
 import Footer from  './components/Footer/Footer.tsx';
 import Error from './pages/Error.tsx';
+import {GoogleMapsProvider} from './store/GoogleMapsContext.tsx';
 
 function App() {
   return (
     <>
         <Header />
         <NavBar />
+        <GoogleMapsProvider>
         <Routes>
             <Route path="/" element={<Main />} index/>
             <Route path="/new-place" element={<NewPlace />} />
@@ -22,6 +24,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="*" element={<Error />}/>
         </Routes>
+        </GoogleMapsProvider>
         <Footer />
     </>
   )
