@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './PlaceInfo.module.css';
 import {differenceInDays, format} from 'date-fns';
 import {isPastDate} from '../../utils/utils.ts';
 import {PiConfettiFill} from 'react-icons/pi';
 import {MdCardTravel} from 'react-icons/md';
 import {IoEarth} from 'react-icons/io5';
-import {Place} from '../../types.ts';
 import PlaceInfoWrapper from '../PlaceInfoWrapper/PlaceInfoWrapper.tsx';
 import Sights from '../Sights/Sights.tsx';
+import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';
 
-const PlaceInfo: React.FC<{ place: Place }> = ({place}) => {
+const PlaceInfo: React.FC = () => {
+    const currentPlaceCtx = useContext(CurrentPlaceContext);
+    const place = currentPlaceCtx?.currentPlace;
+
+    if (!place) return null;
     return (
         <div className={classes.placeInfo}>
             <h3>{place.title}</h3>
@@ -26,7 +30,7 @@ const PlaceInfo: React.FC<{ place: Place }> = ({place}) => {
             <PlaceInfoWrapper label="Description:">{place.description}</PlaceInfoWrapper>
             {place.specialRequirements &&
                 <PlaceInfoWrapper label="Special requirements:">{place.specialRequirements}</PlaceInfoWrapper>}
-            {place.type === "City" && (place.sights?.length ?? 0) > 0 && <Sights place={place}/>}
+            {place.type === "City" && (place.sights?.length ?? 0) > 0 && <Sights/>}
         </div>
     )
 }

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './Sights.module.css';
 import {FaLandmarkFlag} from 'react-icons/fa6';
-import {Place} from '../../types.ts';
+import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';
 
-const Sights:React.FC<{place:Place}> = ({place}) => {
+const Sights:React.FC = () => {
+    const currentPlaceCtx = useContext(CurrentPlaceContext);
+    const place = currentPlaceCtx?.currentPlace;
+
+    if (!place) return null;
     return(
         <>
             <h4 className={classes.sightsLabel}>Places of interest:</h4>
