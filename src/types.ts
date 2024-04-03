@@ -30,3 +30,20 @@ export interface CurrentPlaceContextProps {
     currentPlace: Place | null;
     setCurrentPlace: (place: Place | null) => void;
 }
+
+export interface PlaceForm {
+    title: string;
+    imageUrl: string;
+    type: string;
+    date: string;
+    country: string;
+    continent: string;
+    budget: number | undefined;
+    description: string;
+    specialRequirements: string | undefined;
+    sights: Sight[] | undefined;
+    location: {
+        lat: number,
+        lng: number
+    }
+}
