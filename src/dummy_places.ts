@@ -62,8 +62,8 @@ export const DUMMY_PLACES: Place[] = [
         continent: 'Asia',
         description: 'Angkor wat is a temple complex in Cambodia and the largest religious monument in the world.',
         location: {
-            lat: 48.8588443,
-            lng: 2.2943506
+            lat: 13.411593,
+            lng:103.867416
         },
     },
     {
@@ -84,8 +84,8 @@ export const DUMMY_PLACES: Place[] = [
             }
         ],
         location: {
-            lat: 48.8588443,
-            lng: 2.2943506
+            lat: 28.644800,
+            lng: 77.216721
         },
     },
     {
@@ -100,8 +100,8 @@ export const DUMMY_PLACES: Place[] = [
         specialRequirements: 'Need to book tickets in advance.',
         description: 'Great wall of China is a series of fortifications made of stone, brick, tamped earth, wood, and other materials, generally built along an east-to-west line across the historical northern borders of China to protect the Chinese states and empires against the raids and invasions of the various nomadic groups of the Eurasian Steppe.',
         location: {
-            lat: 48.8588443,
-            lng: 2.2943506
+            lat:  40.431908,
+            lng: 116.570374
         },
     },
 ]
