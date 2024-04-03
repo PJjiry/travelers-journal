@@ -3,8 +3,9 @@ import {useParams} from 'react-router-dom';
 import classes from './EditPlace.module.css'
 import {PiConfettiFill} from "react-icons/pi";
 import {MdCardTravel} from "react-icons/md";
-import { IoEarth } from "react-icons/io5";
+import {IoEarth} from "react-icons/io5";
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
+import {FaLandmarkFlag} from "react-icons/fa6";
 import {DUMMY_PLACES} from '../../dummy_places.ts';
 import {Place} from '../../types.ts';
 import Error from '../Error.tsx';
@@ -20,7 +21,7 @@ const EditPlace: React.FC = () => {
     )
 
     return (
-        <section className={place.type === "Nature" ? classes.natureBackground : classes.cityBackground}>
+        <main className={place.type === "Nature" ? classes.natureBackground : classes.cityBackground}>
             <article key={place.id} className={classes.place}>
                 <img src={place.imageUrl} alt={place.title}/>
                 <div className={classes.placeInfo}>
@@ -34,45 +35,57 @@ const EditPlace: React.FC = () => {
                         <span className={classes.label}>Country: </span>
                         <p>{place.country} ({place.continent} <IoEarth/>)</p>
                     </div>
-                    {isPastDate(place.date) && <div className={classes.budget}>
+                    {isPastDate(place.date) && place.budget && <div className={classes.budget}>
                         <span className={classes.label}>Budget: </span>
-                        <p>{place.budget} $(USD)</p>
-                        </div>}
+                        <p>{new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                        }).format(place.budget)}</p>
+                    </div>}
                     <div className={classes.description}>
                         <span className={classes.label}>Description: </span>
                         <p>{place.description}</p>
-                        </div>
+                    </div>
                     {place.specialRequirements &&
-                        <p className={classes.specialRequirements}>{place.specialRequirements}</p>}
+                        <div className={classes.specialRequirements}>
+                            <span className={classes.label}>Special requirements: </span>
+                            <p>{place.specialRequirements}</p></div>}
                     {place.type === "City" && (place.sights?.length ?? 0) > 0 && place.sights?.map((sight) => {
                         return (
-                            <div className={classes.sight} key={sight.sightName}>
-                                <h4>{sight.sightName}</h4>
-                                <p>{sight.sightDescription}</p>
-                            </div>
+                            <>
+                                <h4 className={classes.sightsLabel}>Places of interest:</h4>
+                                <div className={classes.sight} key={sight.sightName}>
+                                    <div><h5>{sight.sightName}</h5>
+                                        <FaLandmarkFlag/></div>
+                                    <p>{sight.sightDescription}</p>
+                                </div>
+                            </>
                         )
                     })}
                 </div>
-                <LoadScript googleMapsApiKey="AIzaSyAkJEGW4P__lSJITHtP_jSJl542ean0QIQ">
-                    <GoogleMap
-                        mapContainerStyle={{width: '100%', height: '200px'}}
-                        center={{lat: 40.7484405, lng: -73.9878531}}
-                        zoom={10}
-                        options={{
-                            draggable: false,
-                            zoomControl: true,
-                            scrollwheel: false,
-                            streetViewControl: false,
-                        }}
-                    >
-                        {DUMMY_PLACES.map((place) => (
-                            <Marker key={place.id} position={{lat: place.location.lat, lng: place.location.lng}}
-                                    draggable={false}/>
-                        ))}
-                    </GoogleMap>
-                </LoadScript>
+                <div className={classes.map}>
+                    <h4>Location:</h4>
+                    <LoadScript googleMapsApiKey="AIzaSyAkJEGW4P__lSJITHtP_jSJl542ean0QIQ">
+                        <GoogleMap
+                            mapContainerStyle={{width: '100%', height: '400px', borderRadius: '0 0 10px 10px'}}
+                            center={{lat: place.location.lat, lng: place.location.lng}}
+                            zoom={10}
+                            options={{
+                                draggable: false,
+                                zoomControl: true,
+                                scrollwheel: false,
+                                streetViewControl: false,
+                            }}
+                        >
+                            {DUMMY_PLACES.map((place) => (
+                                <Marker key={place.id} position={{lat: place.location.lat, lng: place.location.lng}}
+                                        draggable={false}/>
+                            ))}
+                        </GoogleMap>
+                    </LoadScript>
+                </div>
             </article>
-        </section>
+        </main>
     )
 }
 export default EditPlace

@@ -13,6 +13,7 @@
     width: 100%;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
+    max-height: 450px;
 }
 
 .placeInfo {
@@ -35,7 +36,6 @@
 
 .date, .country, .budget, .description, .specialRequirements {
     font-size: 1.2rem;
-    color: #333;
     margin-bottom: 0.5rem;
 }
 
@@ -85,32 +85,66 @@ align-items: baseline;
 }
 
 .description{
-    display: flex;
-    align-items: baseline;
-    margin: 0 2rem;
-}
+     display: flex;
+     align-items: baseline;
+     margin: 0 2rem;
+ }
 
 .description p{
     margin-left: 1rem;
     display: flex;
 }
 
-.sight {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.specialRequirements{
+    display: flex;
+    align-items: baseline;
+    margin: 0 2rem;
 }
 
-.sight h4 {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 0.5rem;
+.specialRequirements p{
+    margin-left: 1rem;
+    display: flex;
+}
+
+.sight {
+    margin: 1rem;
+    padding: 1.5rem;
+    width: 500px;
+    border-radius: 10px;
+    background-color: var(--city-color);
+    box-shadow: 0 3px 6px var(--dark-grey);
+}
+
+.sightsLabel{
+    font-size: 1.6rem;
+    align-self: flex-start;
+    color: var(--text-dark);
+    margin: 0.5rem 1rem;
+}
+
+.sight h5 {
+    font-size: 1.4rem;
+    color:var(--text-dark);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sight div {
+    display: flex;
+    align-items: baseline;
+}
+
+.sight svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 0.5rem;
 }
 
 .sight p {
-    font-size: 1rem;
-    color: #666;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.6;
 }
 
 .natureBackground {
@@ -120,14 +154,24 @@ align-items: baseline;
 }
 
 .cityBackground {
-    background-image: url("../../assets/city-background.jpg");
+    background-image: url("../../assets/city2.jpg");
     background-size: cover;
     background-position: center;
 }
 
 .label{
     font-size: 1.2rem;
-    font-weight: bold;
     color: #333;
     margin-bottom: 0.5rem;
+}
+
+.map{
+    width: 100%;
+    height: auto;
+}
+
+.map h4{
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin: 0.5rem 1rem;
 }
