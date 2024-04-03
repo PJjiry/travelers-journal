@@ -13,24 +13,34 @@
     flex-direction: column;
     width: 50%;
     margin: 3rem auto;
-    background-color: var(--text-light);
+    background-color: var(--background);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px var(--dark-grey);
 }
 
+.title{
+    font-size: 2rem;
+    margin:0 0 1rem 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px var(--dark-grey);
+    color: var(--text-dark);
+}
+
 .label {
     margin-bottom: 1rem;
+    font-weight: bold;
     font-size: 1.2rem;
-    color: #343a40;
+    color: var(--primary);
 }
 
 .input, .textarea, .select {
+    box-sizing: border-box;
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+    border: 1px solid var(--text-dark);
+    border-radius: 5px;
 }
 
 .textarea {
