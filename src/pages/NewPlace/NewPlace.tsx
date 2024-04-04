@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {PlaceForm} from '../../types.ts';
 import classes from './NewPlace.module.css';
 import {isPastDate} from '../../utils/utils.ts';
+import {MdHelpOutline} from "react-icons/md";
+import {FaImage} from "react-icons/fa6";
 
 const continents = ['Africa', 'Antarctica', 'Asia', 'Europe', 'North America', 'Australia/Oceania', 'South America'];
 
@@ -57,81 +59,127 @@ const NewPlace: React.FC = () => {
     };
 
     const handleAddSight = () => {
-        // @ts-ignore
+        // @ts-expect-error expect error
         setPlaceForm({...placeForm, sights: [...placeForm.sights, {sightName: '', sightDescription: ''}]});
     };
 
     return (
         <main className={classes.main}>
             <form className={classes.form} onSubmit={handleSubmit}>
+                <h3 className={classes.title}>Add a new place</h3>
                 <label htmlFor="title" className={classes.label}>
                     Name of the place:
-                    <input className={classes.input} type="text" id="title" name="title" value={placeForm.title}
-                           onChange={handleChange}/>
+                    <div className={classes.inputHelp}><input className={classes.input} type="text" id="title"
+                                                              name="title" value={placeForm.title}
+                                                              onChange={handleChange}/>
+                        <MdHelpOutline
+                            title="Enter name of the city (London) or name of the place you want to visit (the Alps)."
+                            className={classes.icon}/></div>
                 </label>
-                <label htmlFor="image" className={classes.label}>
-                    Background image:
-                    <input className={classes.input} type="file" name="image" id="image" accept=".jpg,.png,.jpeg"
-                           onChange={handleChange}/>
-                </label>
+                <div className={classes.imageFlexbox}>
+                    <label htmlFor="image" className={`${classes.label} ${classes.customFileInput}`}>
+                        Background image:
+                        <input className={`${classes.input} ${classes.hiddenFileInput}`} type="file" name="image"
+                               id="image" accept=".jpg,.png,.jpeg"
+                               onChange={handleChange}/>
+                        <FaImage/>
+                    </label>
+                    <MdHelpOutline
+                        title="Click to choose a background image of the place. Allowed formats are: jpg, png, jpeg."
+                        className={classes.icon}/>
+                </div>
                 <label htmlFor="type" className={classes.label}>
-                    Type:
-                    <select className={classes.select} name="type" id="type" value={placeForm.type} onChange={handleChange}>
-                        <option value="">--Please choose an option--</option>
-                        <option value="City">City</option>
-                        <option value="Nature">Nature</option>
+                    Type of place:
+                    <div className={classes.inputHelp}><select className={classes.select} name="type" id="type"
+                                                               value={placeForm.type}
+                                                               onChange={handleChange}>
+                        <option className={classes.option} value="">--Please choose an option--</option>
+                        <option className={`${classes.option} ${classes.cityOption}`} value="City">City</option>
+                        <option className={`${classes.option} ${classes.natureOption}`} value="Nature">Nature</option>
                     </select>
+                        <MdHelpOutline
+                            title="Type of the place determines the appearance of the place. City type allows you to enter sights."
+                            className={classes.icon}/></div>
                 </label>
                 <label htmlFor="date" className={classes.label}>
-                    Date:
-                    <input className={classes.input} type="date" id="date" name="date" value={placeForm.date}
-                           onChange={handleChange}/>
+                    Date of visit:
+                    <div className={classes.inputHelp}><input className={classes.input} type="date" id="date"
+                                                              name="date" value={placeForm.date}
+                                                              onChange={handleChange}/>
+                        <MdHelpOutline title="Pick a date you have visited the place or are planning to visit."
+                                       className={classes.icon}/></div>
                 </label>
                 <label htmlFor="country" className={classes.label}>
                     Country:
-                    <input className={classes.input} type="text" id="country" name="country" value={placeForm.country}
-                           onChange={handleChange}/>
+                    <div className={classes.inputHelp}><input className={classes.input} type="text" id="country"
+                                                              name="country"
+                                                              value={placeForm.country}
+                                                              onChange={handleChange}/>
+                        <MdHelpOutline title="Type a country where is the place located." className={classes.icon}/>
+                    </div>
                 </label>
                 <label htmlFor="continent" className={classes.label}>
                     Continent:
-                    <select className={classes.select} name="continent" id="continent" value={placeForm.continent}
-                            onChange={handleChange}>
+                    <div className={classes.inputHelp}><select className={classes.select} name="continent"
+                                                               id="continent" value={placeForm.continent}
+                                                               onChange={handleChange}>
                         <option value="">--Please choose an option--</option>
-                        {continents.map(continent => (
-                            <option key={continent} value={continent}>{continent}</option>
+                        {continents.map((continent, index) => (
+                            <option key={continent} className={`${classes['continent' + index]}`} value={continent}>{continent}</option>
                         ))}
                     </select>
+                        <MdHelpOutline
+                            title="Select place's continent. The country should be inside the selected continent."
+                            className={classes.icon}/></div>
                 </label>
                 {(!placeForm.date || isPastDate(placeForm.date)) && <label htmlFor="budget" className={classes.label}>
-                    Budget for the whole trip (optional)
-                    <input className={classes.input} type="number" name="budget" id="budget" value={placeForm.budget}
-                           onChange={handleChange}/>
+                    Budget for the whole trip (in $USD):
+                    <div className={classes.inputHelp}>
+                            <input min={0} className={classes.input} type="number" name="budget" id="budget"
+                                   value={placeForm.budget} onChange={handleChange}/>
+                        <MdHelpOutline title="Enter a budget for the whole trip." className={classes.icon}/></div>
                 </label>}
                 <label htmlFor="description" className={classes.label}>
                     Description of the place:
-                    <textarea className={classes.textarea} name="description" id="description"
-                              value={placeForm.description}
-                              onChange={handleChange}/>
+                    <div className={classes.inputHelp}><textarea className={classes.textarea} name="description"
+                                                                 id="description"
+                                                                 value={placeForm.description}
+                                                                 onChange={handleChange}/>
+                        <MdHelpOutline title="Add some basic description about the place." className={classes.icon}/>
+                    </div>
                 </label>
                 <label htmlFor="specialRequirements" className={classes.label}>
-                    Special Requirements to visit the place:
-                    <input className={classes.input} name="specialRequirements" id="specialRequirements"
-                           value={placeForm.specialRequirements} onChange={handleChange}/>
+                    Special requirements:
+                    <div className={classes.inputHelp}><input className={classes.input} name="specialRequirements"
+                                                              id="specialRequirements"
+                                                              value={placeForm.specialRequirements}
+                                                              onChange={handleChange}/>
+                        <MdHelpOutline
+                            title="Mention special requirements that were needed to visit the place like visa or booking in advance."
+                            className={classes.icon}/>
+                    </div>
                 </label>
-                {placeForm.type === "City" && <label htmlFor="sights" className={classes.label}>
-                    Sights to visit (optional):
+                {placeForm.type === "City" && <label htmlFor="sights" className={`${classes.label} ${classes.sightsBox}`}>
+                    <div className={classes.sightsTitle}>
+                    <h4 className={classes.sightsTitle}>Sights to visit:</h4>
+                    <MdHelpOutline
+                        title="Mention sights you want to or have visited in the city. Add also basic description of each site."
+                        className={classes.icon}/>
+                    </div>
                     {placeForm.sights?.map((sight, index) => (
-                        <div key={sight.sightName}>
-                            <input className={classes.input} name="sightName" value={sight.sightName}
+                        <div className={classes.sightInputs} key={sight.sightName}>
+                            <input className={classes.input} name="sightName" id="sightName" value={sight.sightName}
                                    onChange={event => handleSightChange(index, event)} placeholder="Sight Name"/>
-                            <input className={classes.input} name="sightDescription" value={sight.sightDescription}
+                            <input className={classes.input} name="sightDescription" id="sightDescription" value={sight.sightDescription}
                                    onChange={event => handleSightChange(index, event)} placeholder="Sight Description"/>
                         </div>
                     ))}
-                    <button type="button" onClick={handleAddSight}>Add another sight</button>
+                    <button className={classes.addSightButton} type="button" onClick={handleAddSight}>Add sight</button>
                 </label>}
-
+                <div className={classes.actions}>
+                    <input className={classes.reset} type="reset" value="Reset"/>
                 <input className={classes.submit} type="submit" value="Submit"/>
+                </div>
             </form>
         </main>
     );
