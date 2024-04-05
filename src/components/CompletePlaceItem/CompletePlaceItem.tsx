@@ -16,7 +16,7 @@ const CompletePlaceItem: React.FC = () => {
             <PlaceInfo />
             <div className={classes.map}>
                 <h4>Location:</h4>
-                <MapLocation/>
+                <MapLocation lat={place.location.lat} lng={place.location.lng}/>
             </div>
         </article>
     )
