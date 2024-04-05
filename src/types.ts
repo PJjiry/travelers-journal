@@ -47,3 +47,10 @@ export interface PlaceForm {
         lng: number
     }
 }
+
+export type MapLocationProps = {
+    mapContainerStyle?:{width: string, height: string, borderRadius: string},
+    onLocationChange?: (location: {lat: number, lng: number}) => void,
+    lat: number;
+    lng: number;
+};

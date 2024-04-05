@@ -1,27 +1,36 @@
-import React, { useContext } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import React, {useContext} from 'react';
+import {GoogleMap, Marker} from '@react-google-maps/api';
 import classes from './MapLocation.module.css';
-import { GoogleMapsContext } from '../../store/GoogleMapsContext';
-import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';
+import {GoogleMapsContext} from '../../store/GoogleMapsContext';
+import {MapLocationProps} from '../../types.ts';
 
-const MapLocation: React.FC = () => {
-    const currentPlaceCtx = useContext(CurrentPlaceContext);
+const MapLocation: React.FC<MapLocationProps> = ({lat, lng, ...props}, onLocationChange) => {
     const isGoogleMapsLoaded = useContext(GoogleMapsContext);
-    const place = currentPlaceCtx?.currentPlace;
-
-    if (!place) return null;
+    const mapRef = React.useRef(null);
+    // const handleCenterChanged = () => {
+    //     if (mapRef.current) {
+    //         const newCenter = mapRef.current.getCenter();
+    //         onLocationChange && onLocationChange({
+    //             lat: newCenter.lat(),
+    //             lng: newCenter.lng(),
+    //         });
+    //     }
+    // };
 
     return isGoogleMapsLoaded ? (
         <GoogleMap
             mapContainerStyle={{width: '100%', height: '400px', borderRadius: '0 0 10px 10px'}}
-            center={{lat: place.location.lat, lng:place.location.lng}}
+            center={{lat: lat, lng: lng}}
+            ref={mapRef}
+            // onCenterChanged={handleCenterChanged}
+            {...props}
             zoom={10}
             options={{
                 zoomControl: true,
                 streetViewControl: false,
             }}
         >
-            <Marker position={{lat: place.location.lat, lng: place.location.lng}}
+            <Marker position={{lat: lat, lng: lng}}
                     draggable={false}/>
         </GoogleMap>
     ) : <div className={classes.loadingText}>Loading...</div>;

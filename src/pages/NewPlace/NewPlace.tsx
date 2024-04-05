@@ -4,6 +4,7 @@ import classes from './NewPlace.module.css';
 import {isPastDate} from '../../utils/utils.ts';
 import {MdHelpOutline} from "react-icons/md";
 import {FaImage} from "react-icons/fa6";
+import MapLocation from '../../components/MapLocation/MapLocation.tsx';
 
 const continents = ['Africa', 'Antarctica', 'Asia', 'Europe', 'North America', 'Australia/Oceania', 'South America'];
 
@@ -20,29 +21,28 @@ const NewPlace: React.FC = () => {
         specialRequirements: undefined,
         sights: [{sightName: '', sightDescription: ''}],
         location: {
-            lat: 40.7484405,
-            lng: -73.9878531,
+            lat: 50.073658,
+            lng: 14.418540,
         },
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        // if (event.target.name === 'imageUrl' && event.target.files) {
-        //     const file = event.target.files[0];
-        //     const reader = new FileReader();
-        //     reader.onloadend = () => {
-        //         setPlaceForm({
-        //             ...placeForm,
-        //             imageUrl: reader.result as string,
-        //         });
-        //     };
-        //     reader.readAsDataURL(file);
-        // } else {
         setPlaceForm({
             ...placeForm,
             [event.target.name]: event.target.value,
         });
-        // }
     };
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setPlaceForm({...placeForm, imageUrl: reader.result as string});
+        };
+        reader.readAsDataURL(file);
+    }
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -81,7 +81,7 @@ const NewPlace: React.FC = () => {
                         Background image:
                         <input className={`${classes.input} ${classes.hiddenFileInput}`} type="file" name="image"
                                id="image" accept=".jpg,.png,.jpeg"
-                               onChange={handleChange}/>
+                               onChange={handleImageChange}/>
                         <FaImage/>
                     </label>
                     <MdHelpOutline
@@ -125,7 +125,8 @@ const NewPlace: React.FC = () => {
                                                                onChange={handleChange}>
                         <option value="">--Please choose an option--</option>
                         {continents.map((continent, index) => (
-                            <option key={continent} className={`${classes['continent' + index]}`} value={continent}>{continent}</option>
+                            <option key={continent} className={`${classes['continent' + index]}`}
+                                    value={continent}>{continent}</option>
                         ))}
                     </select>
                         <MdHelpOutline
@@ -135,8 +136,8 @@ const NewPlace: React.FC = () => {
                 {(!placeForm.date || isPastDate(placeForm.date)) && <label htmlFor="budget" className={classes.label}>
                     Budget for the whole trip (in $USD):
                     <div className={classes.inputHelp}>
-                            <input min={0} className={classes.input} type="number" name="budget" id="budget"
-                                   value={placeForm.budget} onChange={handleChange}/>
+                        <input min={0} className={classes.input} type="number" name="budget" id="budget"
+                               value={placeForm.budget} onChange={handleChange}/>
                         <MdHelpOutline title="Enter a budget for the whole trip." className={classes.icon}/></div>
                 </label>}
                 <label htmlFor="description" className={classes.label}>
@@ -159,26 +160,48 @@ const NewPlace: React.FC = () => {
                             className={classes.icon}/>
                     </div>
                 </label>
-                {placeForm.type === "City" && <label htmlFor="sights" className={`${classes.label} ${classes.sightsBox}`}>
-                    <div className={classes.sightsTitle}>
-                    <h4 className={classes.sightsTitle}>Sights to visit:</h4>
+                {placeForm.type === "City" &&
+                    <label htmlFor="sights" className={`${classes.label} ${classes.sightsBox}`}>
+                        <div className={classes.sightsTitle}>
+                            <h4 className={classes.sightsTitle}>Sights to visit:</h4>
+                            <MdHelpOutline
+                                title="Mention sights you want to or have visited in the city. Add also basic description of each site."
+                                className={classes.icon}/>
+                        </div>
+                        {placeForm.sights?.map((sight, index) => (
+                            <div className={classes.sightInputs} key={sight.sightName}>
+                                <input className={classes.input} name="sightName" id="sightName" value={sight.sightName}
+                                       onChange={event => handleSightChange(index, event)} placeholder="Sight Name"/>
+                                <input className={classes.input} name="sightDescription" id="sightDescription"
+                                       value={sight.sightDescription}
+                                       onChange={event => handleSightChange(index, event)}
+                                       placeholder="Sight Description"/>
+                            </div>
+                        ))}
+                        <button className={classes.addSightButton} type="button" onClick={handleAddSight}>Add sight
+                        </button>
+                    </label>}
+                <label htmlFor="location" className={`${classes.label} ${classes.location}`}>
+                    <div className={classes.locationTitle}>
+                        Location of the place:
                     <MdHelpOutline
-                        title="Mention sights you want to or have visited in the city. Add also basic description of each site."
+                        title="Set the location on the map of the place. You can scroll and zoom the map as you wish to."
                         className={classes.icon}/>
                     </div>
-                    {placeForm.sights?.map((sight, index) => (
-                        <div className={classes.sightInputs} key={sight.sightName}>
-                            <input className={classes.input} name="sightName" id="sightName" value={sight.sightName}
-                                   onChange={event => handleSightChange(index, event)} placeholder="Sight Name"/>
-                            <input className={classes.input} name="sightDescription" id="sightDescription" value={sight.sightDescription}
-                                   onChange={event => handleSightChange(index, event)} placeholder="Sight Description"/>
-                        </div>
-                    ))}
-                    <button className={classes.addSightButton} type="button" onClick={handleAddSight}>Add sight</button>
-                </label>}
+                    <MapLocation mapContainerStyle={{width: '100%', height: '400px', borderRadius: '10px'}} lat={placeForm.location.lat} lng={placeForm.location.lng}
+                                 onLocationChange={(newLocation) => {
+                                     setPlaceForm(prevPlaceForm => {
+                                         return {
+                                             ...prevPlaceForm,
+                                             location: newLocation,
+                                         };
+                                     });
+                                 }}
+                        />
+                </label>
                 <div className={classes.actions}>
                     <input className={classes.reset} type="reset" value="Reset"/>
-                <input className={classes.submit} type="submit" value="Submit"/>
+                    <input className={classes.submit} type="submit" value="Submit"/>
                 </div>
             </form>
         </main>

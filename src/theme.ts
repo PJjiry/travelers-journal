@@ -9,5 +9,6 @@ export const theme = {
         cityColor: 'rgb(70, 130, 180)',
         natureColor: 'rgb(43, 155, 18)',
         secondaryTransparent: 'rgba(190, 20, 235, 0.5)',
+        darkGreen: 'rgb(0, 128, 0)',
     },
 };
