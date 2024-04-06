@@ -3,6 +3,7 @@ import {PlaceForm} from '../../types.ts';
 import classes from './NewPlace.module.css';
 import {isPastDate} from '../../utils/utils.ts';
 import {MdHelpOutline} from "react-icons/md";
+import {FaTrashAlt} from "react-icons/fa";
 import {FaImage} from "react-icons/fa6";
 import MapLocation from '../../components/MapLocation/MapLocation.tsx';
 
@@ -19,12 +20,15 @@ const NewPlace: React.FC = () => {
         budget: undefined,
         description: '',
         specialRequirements: undefined,
-        sights: [{sightName: '', sightDescription: ''}],
+        sights: undefined,
         location: {
             lat: 50.073658,
             lng: 14.418540,
         },
     });
+
+    const [sightName, setSightName] = useState('');
+    const [sightDescription, setSightDescription] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setPlaceForm({
@@ -44,23 +48,58 @@ const NewPlace: React.FC = () => {
         reader.readAsDataURL(file);
     }
 
+    const removeImage = () => {
+        setPlaceForm({...placeForm, imageUrl: ''});
+    }
+
+    const handleAddSight = (sightName: string, sightDescription: string) => {
+        if (!placeForm.sights) {
+            setPlaceForm(prevPlaceForm => ({
+                ...prevPlaceForm,
+                sights: [{sightName: sightName, sightDescription: sightDescription}]
+            }));
+        } else {
+            setPlaceForm(prevPlaceForm => ({
+                ...prevPlaceForm,
+                sights: [...prevPlaceForm.sights!, {sightName: sightName, sightDescription: sightDescription}]
+            }));
+        }
+
+    };
+
+    const removeSight = (sightName: string) => {
+        setPlaceForm(prevPlaceForm => {
+            return {
+                ...prevPlaceForm,
+                sights: prevPlaceForm.sights!.filter(sight => sight.sightName !== sightName)
+            };
+        });
+    }
+
+    const handleReset = () => {
+        setPlaceForm({
+            title: '',
+            imageUrl: '',
+            type: '',
+            date: '',
+            country: '',
+            continent: '',
+            budget: undefined,
+            description: '',
+            specialRequirements: undefined,
+            sights: undefined,
+            location: {
+                lat: 50.073658,
+                lng: 14.418540,
+            },
+        });
+        setSightName('');
+        setSightDescription('');
+    }
+
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         console.log(placeForm);
-    };
-
-    const handleSightChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
-        const newSights = placeForm.sights?.map((sight, sightIndex) => {
-            if (index !== sightIndex) return sight;
-            return {...sight, [event.target.name]: event.target.value};
-        });
-
-        setPlaceForm({...placeForm, sights: newSights});
-    };
-
-    const handleAddSight = () => {
-        // @ts-expect-error expect error
-        setPlaceForm({...placeForm, sights: [...placeForm.sights, {sightName: '', sightDescription: ''}]});
     };
 
     return (
@@ -80,12 +119,18 @@ const NewPlace: React.FC = () => {
                     <label htmlFor="image" className={`${classes.label} ${classes.customFileInput}`}>
                         Background image:
                         <input className={`${classes.input} ${classes.hiddenFileInput}`} type="file" name="image"
+                               multiple={false}
                                id="image" accept=".jpg,.png,.jpeg"
                                onChange={handleImageChange}/>
                         <FaImage/>
+                        <div className={classes.imagePreview}>
+                            {placeForm.imageUrl &&
+                                <img onClick={removeImage} title="Remove current image and pick a new one."
+                                     src={placeForm.imageUrl} alt="Background image"/>}
+                        </div>
                     </label>
                     <MdHelpOutline
-                        title="Click to choose a background image of the place. Allowed formats are: jpg, png, jpeg."
+                        title="Click to choose a background image of the place. Allowed formats are: jpg, png, jpeg. Dropping of the image is not allowed."
                         className={classes.icon}/>
                 </div>
                 <label htmlFor="type" className={classes.label}>
@@ -162,33 +207,45 @@ const NewPlace: React.FC = () => {
                 </label>
                 {placeForm.type === "City" &&
                     <label htmlFor="sights" className={`${classes.label} ${classes.sightsBox}`}>
-                        <div className={classes.sightsTitle}>
-                            <h4 className={classes.sightsTitle}>Sights to visit:</h4>
-                            <MdHelpOutline
-                                title="Mention sights you want to or have visited in the city. Add also basic description of each site."
-                                className={classes.icon}/>
+                        <div className={classes.sights}>
+                            <div className={classes.sightsTitle}>
+                                <h4>Sights to visit:</h4>
+                                <MdHelpOutline
+                                    title="Mention sights you want to or have visited in the city. Add also basic description of each site."
+                                    className={classes.icon}/></div>
+                            <div
+                                className={classes.sightsContainer}>{placeForm.sights && placeForm.sights.map((sight) => (
+                                <div className={classes.sightItem}>
+                                    <span
+                                        title={`Sight name: ${sight.sightName} \nSight description: ${sight.sightDescription}`}
+                                        key={sight.sightName}>{sight.sightName}</span><FaTrashAlt onClick={()=>removeSight(sight.sightName)}/></div>
+                            ))}</div>
                         </div>
-                        {placeForm.sights?.map((sight, index) => (
-                            <div className={classes.sightInputs} key={sight.sightName}>
-                                <input className={classes.input} name="sightName" id="sightName" value={sight.sightName}
-                                       onChange={event => handleSightChange(index, event)} placeholder="Sight Name"/>
-                                <input className={classes.input} name="sightDescription" id="sightDescription"
-                                       value={sight.sightDescription}
-                                       onChange={event => handleSightChange(index, event)}
-                                       placeholder="Sight Description"/>
-                            </div>
-                        ))}
-                        <button className={classes.addSightButton} type="button" onClick={handleAddSight}>Add sight
+                        <div className={classes.sightInputs}>
+                            <input className={classes.input} name="newSightName" id="newSightName" value={sightName}
+                                   onChange={event => setSightName(event.target.value)} placeholder="Sight Name"/>
+                            <input className={classes.input} name="newSightDescription" id="newSightDescription"
+                                   value={sightDescription}
+                                   onChange={event => setSightDescription(event.target.value)}
+                                   placeholder="Sight Description"/>
+                        </div>
+                        <button className={classes.addSightButton} type="button" onClick={() => {
+                            handleAddSight(sightName, sightDescription);
+                            setSightName('');
+                            setSightDescription('')
+                        }}
+                        >Add sight
                         </button>
                     </label>}
                 <label htmlFor="location" className={`${classes.label} ${classes.location}`}>
                     <div className={classes.locationTitle}>
                         Location of the place:
-                    <MdHelpOutline
-                        title="Set the location on the map of the place. You can scroll and zoom the map as you wish to."
-                        className={classes.icon}/>
+                        <MdHelpOutline
+                            title="Set the location on the map of the place. You can scroll and zoom the map as you wish to."
+                            className={classes.icon}/>
                     </div>
-                    <MapLocation mapContainerStyle={{width: '100%', height: '400px', borderRadius: '10px'}} lat={placeForm.location.lat} lng={placeForm.location.lng}
+                    <MapLocation mapContainerStyle={{width: '100%', height: '400px', borderRadius: '10px'}}
+                                 lat={placeForm.location.lat} lng={placeForm.location.lng}
                                  onLocationChange={(newLocation) => {
                                      setPlaceForm(prevPlaceForm => {
                                          return {
@@ -197,10 +254,10 @@ const NewPlace: React.FC = () => {
                                          };
                                      });
                                  }}
-                        />
+                    />
                 </label>
                 <div className={classes.actions}>
-                    <input className={classes.reset} type="reset" value="Reset"/>
+                    <input className={classes.reset} onClick={handleReset} type="reset" value="Reset"/>
                     <input className={classes.submit} type="submit" value="Submit"/>
                 </div>
             </form>
