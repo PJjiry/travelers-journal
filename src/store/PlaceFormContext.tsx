@@ -1,10 +1,10 @@
 import React, {useState, createContext, ReactNode} from 'react';
-import {PlaceFormContextType, PlaceFormProps, SightState} from '../types.ts';
+import {Place, PlaceFormContextType, PlaceFormProps, SightState} from '../types.ts';
 
 const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
 
 
-export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }) => {
+export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [placeForm, setPlaceForm] = useState<PlaceFormProps>({
         id: '',
         title: '',
@@ -102,7 +102,7 @@ export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }
         });
     }
 
-    const handleLocationChange = (newLocation: {lat: number, lng: number}) => {
+    const handleLocationChange = (newLocation: { lat: number, lng: number }) => {
         setPlaceForm(prevPlaceForm => {
             return {
                 ...prevPlaceForm,
@@ -135,9 +135,9 @@ export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }
         });
     }
 
-    const PlaceFormContextValue:{
-placeForm: PlaceFormProps,
-        setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps>>,
+    const PlaceFormContextValue: {
+        placeForm: PlaceFormProps,
+        setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps | Place>>,
         sight: SightState,
         setSight: React.Dispatch<React.SetStateAction<SightState>>,
         handleAddSight: (sightName: string, sightDescription: string) => void,
@@ -147,7 +147,7 @@ placeForm: PlaceFormProps,
         handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
         handleImageDrop: (event: React.DragEvent<HTMLLabelElement>) => void,
         handleRemoveImage: () => void,
-        handleLocationChange: (newLocation: {lat: number, lng: number}) => void,
+        handleLocationChange: (newLocation: { lat: number, lng: number }) => void,
         handleReset: () => void,
     } = {
         placeForm,

@@ -13,7 +13,7 @@ export type Place = {
     imageUrl: string,
     country: string,
     continent: string,
-    budget?: number,
+    budget: number,
     description: string,
     specialRequirements?: string,
     sights?: Sight[],
@@ -26,7 +26,7 @@ export type Place = {
 export type PlacesContextProps = {
     places: Place[],
     setPlaces: (places: Place[]) => void;
-    addNewPlace: (newPlace: Place) => void;
+    addNewPlace: (newPlace: PlaceFormProps) => void;
     updatePlace: (updatedPlace: Place) => void;
 }
 
@@ -68,7 +68,7 @@ export type SightState = {
 
 export type PlaceFormContextType = {
     placeForm: PlaceFormProps;
-    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps>>;
+    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps|Place>>;
     sight: SightState;
     setSight: React.Dispatch<React.SetStateAction<SightState>>;
     handleAddSight: (sightName: string, sightDescription: string) => void;
