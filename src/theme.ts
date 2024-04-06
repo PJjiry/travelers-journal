@@ -10,6 +10,7 @@ export const theme = {
         natureColor: 'rgb(43, 155, 18)',
         secondaryTransparent: 'rgba(190, 20, 235, 0.5)',
         darkGreen: 'rgb(0, 128, 0)',
-        error: '#ff0000'
+        error: '#ff0000',
+        darkRed: '#8B0000',
     },
 };

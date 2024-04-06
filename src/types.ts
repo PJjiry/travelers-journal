@@ -26,7 +26,8 @@ export type Place = {
 export type PlacesContextProps = {
     places: Place[],
     setPlaces: (places: Place[]) => void;
-    addNewPlace: (newPlace: Place) => void
+    addNewPlace: (newPlace: Place) => void;
+    updatePlace: (updatedPlace: Place) => void;
 }
 
 export interface CurrentPlaceContextProps {

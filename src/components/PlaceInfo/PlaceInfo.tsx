@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import classes from './PlaceInfo.module.css';
 import {differenceInDays, format} from 'date-fns';
 import {isPastDate} from '../../utils/utils.ts';
@@ -7,13 +7,9 @@ import {MdCardTravel} from 'react-icons/md';
 import {IoEarth} from 'react-icons/io5';
 import PlaceInfoWrapper from '../PlaceInfoWrapper/PlaceInfoWrapper.tsx';
 import Sights from '../Sights/Sights.tsx';
-import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';
+import {Place} from '../../types.ts';
 
-const PlaceInfo: React.FC = () => {
-    const currentPlaceCtx = useContext(CurrentPlaceContext);
-    const place = currentPlaceCtx?.currentPlace;
-
-    if (!place) return null;
+const PlaceInfo: React.FC<{place:Place}> = ({place}) => {
     return (
         <div className={classes.placeInfo}>
             <h3>{place.title}</h3>
