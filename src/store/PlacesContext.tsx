@@ -7,9 +7,16 @@ const PlacesContext = createContext<PlacesContextProps | null>(null);
 export const PlacesProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const [places, setPlaces] = useState<Place[]>(DUMMY_PLACES);
 
+
+    const addNewPlace = (newPlace: Place) => {
+        newPlace.id = newPlace.title.toLowerCase() + (Math.floor(Math.random() * 1000000)).toString();
+        setPlaces((prevState) => [...prevState, newPlace]);
+    }
+
     const placesContext:PlacesContextProps = {
         places,
-        setPlaces
+        setPlaces,
+        addNewPlace
     };
 
     return (

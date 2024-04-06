@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
 import classes from './PlaceForm.module.css';
 import {isPastDate} from '../../utils/utils.ts';
 import { MdError } from "react-icons/md";
@@ -9,14 +10,17 @@ import Select from '../UI/Select/Select.tsx';
 import SightForm from '../SightForm/SightForm.tsx';
 import LocationForm from '../LocationForm/LocationForm.tsx';
 import PlaceFormContext from '../../store/PlaceFormContext.tsx';
+import PlacesContext from '../../store/PlacesContext.tsx';
 
 const PlaceForm: React.FC = () => {
     const PlaceFormCtx = useContext(PlaceFormContext);
+    const PlaceCtx = useContext(PlacesContext);
+    const navigate = useNavigate();
 
     const [hasError, setHasError] = React.useState(false);
 
-    if (!PlaceFormCtx) {
-        throw new Error('PlaceFormContext is null');
+    if (!PlaceFormCtx || !PlaceCtx) {
+        throw new Error('Context is null');
     }
 
     const { placeForm, handleChange,sight, handleAddSight, handleRemoveSight, handleSightChange,handleImageDrop, handleImageChange, handleRemoveImage, handleLocationChange, handleReset } = PlaceFormCtx;
@@ -36,8 +40,9 @@ const PlaceForm: React.FC = () => {
         if (!validateForm()) {
             return;
         }
-
-        console.log(placeForm);
+        PlaceCtx.addNewPlace(placeForm);
+        handleReset()
+        navigate('/')
     };
 
     return (

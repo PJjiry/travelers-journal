@@ -25,7 +25,8 @@ export type Place = {
 
 export type PlacesContextProps = {
     places: Place[],
-    setPlaces: (places: Place[]) => void
+    setPlaces: (places: Place[]) => void;
+    addNewPlace: (newPlace: Place) => void
 }
 
 export interface CurrentPlaceContextProps {
@@ -34,6 +35,7 @@ export interface CurrentPlaceContextProps {
 }
 
 export interface PlaceFormProps {
+    id: string;
     title: string;
     imageUrl: string;
     type: string;

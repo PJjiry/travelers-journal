@@ -6,6 +6,7 @@ const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
 
 export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }) => {
     const [placeForm, setPlaceForm] = useState<PlaceFormProps>({
+        id: '',
         title: '',
         imageUrl: '',
         type: '',
@@ -112,6 +113,7 @@ export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }
 
     const handleReset = () => {
         setPlaceForm({
+            id: '',
             title: '',
             imageUrl: '',
             type: '',
