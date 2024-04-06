@@ -6,6 +6,7 @@ const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
 
 export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }) => {
     const [placeForm, setPlaceForm] = useState<PlaceFormProps>({
+        id: '',
         title: '',
         imageUrl: '',
         type: '',
@@ -36,6 +37,18 @@ export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setPlaceForm({...placeForm, imageUrl: reader.result as string});
+        };
+        reader.readAsDataURL(file);
+    }
+
+    const handleImageDrop = (event: React.DragEvent<HTMLLabelElement>) => {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
         if (!file) return;
 
         const reader = new FileReader();
@@ -100,6 +113,7 @@ export const PlaceFormProvider: React.FC<{ children:ReactNode }> = ({ children }
 
     const handleReset = () => {
         setPlaceForm({
+            id: '',
             title: '',
             imageUrl: '',
             type: '',
@@ -131,6 +145,7 @@ placeForm: PlaceFormProps,
         handleRemoveSight: (sightName: string) => void,
         handleSightChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
         handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+        handleImageDrop: (event: React.DragEvent<HTMLLabelElement>) => void,
         handleRemoveImage: () => void,
         handleLocationChange: (newLocation: {lat: number, lng: number}) => void,
         handleReset: () => void,
@@ -145,6 +160,7 @@ placeForm: PlaceFormProps,
         handleSightChange,
         handleImageChange,
         handleRemoveImage,
+        handleImageDrop,
         handleLocationChange,
         handleReset,
     };

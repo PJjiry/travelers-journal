@@ -25,7 +25,8 @@ export type Place = {
 
 export type PlacesContextProps = {
     places: Place[],
-    setPlaces: (places: Place[]) => void
+    setPlaces: (places: Place[]) => void;
+    addNewPlace: (newPlace: Place) => void
 }
 
 export interface CurrentPlaceContextProps {
@@ -34,6 +35,7 @@ export interface CurrentPlaceContextProps {
 }
 
 export interface PlaceFormProps {
+    id: string;
     title: string;
     imageUrl: string;
     type: string;
@@ -72,6 +74,7 @@ export type PlaceFormContextType = {
     handleRemoveSight: (sightName: string) => void;
     handleSightChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleImageDrop: (event: React.DragEvent<HTMLLabelElement>) => void;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void,
     handleRemoveImage: () => void;
     handleLocationChange: (newLocation: {lat: number, lng: number}) => void;
@@ -86,7 +89,7 @@ export type InputProps = {
     value: string | number | undefined,
     onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => void,
     type?: string,
-    min?: number,
+    min?: number
 }
 
 export type ImageInputProps = {
@@ -94,8 +97,9 @@ export type ImageInputProps = {
     title: string,
     tooltip: string,
     onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onImageDrop: (e: React.DragEvent<HTMLLabelElement>) => void,
     imageUrl: string | undefined,
-    onRemoveImage: () => void
+    onRemoveImage: () => void;
 }
 
 export type SelectProps = {
@@ -104,7 +108,7 @@ export type SelectProps = {
     tooltip: string,
     value: string,
     onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 export type SightFormProps = {
