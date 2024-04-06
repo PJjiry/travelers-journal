@@ -16,7 +16,7 @@ const SightForm: React.FC<SightFormProps> = ({
         <label htmlFor="sights" className={`${classes.label} ${classes.sightsBox}`}>
             <div className={classes.sights}>
                 <div className={classes.sightsTitle}>
-                    <h4>Sights to visit:</h4>
+                    <h4>Sights to visit (optional):</h4>
                     <MdHelpOutline
                         title="Mention sights you want to or have visited in the city. Add also basic description of each site."
                         className={classes.icon}/></div>

@@ -76,6 +76,23 @@
     color: var(--text-light)
 }
 
+.error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--error);
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.error svg{
+    margin-left: 0.5rem;
+    width: 23px;
+    height: 23px;
+}
+
 .actions {
     display: flex;
     justify-content: space-around;

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../PlaceForm/PlaceForm.module.css';
+import classes from './LocationForm.module.css';
 import {MdHelpOutline} from 'react-icons/md';
 import MapLocation from '../MapLocation/MapLocation.tsx';
 import {LocationFormProps} from '../../types.ts';

@@ -4,10 +4,10 @@ import {FaImage} from 'react-icons/fa6';
 import {MdHelpOutline} from 'react-icons/md';
 import {ImageInputProps} from '../../types.ts';
 
-const BackgroundImageInput:React.FC<ImageInputProps> = ({name,title,imageUrl,tooltip,onRemoveImage,onImageChange,...props}) => {
+const BackgroundImageInput:React.FC<ImageInputProps> = ({name,title,imageUrl,tooltip,onRemoveImage,onImageChange,onImageDrop,...props}) => {
     return (
-        <div className={classes.imageFlexbox}>
-            <label htmlFor={name} className={`${classes.label} ${classes.customFileInput}`}>
+        <div className={classes.imageFlexbox} >
+            <label htmlFor={name} onDrop={onImageDrop} onDragOver={(event) => event.preventDefault()} className={`${classes.label} ${classes.customFileInput}`}>
                 {title}:
                 <input className={classes.hiddenFileInput} type="file" name="image"
                        multiple={false}
