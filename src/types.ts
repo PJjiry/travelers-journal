@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Sight = {
     sightName: string,
     sightDescription: string,
@@ -31,14 +33,14 @@ export interface CurrentPlaceContextProps {
     setCurrentPlace: (place: Place | null) => void;
 }
 
-export interface PlaceForm {
+export interface PlaceFormProps {
     title: string;
     imageUrl: string;
     type: string;
     date: string;
     country: string;
     continent: string;
-    budget: number | undefined;
+    budget: number;
     description: string;
     specialRequirements: string | undefined;
     sights: Sight[] | undefined;
@@ -54,3 +56,70 @@ export type MapLocationProps = {
     lat: number;
     lng: number;
 };
+
+export type SightState = {
+    sightName: string;
+    sightDescription: string;
+}
+
+
+export type PlaceFormContextType = {
+    placeForm: PlaceFormProps;
+    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps>>;
+    sight: SightState;
+    setSight: React.Dispatch<React.SetStateAction<SightState>>;
+    handleAddSight: (sightName: string, sightDescription: string) => void;
+    handleRemoveSight: (sightName: string) => void;
+    handleSightChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void,
+    handleRemoveImage: () => void;
+    handleLocationChange: (newLocation: {lat: number, lng: number}) => void;
+    handleReset: () => void;
+};
+
+export type InputProps = {
+    name: string,
+    title: string,
+    tooltip: string,
+    isTextarea?: boolean,
+    value: string | number | undefined,
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => void,
+    type?: string,
+    min?: number,
+}
+
+export type ImageInputProps = {
+    name: string,
+    title: string,
+    tooltip: string,
+    onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    imageUrl: string | undefined,
+    onRemoveImage: () => void
+}
+
+export type SelectProps = {
+    name: string,
+    title: string,
+    tooltip: string,
+    value: string,
+    onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
+    children: React.ReactNode
+}
+
+export type SightFormProps = {
+    sightName: string,
+    sightDescription: string,
+    sights: Sight[] | undefined,
+    onSightChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onAddSight: () => void,
+    onRemoveSight: (sightName: string) => void,
+}
+
+export type LocationFormProps = {
+    location: {
+        lat: number,
+        lng: number
+    },
+    onLocationChange: (newLocation: {lat: number, lng: number}) => void
+}
