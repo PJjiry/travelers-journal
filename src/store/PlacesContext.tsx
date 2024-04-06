@@ -13,10 +13,20 @@ export const PlacesProvider: React.FC<{children: ReactNode}> = ({children}) => {
         setPlaces((prevState) => [...prevState, newPlace]);
     }
 
+    const updatePlace = (updatedPlace: Place) => {
+        setPlaces((prevState) => {
+            const index = prevState.findIndex((place) => place.id === updatedPlace.id);
+            const updatedPlaces = [...prevState];
+            updatedPlaces[index] = updatedPlace;
+            return updatedPlaces;
+        });
+    }
+
     const placesContext:PlacesContextProps = {
         places,
         setPlaces,
-        addNewPlace
+        addNewPlace,
+        updatePlace
     };
 
     return (

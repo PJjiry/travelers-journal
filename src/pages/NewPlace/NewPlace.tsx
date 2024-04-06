@@ -9,7 +9,7 @@ const NewPlace: React.FC = () => {
 
     return (
         <main className={classes.main}>
-            <PlaceForm/>
+            <PlaceForm title="Add a new place"/>
         </main>
     );
 };
