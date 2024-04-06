@@ -49,3 +49,53 @@ button {
   font-family: inherit;
   cursor: pointer;
 }
+
+input {
+  box-sizing: border-box;
+  width: 93%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--text-dark);
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+  box-shadow: 0 0 5px var(--primary);
+}
+
+input, textarea, select {
+  box-sizing: border-box;
+  width: 93%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--text-dark);
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 5px var(--primary);
+}
+
+textarea {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--text-dark);
+  border-radius: 5px;
+  overflow: hidden;
+  resize: vertical;
+}
+
+select {
+  appearance: none;
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--text-dark);
+}
+
+option {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-dark);
+}

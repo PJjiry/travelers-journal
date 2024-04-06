@@ -1,0 +1,19 @@
+.label {
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.inputHelp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    width: 23px;
+    color: var(--text-dark);
+    height: 23px;
+    margin-right: 0.5rem;
+}
