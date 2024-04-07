@@ -19,6 +19,10 @@ const PackingList:React.FC = () => {
                             <input type="checkbox"/>
                             <span>Passport</span>
                         </li>
+                        <li className={classes.listItem}>
+                            <input type="checkbox"/>
+                            <span>Headphones</span>
+                        </li>
                     </ul>
                 </div>
             </section>
