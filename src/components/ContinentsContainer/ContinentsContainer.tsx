@@ -1,15 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import classes from './ContinentsContainer.module.css'
 import PlacesList from '../PlacesList/PlacesList.tsx';
 import {Place} from '../../types.ts';
-import PlacesContext from '../../store/PlacesContext.tsx';
 
 type GroupedPlaces = Record<string, Place[]> | undefined;
 
 type PlacesArray = [string, Place[]][] | undefined;
-const ContinentsContainer: React.FC = () => {
-    const placesCtx = useContext(PlacesContext);
-    const sortedPlaces = placesCtx?.places.sort((a, b) => a.continent.localeCompare(b.continent));
+const ContinentsContainer: React.FC<{searchedPlaces:Place[]}> = ({searchedPlaces}) => {
+    if(searchedPlaces.length===0) {
+        return <h3 className={classes.noResult} >No places found.</h3>
+    }
+
+    const sortedPlaces = searchedPlaces?.sort((a, b) => a.continent.localeCompare(b.continent));
     const groupedPlaces:GroupedPlaces = sortedPlaces?.reduce((acc, place) => {
         const continent = place.continent;
         // If the continent hasn't been added to the accumulator, add it with an empty array

@@ -19,3 +19,10 @@
     border-bottom: 3px solid var(--text-dark);
     color: var(--text-dark);
 }
+
+.noResult{
+    font-size: 1.4rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 4rem 0 2rem 0;
+}

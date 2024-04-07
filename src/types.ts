@@ -14,6 +14,7 @@ export type Place = {
     country: string,
     continent: string,
     budget: number,
+    currency: string,
     description: string,
     specialRequirements?: string,
     sights?: Sight[],
@@ -45,6 +46,7 @@ export interface PlaceFormItems {
     country: string;
     continent: string;
     budget: number;
+    currency: string;
     description: string;
     specialRequirements?: string | undefined;
     sights?: Sight[] | undefined;
@@ -86,12 +88,13 @@ export type PlaceFormContextType = {
 export type InputProps = {
     name: string,
     title: string,
-    tooltip: string,
+    tooltip?: string,
     isTextarea?: boolean,
     value: string | number | undefined,
     onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
     type?: string,
-    min?: number
+    min?: number,
+    hasNoIcon?: boolean
 }
 
 export type ImageInputProps = {

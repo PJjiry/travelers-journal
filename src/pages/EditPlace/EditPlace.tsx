@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import classes from './EditPlace.module.css'
 import {Place} from '../../types.ts';
-import Error from '../Error.tsx';
+import Error from '../Error/Error.tsx';
 import CompletePlaceItem from '../../components/CompletePlaceItem/CompletePlaceItem.tsx';
 import PlacesContext from '../../store/PlacesContext.tsx';
 import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';

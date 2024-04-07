@@ -3,7 +3,7 @@ import classes from '../UI.module.css'
 import {MdHelpOutline} from 'react-icons/md';
 import {InputProps} from '../../../types.ts';
 
-const Input:React.FC<InputProps> = ({name, title, tooltip, isTextarea,value, onInputChange,...props}) => {
+const Input:React.FC<InputProps> = ({name, title, tooltip,hasNoIcon, isTextarea,value, onInputChange,...props}) => {
     return (
         <label htmlFor={name} className={classes.label}>
             {title}:
@@ -16,9 +16,9 @@ const Input:React.FC<InputProps> = ({name, title, tooltip, isTextarea,value, onI
                             {...props}
                            name={name} value={value}
                            onChange={onInputChange}/>}
-                <MdHelpOutline
+                {!hasNoIcon && <MdHelpOutline
                     title={tooltip}
-                    className={classes.icon}/></div>
+                    className={classes.icon}/>}</div>
         </label>
     )
 }
