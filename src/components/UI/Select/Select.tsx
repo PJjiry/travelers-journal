@@ -3,7 +3,7 @@ import classes from '../UI.module.css'
 import {MdHelpOutline} from 'react-icons/md';
 import {SelectProps} from '../../../types.ts';
 
-const Select:React.FC<SelectProps> = ({title,name,tooltip,value,onSelectChange, children,...props}) => {
+const Select: React.FC<SelectProps> = ({title, name, tooltip, value, onSelectChange, children, ...props}) => {
     return (
         <label htmlFor={name} className={classes.label}>
             {title}:

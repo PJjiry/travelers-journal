@@ -21,7 +21,7 @@ const PlaceInfo: React.FC<{place:Place}> = ({place}) => {
             {isPastDate(place.date) && place.budget &&
                 <PlaceInfoWrapper label="Budget:">{new Intl.NumberFormat('en-US', {
                     style: 'currency',
-                    currency: 'USD'
+                    currency: place.currency
                 }).format(place.budget)}</PlaceInfoWrapper>}
             <PlaceInfoWrapper label="Description:">{place.description}</PlaceInfoWrapper>
             {place.specialRequirements &&

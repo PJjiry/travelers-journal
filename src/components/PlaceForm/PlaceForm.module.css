@@ -76,6 +76,34 @@
     color: var(--text-light)
 }
 
+.budgetDiv{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.budgetDiv label:first-child{
+    width: 73%;
+}
+
+.budgetDiv label:last-child{
+    width: 27%;
+}
+
+.budgetDiv input{
+    height: 37px;
+}
+
+.budgetDiv select{
+    width: 73%;
+    height: 37px;
+}
+
+.budgetDiv svg{
+    width: 23px;
+    height: 23px;
+    margin-right:  0.5rem;
+}
 .error{
     display: flex;
     align-items: center;
