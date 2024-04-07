@@ -13,8 +13,7 @@ const LocationForm: React.FC<LocationFormProps> = ({location, onLocationChange})
                     title="Set the location on the map of the place. You can scroll and zoom the map as you wish to."
                     className={classes.icon}/>
             </div>
-            <MapLocation mapContainerStyle={{width: '100%', height: '400px', borderRadius: '10px'}}
-                         lat={location.lat} lng={location.lng}
+            <MapLocation lat={location.lat} lng={location.lng}
                          onLocationChange={(newLocation) => onLocationChange(newLocation)}
             />
         </label>

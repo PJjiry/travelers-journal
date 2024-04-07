@@ -26,7 +26,7 @@ export type Place = {
 export type PlacesContextProps = {
     places: Place[],
     setPlaces: (places: Place[]) => void;
-    addNewPlace: (newPlace: PlaceFormProps) => void;
+    addNewPlace: (newPlace: PlaceFormItems) => void;
     updatePlace: (updatedPlace: Place) => void;
 }
 
@@ -35,7 +35,7 @@ export interface CurrentPlaceContextProps {
     setCurrentPlace: (place: Place | null) => void;
 }
 
-export interface PlaceFormProps {
+export interface PlaceFormItems {
     id: string;
     title: string;
     imageUrl: string;
@@ -45,8 +45,8 @@ export interface PlaceFormProps {
     continent: string;
     budget: number;
     description: string;
-    specialRequirements: string | undefined;
-    sights: Sight[] | undefined;
+    specialRequirements?: string | undefined;
+    sights?: Sight[] | undefined;
     location: {
         lat: number,
         lng: number
@@ -67,8 +67,8 @@ export type SightState = {
 
 
 export type PlaceFormContextType = {
-    placeForm: PlaceFormProps;
-    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps|Place>>;
+    placeForm: PlaceFormItems;
+    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems|Place>>;
     sight: SightState;
     setSight: React.Dispatch<React.SetStateAction<SightState>>;
     handleAddSight: (sightName: string, sightDescription: string) => void;
@@ -127,4 +127,11 @@ export type LocationFormProps = {
         lng: number
     },
     onLocationChange: (newLocation: {lat: number, lng: number}) => void
+}
+
+export type PlaceFormProps = {
+    title: string,
+    place?: Place,
+    isEditing?: boolean
+    stopEditing?: () => void
 }

@@ -1,11 +1,11 @@
 import React, {useState, createContext, ReactNode} from 'react';
-import {Place, PlaceFormContextType, PlaceFormProps, SightState} from '../types.ts';
+import {Place, PlaceFormContextType, PlaceFormItems, SightState} from '../types.ts';
 
 const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
 
 
 export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children}) => {
-    const [placeForm, setPlaceForm] = useState<PlaceFormProps>({
+    const [placeForm, setPlaceForm] = useState<PlaceFormItems>({
         id: '',
         title: '',
         imageUrl: '',
@@ -122,7 +122,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
             continent: '',
             budget: 0,
             description: '',
-            specialRequirements: undefined,
+            specialRequirements: '',
             sights: undefined,
             location: {
                 lat: 50.073658,
@@ -136,8 +136,8 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
     }
 
     const PlaceFormContextValue: {
-        placeForm: PlaceFormProps,
-        setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormProps | Place>>,
+        placeForm: PlaceFormItems,
+        setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems | Place>>,
         sight: SightState,
         setSight: React.Dispatch<React.SetStateAction<SightState>>,
         handleAddSight: (sightName: string, sightDescription: string) => void,
