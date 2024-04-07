@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './PlaceForm.module.css';
 import {isPastDate} from '../../utils/utils.ts';
-import { MdError } from "react-icons/md";
+import {MdCancel, MdError} from "react-icons/md";
 import {CONTINENTS} from '../../utils/constants.ts';
 import Input from '../UI/Input/Input.tsx';
 import BackgroundImageInput from '../BackgroundImageInput/BackgroundImageInput.tsx';
@@ -11,9 +11,10 @@ import SightForm from '../SightForm/SightForm.tsx';
 import LocationForm from '../LocationForm/LocationForm.tsx';
 import PlaceFormContext from '../../store/PlaceFormContext.tsx';
 import PlacesContext from '../../store/PlacesContext.tsx';
-import {Place} from '../../types.ts';
+import { PlaceFormProps} from '../../types.ts';
+import {IoMdSave} from 'react-icons/io';
 
-const PlaceForm: React.FC<{place?:Place, title:string}> = ({place, title}) => {
+const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditing}) => {
     const PlaceFormCtx = useContext(PlaceFormContext);
     const PlaceCtx = useContext(PlacesContext);
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ const PlaceForm: React.FC<{place?:Place, title:string}> = ({place, title}) => {
         if (place) {
             setPlaceForm(place);
         }
-    }, [PlaceFormCtx, place, setPlaceForm]);
+    }, [place, setPlaceForm]);
     
 
 
@@ -48,9 +49,18 @@ const PlaceForm: React.FC<{place?:Place, title:string}> = ({place, title}) => {
         if (!validateForm()) {
             return;
         }
+        if (!place) {
         PlaceCtx.addNewPlace(placeForm);
         handleReset()
         navigate('/')
+        }
+        if(place) {
+            PlaceCtx.updatePlace(placeForm);
+            if (typeof stopEditing === 'function') {
+                stopEditing();
+            }
+        }
+
     };
 
     return (
@@ -92,10 +102,14 @@ const PlaceForm: React.FC<{place?:Place, title:string}> = ({place, title}) => {
                 }} onRemoveSight={handleRemoveSight} onSightChange={handleSightChange}/>}
             <LocationForm location={placeForm.location} onLocationChange={handleLocationChange} />
             {hasError && <div className={classes.error}>Please fill in all required fields{placeForm.budget<0 ? '. Budget cannot be negative number':''}<MdError/></div>}
-            <div className={classes.actions}>
+            {!isEditing && <div className={classes.actions}>
                 <input className={classes.reset} onClick={handleReset} type="reset" value="Reset"/>
                 <input className={classes.submit} type="submit" value="Submit"/>
-            </div>
+            </div>}
+            {isEditing && <div className={classes.actions}>
+                <button className={classes.cancelButton} onClick={stopEditing}>Cancel <MdCancel/></button>
+                <button className={classes.saveButton} type="submit">Save <IoMdSave/></button>
+            </div>}
         </form>
     )
 }

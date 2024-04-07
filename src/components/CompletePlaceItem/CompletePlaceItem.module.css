@@ -1,11 +1,13 @@
 .place {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin: 3rem auto;
+    padding: 20px;
+    box-shadow: 0 0 10px var(--dark-grey);
     align-items: center;
-    margin: 2rem auto;
     border-radius: 10px;
     background-color: var(--background);
-    max-width: 50%;
 }
 
 .place img {
@@ -23,17 +25,17 @@
 .map h4{
     font-size: 1.6rem;
     color: var(--text-dark);
-    margin: 0 0 2rem 2rem;
+    margin: 0 1rem 0.5rem 0;
 }
 
 .actions {
     display: flex;
     width: 100%;
     justify-content: space-around;
-    margin: 1rem;
+    margin-top: 1rem;
 }
 
-.editButton, .deleteButton, .cancelButton,.saveButton {
+.editButton, .deleteButton {
     width: 40%;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -51,17 +53,7 @@
     color: var(--text-light);
 }
 
-.cancelButton{
-    background-color: var(--error);
-    color: var(--text-light);
-}
-
-.saveButton{
-    background-color: var(--nature-color);
-    color: var(--text-light);
-}
-
-.editButton svg,.deleteButton svg, .cancelButton svg, .saveButton svg{
+.editButton svg,.deleteButton svg{
     width: 23px;
     height: 23px;
     margin-left: 0.5rem;
@@ -81,14 +73,4 @@
     background-color: var(--text-light);
     border: 1px solid var(--primary);
     color: var(--primary);
-}
-
-.saveButton:hover{
-    background-color: var(--dark-green);
-    color: var(--background);
-}
-
-.cancelButton:hover{
-    background-color: var(--dark-red);
-    color: var(--background);
 }

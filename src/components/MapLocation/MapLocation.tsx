@@ -34,7 +34,7 @@ const MapLocation: React.FC<MapLocationProps> = ({ lat, lng, onLocationChange, .
 
     return isGoogleMapsLoaded ? (
         <GoogleMap
-            mapContainerStyle={{width: '100%', height: '400px', borderRadius: '0 0 10px 10px'}}
+            mapContainerStyle={{width: '100%', height: '400px', borderRadius: '10px'}}
             center={{lat: lat, lng: lng}}
             onLoad={handleLoad}
             onCenterChanged={handleCenterChanged}
