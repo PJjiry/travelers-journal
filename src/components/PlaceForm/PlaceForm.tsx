@@ -43,12 +43,15 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         if (place) {
             setPlaceForm(place);
         }
+        return () => {
+            handleReset();
+        }
     }, [place, setPlaceForm]);
 
 
     const validateForm = () => {
-        const {title, imageUrl, type, budget, date, country, continent, description} = placeForm;
-        if (!title || !imageUrl || !type || budget < 0 || !date || !country || !continent || !description) {
+        const {title, imageUrl, type, date, country, continent, description} = placeForm;
+        if (!title || !imageUrl || !type ||!date || !country || !continent || !description) {
             setHasError(true);
             return false;
         }
@@ -72,7 +75,6 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                 stopEditing();
             }
         }
-
     };
 
     return (
@@ -108,7 +110,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                 <Input title="Budget for the whole trip (optional)" name="budget" value={placeForm.budget}
                        onInputChange={handleChange} hasNoIcon
                        min={0} type="number"/>
-                <Select title="Currency" name="currency" value={placeForm.currency} onSelectChange={handleChange}
+                <Select title="Currency" name="currency" value={placeForm.currency!} onSelectChange={handleChange}
                         tooltip="Enter a budget spent for the whole trip and select currency.">
                     <option value="USD">$USD</option>
                     <option value="EUR">€EUR</option>
@@ -130,7 +132,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                 }} onRemoveSight={handleRemoveSight} onSightChange={handleSightChange}/>}
             <LocationForm location={placeForm.location} onLocationChange={handleLocationChange}/>
             {hasError && <div className={classes.error}>Please fill in all required
-                fields{placeForm.budget < 0 ? '. Budget cannot be negative number' : ''}<MdError/></div>}
+                fields<MdError/></div>}
             {!isEditing && <div className={classes.actions}>
                 <input className={classes.reset} onClick={handleReset} type="reset" value="Reset"/>
                 <input className={classes.submit} type="submit" value="Submit"/>

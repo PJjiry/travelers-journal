@@ -10,6 +10,7 @@ export const DUMMY_PLACES: Place[] = [
         country: 'United States',
         continent: 'North America',
         budget: 1000,
+        currency: 'USD',
         description: 'One of the most famous sky scraper cities in the world!',
         specialRequirements: 'Need to have visa.',
         sights: [
@@ -36,6 +37,7 @@ export const DUMMY_PLACES: Place[] = [
         country: 'France',
         continent: 'Europe',
         budget: 500,
+        currency: 'USD',
         description: 'Unique experience in the city of love!',
         sights: [
             {
@@ -63,7 +65,7 @@ export const DUMMY_PLACES: Place[] = [
         description: 'Angkor wat is a temple complex in Cambodia and the largest religious monument in the world.',
         location: {
             lat: 13.411593,
-            lng:103.867416
+            lng: 103.867416
         },
     },
     {
@@ -75,6 +77,7 @@ export const DUMMY_PLACES: Place[] = [
         country: 'India',
         continent: 'Asia',
         budget: 300,
+        currency: 'USD',
         specialRequirements: 'Need to have visa.',
         description: 'Delhi is the capital of India and is known for its rich history and culture.',
         sights: [
@@ -97,6 +100,7 @@ export const DUMMY_PLACES: Place[] = [
         country: 'China',
         continent: 'Asia',
         budget: 500,
+        currency: 'EUR',
         specialRequirements: 'Need to book tickets in advance.',
         description: 'Great wall of China is a series of fortifications made of stone, brick, tamped earth, wood, and other materials, generally built along an east-to-west line across the historical northern borders of China to protect the Chinese states and empires against the raids and invasions of the various nomadic groups of the Eurasian Steppe.',
         location: {
