@@ -22,11 +22,18 @@ export const PlacesProvider: React.FC<{children: ReactNode}> = ({children}) => {
         });
     }
 
+    const deletePlace = (placeId: string) => {
+        setPlaces((prevState) => {
+            return prevState.filter((place) => place.id !== placeId);
+        });
+    }
+
     const placesContext:PlacesContextProps = {
         places,
         setPlaces,
         addNewPlace,
-        updatePlace
+        updatePlace,
+        deletePlace
     };
 
     return (
