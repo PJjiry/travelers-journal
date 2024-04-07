@@ -1,0 +1,19 @@
+.errorDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.errorDiv h3{
+    font-size: 2.5rem;
+    color: var(--error);
+    margin: 2rem 0 1rem 0;
+}
+
+.errorDiv p{
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    text-align: center;
+}
