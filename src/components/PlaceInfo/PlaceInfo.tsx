@@ -9,7 +9,7 @@ import PlaceInfoWrapper from '../PlaceInfoWrapper/PlaceInfoWrapper.tsx';
 import Sights from '../Sights/Sights.tsx';
 import {Place} from '../../types.ts';
 
-const PlaceInfo: React.FC<{place:Place}> = ({place}) => {
+const PlaceInfo: React.FC<{ place: Place }> = ({place}) => {
     return (
         <div className={classes.placeInfo}>
             <h3>{place.title}</h3>
@@ -18,7 +18,7 @@ const PlaceInfo: React.FC<{place:Place}> = ({place}) => {
                 visited <PiConfettiFill/></> : <>Coming
                 in {differenceInDays(new Date(place.date), new Date())} days <MdCardTravel/></>})</PlaceInfoWrapper>
             <PlaceInfoWrapper label="Country:">{place.country} ({place.continent} <IoEarth/>)</PlaceInfoWrapper>
-            {isPastDate(place.date) && place.budget &&
+            {isPastDate(place.date) && place.budget !== null && place.budget !== undefined && place.budget > 0 &&
                 <PlaceInfoWrapper label="Budget:">{new Intl.NumberFormat('en-US', {
                     style: 'currency',
                     currency: place.currency

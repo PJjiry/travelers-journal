@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom"
-import PackingList from './pages/PackingList.tsx';
+import PackingList from './pages/PackingList/PackingList.tsx';
 import NewPlace from './pages/NewPlace/NewPlace.tsx';
 import Main from './pages/Main/Main.tsx';
 import EditPlace from './pages/EditPlace/EditPlace.tsx';

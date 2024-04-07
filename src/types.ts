@@ -13,8 +13,8 @@ export type Place = {
     imageUrl: string,
     country: string,
     continent: string,
-    budget: number,
-    currency: string,
+    budget?: number,
+    currency?: string,
     description: string,
     specialRequirements?: string,
     sights?: Sight[],
@@ -45,8 +45,8 @@ export interface PlaceFormItems {
     date: string;
     country: string;
     continent: string;
-    budget: number;
-    currency: string;
+    budget?: number;
+    currency?: string;
     description: string;
     specialRequirements?: string | undefined;
     sights?: Sight[] | undefined;
