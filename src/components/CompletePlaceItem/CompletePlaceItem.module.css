@@ -74,3 +74,13 @@
     border: 1px solid var(--primary);
     color: var(--primary);
 }
+
+.closeButton {
+    background-color: var(--dark-grey);
+    color: var(--text-dark);
+}
+
+.closeButton:hover {
+    background-color: var(--grey);
+    color: var(--text-light);
+}

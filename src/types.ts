@@ -28,6 +28,7 @@ export type PlacesContextProps = {
     setPlaces: (places: Place[]) => void;
     addNewPlace: (newPlace: PlaceFormItems) => void;
     updatePlace: (updatedPlace: Place) => void;
+    deletePlace: (placeId: string) => void;
 }
 
 export interface CurrentPlaceContextProps {
@@ -54,8 +55,8 @@ export interface PlaceFormItems {
 }
 
 export type MapLocationProps = {
-    mapContainerStyle?:{width: string, height: string, borderRadius: string},
-    onLocationChange?: (location: {lat: number, lng: number}) => void,
+    mapContainerStyle?: { width: string, height: string, borderRadius: string },
+    onLocationChange?: (location: { lat: number, lng: number }) => void,
     lat: number;
     lng: number;
 };
@@ -68,7 +69,7 @@ export type SightState = {
 
 export type PlaceFormContextType = {
     placeForm: PlaceFormItems;
-    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems|Place>>;
+    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems | Place>>;
     sight: SightState;
     setSight: React.Dispatch<React.SetStateAction<SightState>>;
     handleAddSight: (sightName: string, sightDescription: string) => void;
@@ -78,7 +79,7 @@ export type PlaceFormContextType = {
     handleImageDrop: (event: React.DragEvent<HTMLLabelElement>) => void;
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void,
     handleRemoveImage: () => void;
-    handleLocationChange: (newLocation: {lat: number, lng: number}) => void;
+    handleLocationChange: (newLocation: { lat: number, lng: number }) => void;
     handleReset: () => void;
 };
 
@@ -88,7 +89,7 @@ export type InputProps = {
     tooltip: string,
     isTextarea?: boolean,
     value: string | number | undefined,
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => void,
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
     type?: string,
     min?: number
 }
@@ -126,7 +127,7 @@ export type LocationFormProps = {
         lat: number,
         lng: number
     },
-    onLocationChange: (newLocation: {lat: number, lng: number}) => void
+    onLocationChange: (newLocation: { lat: number, lng: number }) => void
 }
 
 export type PlaceFormProps = {
@@ -134,4 +135,11 @@ export type PlaceFormProps = {
     place?: Place,
     isEditing?: boolean
     stopEditing?: () => void
+}
+
+export type ModalProps = {
+    title: string,
+    message: string,
+    open: boolean,
+    children: React.ReactNode
 }
