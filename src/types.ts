@@ -136,7 +136,7 @@ export type LocationFormProps = {
 export type PlaceFormProps = {
     title: string,
     place?: Place,
-    isEditing?: boolean
+    isEditing?: boolean,
     stopEditing?: () => void
 }
 
@@ -145,4 +145,9 @@ export type ModalProps = {
     message: string,
     open: boolean,
     children: React.ReactNode
+}
+
+export type PackingListItem = {
+    name: string,
+    packed: boolean
 }
