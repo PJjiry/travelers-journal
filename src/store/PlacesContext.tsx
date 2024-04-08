@@ -1,19 +1,29 @@
-import React, {createContext, ReactNode, useState} from 'react';
+import React, {createContext, ReactNode, useEffect, useState} from 'react';
 import {Place, PlacesContextProps} from '../types.ts';
-import {DUMMY_PLACES} from '../dummy_places.ts';
+import {addPlace, editPlace, loadPlaces, deletePlace} from '../firebaseAPI.ts';
 
 const PlacesContext = createContext<PlacesContextProps | null>(null);
 
 export const PlacesProvider: React.FC<{children: ReactNode}> = ({children}) => {
-    const [places, setPlaces] = useState<Place[]>(DUMMY_PLACES);
+    const [places, setPlaces] = useState<Place[]>([]);
 
+    useEffect(() => {
+        const loadPlacesFromDB = async () => {
+            const placesFromDB = await loadPlaces();
+            setPlaces(placesFromDB);
+        };
+        loadPlacesFromDB();
+    }, []);
 
-    const addNewPlace = (newPlace: Place) => {
+    const handleAddNewPlace = async (newPlace: Place) => {
         newPlace.id = newPlace.title.toLowerCase() + (Math.floor(Math.random() * 1000000)).toString();
+        await addPlace(newPlace);
         setPlaces((prevState) => [...prevState, newPlace]);
     }
 
-    const updatePlace = (updatedPlace: Place) => {
+    const handleUpdatePlace = async (updatedPlace: Place) => {
+        const id = updatedPlace.id;
+        await editPlace(id, updatedPlace);
         setPlaces((prevState) => {
             const index = prevState.findIndex((place) => place.id === updatedPlace.id);
             const updatedPlaces = [...prevState];
@@ -22,7 +32,8 @@ export const PlacesProvider: React.FC<{children: ReactNode}> = ({children}) => {
         });
     }
 
-    const deletePlace = (placeId: string) => {
+    const handleDeletePlace = async (placeId: string) => {
+        await deletePlace(placeId);
         setPlaces((prevState) => {
             return prevState.filter((place) => place.id !== placeId);
         });
@@ -31,9 +42,9 @@ export const PlacesProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const placesContext:PlacesContextProps = {
         places,
         setPlaces,
-        addNewPlace,
-        updatePlace,
-        deletePlace
+        handleAddNewPlace,
+        handleUpdatePlace,
+        handleDeletePlace
     };
 
     return (

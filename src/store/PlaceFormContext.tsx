@@ -15,8 +15,8 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         budget: 0,
         currency: 'USD',
         description: '',
-        specialRequirements: undefined,
-        sights: undefined,
+        specialRequirements: '',
+        sights: [],
         location: {
             lat: 50.073658,
             lng: 14.418540,
@@ -70,7 +70,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
     }
 
     const addSight = (sightName: string, sightDescription: string) => {
-        if (!placeForm.sights) {
+        if (placeForm.sights?.length === 0) {
             setPlaceForm(prevPlaceForm => ({
                 ...prevPlaceForm,
                 sights: [{sightName: sightName, sightDescription: sightDescription}]
@@ -124,7 +124,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
             currency: 'USD',
             description: '',
             specialRequirements: '',
-            sights: undefined,
+            sights: [],
             location: {
                 lat: 50.073658,
                 lng: 14.418540,

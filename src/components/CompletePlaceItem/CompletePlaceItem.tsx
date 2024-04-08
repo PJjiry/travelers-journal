@@ -29,7 +29,7 @@ const CompletePlaceItem: React.FC = () => {
     }
 
     const handleDeletePlace = () => {
-        placesCtx?.deletePlace(place.id);
+        placesCtx?.handleDeletePlace(place.id);
         setOpen(false);
         navigate('/');
     }
