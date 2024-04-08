@@ -3,7 +3,6 @@ import {Place, PlaceFormContextType, PlaceFormItems, SightState} from '../types.
 
 const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
 
-
 export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [placeForm, setPlaceForm] = useState<PlaceFormItems>({
         id: '',

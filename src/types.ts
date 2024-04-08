@@ -151,3 +151,18 @@ export type PackingListItem = {
     name: string,
     packed: boolean
 }
+
+export type PackingListContextType = {
+    packingList: PackingListItem[],
+    newItem: string,
+    hasSameName: boolean,
+    editingItem: string | null,
+    editedItemText: string,
+    handleEditMode: (itemText: string) => void;
+    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleAddItem: () => void;
+    handleCheckItem: (itemText: string) => void;
+    handleSaveEditedItem: () => void;
+    handleDeleteItem: (itemText: string) => void;
+    handleEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
