@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './AddPackingItem.module.css'
-import {AddPackingItemProps} from '../../types.ts';
+import PackingListContext from '../../store/PackingListContext.tsx';
 
-const AddPackingItem:React.FC<AddPackingItemProps> = ({newItem,onInputChange, hasSameName, onAddItem}) => {
+const AddPackingItem: React.FC = () => {
+    const PackingListCtx = useContext(PackingListContext);
+
+    if (!PackingListCtx) {
+        return null;
+    }
+    const {newItem, handleInputChange, handleAddItem, hasSameName} = PackingListCtx;
+
     return (
         <div className={classes.addItem}>
-        <div className={classes.inputDiv}>
-            <input type="text" placeholder="Add an item" value={newItem} onChange={onInputChange}/>
-            {hasSameName && <p className={classes.error}>Item already exists.</p>}
+            <div className={classes.inputDiv}>
+                <input type="text" placeholder="Add an item" value={newItem} onChange={handleInputChange}/>
+                {hasSameName && <p className={classes.error}>Item already exists.</p>}
+            </div>
+            <button onClick={handleAddItem}>Add</button>
         </div>
-        <button onClick={onAddItem}>Add</button>
-    </div>
     )
 }
 export default AddPackingItem

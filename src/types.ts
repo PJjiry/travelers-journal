@@ -152,33 +152,17 @@ export type PackingListItem = {
     packed: boolean
 }
 
-export type AddPackingItemProps = {
+export type PackingListContextType = {
+    packingList: PackingListItem[],
     newItem: string,
     hasSameName: boolean,
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    onAddItem: () => void
-}
-
-export type PackingItemsListProps = {
-    packingList: PackingListItem[],
-    onCheckItem: (itemText: string) => void,
-    onEditMode: (itemText: string) => void,
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    onAddItem: () => void,
-    onRemoveItem: (itemText: string) => void,
-    onSaveEditedItem: () => void,
     editingItem: string | null,
     editedItemText: string,
-    onEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
-
-export type PackingItemProps = {
-    item: PackingListItem,
-    onCheckItem: (itemText: string) => void,
-    onEditMode: (itemText: string) => void,
-    onRemoveItem: (itemText: string) => void,
-    onSaveEditedItem: () => void,
-    editingItem: string | null,
-    editedItemText: string,
-    onEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleEditMode: (itemText: string) => void;
+    handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleAddItem: () => void;
+    handleCheckItem: (itemText: string) => void;
+    handleSaveEditedItem: () => void;
+    handleDeleteItem: (itemText: string) => void;
+    handleEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

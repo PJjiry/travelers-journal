@@ -12,9 +12,9 @@ import {GoogleMapsProvider} from './store/GoogleMapsContext.tsx';
 import {PlacesProvider} from './store/PlacesContext.tsx';
 import {CurrentPlaceProvider} from './store/CurrentPlaceContext.tsx';
 import {PlaceFormProvider} from './store/PlaceFormContext.tsx';
+import {PackingListProvider} from './store/PackingListContext.tsx';
 
 function App() {
-
     return (
         <>
             <Header/>
@@ -23,14 +23,16 @@ function App() {
                 <PlaceFormProvider>
                     <CurrentPlaceProvider>
                         <GoogleMapsProvider>
-                            <Routes>
-                                <Route path="/" element={<Main/>} index/>
-                                <Route path="/new-place" element={<NewPlace/>}/>
-                                <Route path="/packing-list" element={<PackingList/>}/>
-                                <Route path="/edit-place/:id" element={<EditPlace/>}/>
-                                <Route path="/about" element={<About/>}/>
-                                <Route path="*" element={<Error/>}/>
-                            </Routes>
+                            <PackingListProvider>
+                                <Routes>
+                                    <Route path="/" element={<Main/>} index/>
+                                    <Route path="/new-place" element={<NewPlace/>}/>
+                                    <Route path="/packing-list" element={<PackingList/>}/>
+                                    <Route path="/edit-place/:id" element={<EditPlace/>}/>
+                                    <Route path="/about" element={<About/>}/>
+                                    <Route path="*" element={<Error/>}/>
+                                </Routes>
+                            </PackingListProvider>
                         </GoogleMapsProvider>
                     </CurrentPlaceProvider>
                 </PlaceFormProvider>
