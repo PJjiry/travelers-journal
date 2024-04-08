@@ -151,3 +151,34 @@ export type PackingListItem = {
     name: string,
     packed: boolean
 }
+
+export type AddPackingItemProps = {
+    newItem: string,
+    hasSameName: boolean,
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onAddItem: () => void
+}
+
+export type PackingItemsListProps = {
+    packingList: PackingListItem[],
+    onCheckItem: (itemText: string) => void,
+    onEditMode: (itemText: string) => void,
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onAddItem: () => void,
+    onRemoveItem: (itemText: string) => void,
+    onSaveEditedItem: () => void,
+    editingItem: string | null,
+    editedItemText: string,
+    onEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export type PackingItemProps = {
+    item: PackingListItem,
+    onCheckItem: (itemText: string) => void,
+    onEditMode: (itemText: string) => void,
+    onRemoveItem: (itemText: string) => void,
+    onSaveEditedItem: () => void,
+    editingItem: string | null,
+    editedItemText: string,
+    onEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
