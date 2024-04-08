@@ -27,9 +27,9 @@ export type Place = {
 export type PlacesContextProps = {
     places: Place[],
     setPlaces: (places: Place[]) => void;
-    addNewPlace: (newPlace: PlaceFormItems) => void;
-    updatePlace: (updatedPlace: Place) => void;
-    deletePlace: (placeId: string) => void;
+    handleAddNewPlace: (newPlace: PlaceFormItems) => void;
+    handleUpdatePlace: (updatedPlace: Place) => void;
+    handleDeletePlace: (placeId: string) => void;
 }
 
 export interface CurrentPlaceContextProps {
@@ -48,8 +48,8 @@ export interface PlaceFormItems {
     budget?: number;
     currency?: string;
     description: string;
-    specialRequirements?: string | undefined;
-    sights?: Sight[] | undefined;
+    specialRequirements?: string;
+    sights?: Sight[];
     location: {
         lat: number,
         lng: number

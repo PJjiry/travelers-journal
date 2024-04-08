@@ -65,12 +65,12 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
             return;
         }
         if (!place) {
-            PlaceCtx.addNewPlace(placeForm);
+            PlaceCtx.handleAddNewPlace(placeForm);
             handleReset()
             navigate('/')
         }
         if (place) {
-            PlaceCtx.updatePlace(placeForm);
+            PlaceCtx.handleUpdatePlace(placeForm);
             if (typeof stopEditing === 'function') {
                 stopEditing();
             }
