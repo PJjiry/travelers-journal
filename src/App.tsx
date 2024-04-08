@@ -3,7 +3,7 @@ import PackingList from './pages/PackingList/PackingList.tsx';
 import NewPlace from './pages/NewPlace/NewPlace.tsx';
 import Main from './pages/Main/Main.tsx';
 import EditPlace from './pages/EditPlace/EditPlace.tsx';
-import About from './pages/About.tsx';
+import About from './pages/About/About.tsx';
 import Header from './components/Header/Header.tsx';
 import NavBar from './components/NavBar/NavBar.tsx';
 import Footer from './components/Footer/Footer.tsx';
