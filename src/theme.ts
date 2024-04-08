@@ -12,5 +12,6 @@ export const theme = {
         darkGreen: 'rgb(0, 128, 0)',
         error: '#ff0000',
         darkRed: '#8B0000',
+        primaryTransparent: 'rgba(20, 172, 235, 0.5)',
     },
 };

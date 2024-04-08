@@ -12,6 +12,7 @@
   --dark-green: rgb(0, 128, 0);
   --error: #ff0000;
   --dark-red: #8B0000;
+  --primary-transparent: rgba(20, 172, 235, 0.5);
 }
 
 body {
