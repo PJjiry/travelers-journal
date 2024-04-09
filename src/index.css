@@ -13,6 +13,7 @@
   --error: #ff0000;
   --dark-red: #8B0000;
   --primary-transparent: rgba(20, 172, 235, 0.5);
+  --dark-purple: #800080;
 }
 
 body {
@@ -120,7 +121,7 @@ option {
 }
 
 .loading {
-  color: var(--text-light);
+  color: var(--text-dark);
 }
 
 .error {

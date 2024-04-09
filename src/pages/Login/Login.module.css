@@ -1,0 +1,55 @@
+.background{
+    background-image: url('../../assets/login-background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginPage {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: var(--background);
+}
+
+.loginPage h2{
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.loginPage input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--dark-grey);
+    border-radius: 5px;
+}
+
+.loginPage button{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--text-light);
+    border-radius: 5px;
+    background-color: var(--nature-color);
+    color: var(--text-light);
+    font-weight: bold;
+}
+
+.loginPage button:hover{
+    background-color: var(--dark-green);
+    color: var(--background);
+}
+
+.loginPage p{
+    text-align: center;
+    color: var(--error);
+}

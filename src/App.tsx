@@ -13,32 +13,39 @@ import {PlacesProvider} from './store/PlacesContext.tsx';
 import {CurrentPlaceProvider} from './store/CurrentPlaceContext.tsx';
 import {PlaceFormProvider} from './store/PlaceFormContext.tsx';
 import {PackingListProvider} from './store/PackingListContext.tsx';
+import Login from './pages/Login/Login.tsx';
+import AuthWrapper from './components/AuthWrapper/AuthWrapper.tsx';
 
 function App() {
     return (
-        <>
-            <Header/>
-            <NavBar/>
-            <PlacesProvider>
-                <PlaceFormProvider>
-                    <CurrentPlaceProvider>
-                        <GoogleMapsProvider>
-                            <PackingListProvider>
-                                <Routes>
-                                    <Route path="/" element={<Main/>} index/>
-                                    <Route path="/new-place" element={<NewPlace/>}/>
-                                    <Route path="/packing-list" element={<PackingList/>}/>
-                                    <Route path="/edit-place/:id" element={<EditPlace/>}/>
-                                    <Route path="/about" element={<About/>}/>
-                                    <Route path="*" element={<Error/>}/>
-                                </Routes>
-                            </PackingListProvider>
-                        </GoogleMapsProvider>
-                    </CurrentPlaceProvider>
-                </PlaceFormProvider>
-            </PlacesProvider>
-            <Footer/>
-        </>
+        <Routes>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="*" element={
+                <AuthWrapper>
+                    <PlacesProvider>
+                        <PlaceFormProvider>
+                            <CurrentPlaceProvider>
+                                <GoogleMapsProvider>
+                                    <PackingListProvider>
+                                        <Header/>
+                                        <NavBar/>
+                                        <Routes>
+                                            <Route path="/" element={<Main/>} index/>
+                                            <Route path="/new-place" element={<NewPlace/>}/>
+                                            <Route path="/packing-list" element={<PackingList/>}/>
+                                            <Route path="/edit-place/:id" element={<EditPlace/>}/>
+                                            <Route path="/about" element={<About/>}/>
+                                            <Route path="*" element={<Error/>}/>
+                                        </Routes>
+                                        <Footer/>
+                                    </PackingListProvider>
+                                </GoogleMapsProvider>
+                            </CurrentPlaceProvider>
+                        </PlaceFormProvider>
+                    </PlacesProvider>
+                </AuthWrapper>
+            }/>
+        </Routes>
     )
 }
 
