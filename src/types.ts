@@ -30,6 +30,8 @@ export type PlacesContextProps = {
     handleAddNewPlace: (newPlace: PlaceFormItems) => void;
     handleUpdatePlace: (updatedPlace: Place) => void;
     handleDeletePlace: (placeId: string) => void;
+    loading: boolean;
+    error: string | null;
 }
 
 export interface CurrentPlaceContextProps {
@@ -148,6 +150,7 @@ export type ModalProps = {
 }
 
 export type PackingListItem = {
+    id: string,
     name: string,
     packed: boolean
 }
@@ -165,4 +168,6 @@ export type PackingListContextType = {
     handleSaveEditedItem: () => void;
     handleDeleteItem: (itemText: string) => void;
     handleEditedItemChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    loading: boolean;
+    error: string | null;
 }

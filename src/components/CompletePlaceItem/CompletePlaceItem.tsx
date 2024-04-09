@@ -42,6 +42,13 @@ const CompletePlaceItem: React.FC = () => {
         setOpen(false);
     }
 
+    if (placesCtx?.loading) {
+        return <div className="loading">Loading...</div>
+    }
+
+    if (placesCtx?.error) {
+        return <div className="error">Error: {placesCtx.error}</div>;
+    }
 
     return (
         <>

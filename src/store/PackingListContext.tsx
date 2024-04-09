@@ -1,37 +1,53 @@
-import React, {ChangeEvent, createContext, ReactNode} from 'react';
+import React, {ChangeEvent, createContext, ReactNode, useEffect} from 'react';
 import {PackingListContextType, PackingListItem} from '../types.ts';
-
+import {addPackingListItem, deletePackingListItem, editPackingListItem, loadPackingListItems} from '../firebaseAPI.ts';
 
 
 const PackingListContext = createContext<PackingListContextType | null>(null);
 
-export const PackingListProvider:React.FC<{children:ReactNode}>=({children})=>{
+export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [packingList, setPackingList] = React.useState<PackingListItem[]>([]);
     const [newItem, setNewItem] = React.useState<string>('');
     const [hasSameName, setHasSameName] = React.useState<boolean>(false);
     const [editingItem, setEditingItem] = React.useState<string | null>(null);
     const [editedItemText, setEditedItemText] = React.useState<string>('');
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState<string | null>(null);
 
+    useEffect(() => {
+        const loadPackingListFromDB = async () => {
+            try {
+                setLoading(true);
+                const packingListFromDB = await loadPackingListItems();
+                setPackingList(packingListFromDB);
+            } catch (error) {
+                console.error('Error loading packing list from DB:', error);
+                setError('Error loading packing list from DB');
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadPackingListFromDB()
+    }, []);
 
-    const handleEditMode = (itemText: string) => {
-        const itemToEdit = packingList.find(item => item.name === itemText);
+    const handleEditMode = (itemId: string) => {
+        const itemToEdit = packingList.find(item => item.id === itemId);
         if (itemToEdit && itemToEdit.packed) {
             return;
         }
-        setEditingItem(itemText);
+        setEditingItem(itemId);
         if (itemToEdit) {
             setEditedItemText(itemToEdit.name);
         }
     }
-
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setNewItem(e.target.value);
         setHasSameName(false);
     }
 
-    const handleAddItem = () => {
-        if (!newItem) {
+    const handleAddItem = async () => {
+        if (loading||!newItem) {
             return;
         }
 
@@ -40,54 +56,101 @@ export const PackingListProvider:React.FC<{children:ReactNode}>=({children})=>{
             return;
         }
 
+        const newId = newItem.toLowerCase() + (Math.floor(Math.random() * 1000000)).toString();
         const newListItem: PackingListItem = {
+            id: newId,
             name: newItem,
             packed: false
         }
-        setPackingList([...packingList, newListItem]);
+
+        try {
+            await addPackingListItem(newListItem);
+            const packingListFromDB = await loadPackingListItems();
+            setPackingList(packingListFromDB);
+        } catch (error) {
+            console.error('Error adding new item to DB:', error);
+            setError('Error adding new item to DB');
+        }
+
         setNewItem('');
         setHasSameName(false);
     }
 
-    const handleCheckItem = (itemText: string) => {
-        const itemToCheck = packingList.find(item => item.name === itemText);
+
+    const handleCheckItem = async (itemId: string) => {
+        if (loading) {
+            return;
+        }
+
+        const itemToCheck = packingList.find(item => item.id === itemId);
         if (!itemToCheck) {
             return;
         }
-        const newPackingList = packingList.map(item => {
-            if (item.name === itemToCheck.name) {
-                item.packed = !item.packed;
-            }
-            return item;
-        });
-        setPackingList(newPackingList);
+
+        const updatedItem: PackingListItem = {
+            ...itemToCheck,
+            packed: !itemToCheck.packed
+        }
+
+        try {
+            await editPackingListItem(itemToCheck.id, updatedItem);
+            itemToCheck.packed = !itemToCheck.packed;
+            setPackingList([...packingList]);
+        } catch (error) {
+            console.error('Error updating item in DB:', error);
+            setError('Error updating item in DB');
+        }
     }
 
-    const handleSaveEditedItem = () => {
+    const handleSaveEditedItem = async () => {
+        if (loading) {
+            return;
+        }
+
         if (!editedItemText) {
             return;
         }
-        const newPackingList = packingList.map(item => {
-            if (item.name === editingItem) {
-                item.name = editedItemText;
-            }
-            return item;
-        });
-        setPackingList(newPackingList);
-        setEditedItemText('');
-        setEditingItem(null);
+
+        const itemToEdit = packingList.find(item => item.id === editingItem);
+        if (!itemToEdit) {
+            return;
+        }
+
+        const updatedItem: PackingListItem = {
+            ...itemToEdit,
+            name: editedItemText
+        }
+
+        try {
+            await editPackingListItem(itemToEdit.id, updatedItem);
+            itemToEdit.name = editedItemText;
+            setPackingList([...packingList]);
+            setEditedItemText('');
+            setEditingItem(null);
+        } catch (error) {
+            console.error('Error updating item in DB:', error);
+            setError('Error updating item in DB');
+        }
     }
 
-    const handleDeleteItem = (itemText: string) => {
-        const itemToDelete = packingList.find(item => item.name === itemText);
-        if (!itemToDelete) {
+    const handleDeleteItem = async (itemId: string) => {
+        if (loading) {
             return;
         }
-        if (itemToDelete && itemToDelete.packed) {
+
+        const itemToDelete = packingList.find(item => item.id === itemId);
+        if (!itemToDelete || itemToDelete.packed) {
             return;
         }
-        const newPackingList = packingList.filter(item => item.name !== itemText);
-        setPackingList(newPackingList);
+
+        try {
+            await deletePackingListItem(itemToDelete.id);
+            const newPackingList = packingList.filter(item => item.id !== itemId);
+            setPackingList(newPackingList);
+        } catch (error) {
+            console.error('Error deleting item from DB:', error);
+            setError('Error deleting item from DB');
+        }
     }
 
     const handleEditedItemChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -106,10 +169,12 @@ export const PackingListProvider:React.FC<{children:ReactNode}>=({children})=>{
         handleCheckItem,
         handleSaveEditedItem,
         handleDeleteItem,
-        handleEditedItemChange
+        handleEditedItemChange,
+        loading,
+        error,
     }
 
-    return(
+    return (
         <PackingListContext.Provider value={packingListContextValue}>
             {children}
         </PackingListContext.Provider>

@@ -102,3 +102,27 @@ option {
   font-size: 1rem;
   color: var(--text-dark);
 }
+
+
+.loading, .error {
+  margin: auto;
+  font-size: 3rem;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.loading {
+  color: var(--text-light);
+}
+
+.error {
+  color: var(--error);
+}

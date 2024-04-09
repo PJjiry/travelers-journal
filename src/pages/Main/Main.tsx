@@ -25,6 +25,14 @@ const Main: React.FC = () => {
         return place.title.toLowerCase().includes(searchValue.toLowerCase()) || place.country.toLowerCase().includes(searchValue.toLowerCase());
     })
 
+    if (placesCtx?.loading) {
+        return <div className="loading" style={{color:'var(--text-dark)'}}>Loading...</div>
+    }
+
+    if (placesCtx?.error) {
+        return <div className="error">Error: {placesCtx.error}</div>;
+    }
+
 
     return (
         <main className={classes.main}>
