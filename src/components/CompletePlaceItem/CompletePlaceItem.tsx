@@ -59,7 +59,7 @@ const CompletePlaceItem: React.FC = () => {
                         <PlaceInfo place={place}/>
                         <div className={classes.map}>
                             <h4>Location:</h4>
-                            <MapLocation lat={place.location.lat} lng={place.location.lng}/>
+                            <MapLocation place={place}/>
                         </div>
                         <div className={classes.actions}>
                             <button

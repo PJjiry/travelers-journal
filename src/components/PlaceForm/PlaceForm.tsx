@@ -35,7 +35,6 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         handleImageDrop,
         handleImageChange,
         handleRemoveImage,
-        handleLocationChange,
         handleReset
     } = PlaceFormCtx;
 
@@ -130,7 +129,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                            sightDescription={sight.sightDescription} onAddSight={() => {
                     handleAddSight(sight.sightName, sight.sightDescription);
                 }} onRemoveSight={handleRemoveSight} onSightChange={handleSightChange}/>}
-            <LocationForm location={placeForm.location} onLocationChange={handleLocationChange}/>
+            <LocationForm/>
             {hasError && <div className={classes.error}>Please fill in all required
                 fields<MdError/></div>}
             {!isEditing && <div className={classes.actions}>
