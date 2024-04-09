@@ -22,6 +22,10 @@ export type Place = {
         lat: number,
         lng: number
     }
+    markerPosition: {
+        lat: number,
+        lng: number
+    }
 }
 
 export type PlacesContextProps = {
@@ -56,13 +60,14 @@ export interface PlaceFormItems {
         lat: number,
         lng: number
     }
+    markerPosition: {
+        lat: number,
+        lng: number
+    }
 }
 
 export type MapLocationProps = {
-    mapContainerStyle?: { width: string, height: string, borderRadius: string },
-    onLocationChange?: (location: { lat: number, lng: number }) => void,
-    lat: number;
-    lng: number;
+    place?: Place,
 };
 
 export type SightState = {
@@ -85,6 +90,7 @@ export type PlaceFormContextType = {
     handleRemoveImage: () => void;
     handleLocationChange: (newLocation: { lat: number, lng: number }) => void;
     handleReset: () => void;
+    handleMarkerPositionChange: (newMarkerPosition: { lat: number, lng: number }) => void;
 };
 
 export type InputProps = {
@@ -125,14 +131,6 @@ export type SightFormProps = {
     onSightChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     onAddSight: () => void,
     onRemoveSight: (sightName: string) => void,
-}
-
-export type LocationFormProps = {
-    location: {
-        lat: number,
-        lng: number
-    },
-    onLocationChange: (newLocation: { lat: number, lng: number }) => void
 }
 
 export type PlaceFormProps = {

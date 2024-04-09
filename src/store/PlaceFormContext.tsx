@@ -21,6 +21,10 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
             lat: 50.073658,
             lng: 14.418540,
         },
+        markerPosition: {
+            lat: 50.073658,
+            lng: 14.418540,
+        }
     });
 
     const [sight, setSight] = useState<SightState>({
@@ -111,6 +115,15 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         });
     }
 
+    const handleMarkerPositionChange = (newMarkerPosition: { lat: number, lng: number }) => {
+        setPlaceForm(prevPlaceForm => {
+            return {
+                ...prevPlaceForm,
+                markerPosition: newMarkerPosition,
+            };
+        });
+    }
+
     const handleReset = () => {
         setPlaceForm({
             id: '',
@@ -129,6 +142,10 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
                 lat: 50.073658,
                 lng: 14.418540,
             },
+            markerPosition: {
+                lat: 50.073658,
+                lng: 14.418540,
+            }
         });
         setSight({
             sightName: '',
@@ -150,6 +167,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         handleRemoveImage: () => void,
         handleLocationChange: (newLocation: { lat: number, lng: number }) => void,
         handleReset: () => void,
+        handleMarkerPositionChange: (newMarkerPosition: { lat: number, lng: number }) => void,
     } = {
         placeForm,
         setPlaceForm,
@@ -164,6 +182,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         handleImageDrop,
         handleLocationChange,
         handleReset,
+        handleMarkerPositionChange,
     };
 
     return (
