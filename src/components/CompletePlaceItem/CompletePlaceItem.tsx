@@ -43,7 +43,7 @@ const CompletePlaceItem: React.FC = () => {
     }
 
     if (placesCtx?.loading) {
-        return <div className="loading">Loading...</div>
+        return <div className="loading" style={{color:'var(--text-light)'}}>Loading...</div>
     }
 
     if (placesCtx?.error) {

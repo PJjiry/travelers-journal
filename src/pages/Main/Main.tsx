@@ -26,7 +26,7 @@ const Main: React.FC = () => {
     })
 
     if (placesCtx?.loading) {
-        return <div className="loading" style={{color:'var(--text-dark)'}}>Loading...</div>
+        return <div className="loading">Loading...</div>
     }
 
     if (placesCtx?.error) {

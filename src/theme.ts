@@ -13,5 +13,6 @@ export const theme = {
         error: '#ff0000',
         darkRed: '#8B0000',
         primaryTransparent: 'rgba(20, 172, 235, 0.5)',
+        darkPurple:'#800080',
     },
 };

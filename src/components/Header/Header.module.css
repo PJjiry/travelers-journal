@@ -16,3 +16,17 @@
     width: 25px;
     height: 25px;
 }
+
+.logoutButton{
+    margin:0 3rem 0 auto;
+    width: 120px;
+    padding: 0.5rem;
+    background-color: var(--dark-grey);
+    border-radius: 5px;
+    color: var(--text-light);
+}
+
+.logoutButton:hover{
+    background-color: var(--dark-purple);
+    color: var(--background);
+}
