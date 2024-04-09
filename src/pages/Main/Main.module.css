@@ -5,21 +5,21 @@
     height: 100%;
 }
 
-.noPlaceDiv{
+.noPlaceContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
 
-.noPlaceTitle{
+.noPlaceTitle {
     font-size: 1.4rem;
     color: var(--primary);
     text-align: center;
     margin: 4rem 0 2rem 0;
 }
 
-.linkButton{
+.linkButton {
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.4s;
@@ -31,7 +31,7 @@
     text-shadow: 0 0 10px var(--text-light);
 }
 
-.linkButton:hover, .linkButton.active{
+.linkButton:hover, .linkButton.active {
     border: 1px solid var(--primary);
     color: var(--primary);
     background-color: var(--text-light);

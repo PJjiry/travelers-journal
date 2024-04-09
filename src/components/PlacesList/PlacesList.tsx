@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {memo} from 'react';
 import classes from './PlacesList.module.css'
 import PlaceItem from '../PlaceItem/PlaceItem.tsx';
 import {Place} from '../../types.ts';
 
-const PlacesList: React.FC<{sortedPlaces: Place[]}> = ({sortedPlaces}) => {
+// Component for displaying the list of places in the main page
+const PlacesList: React.FC<{ sortedPlaces: Place[] }> = memo(({sortedPlaces}) => {
+
+    // Render the list of sorted places
     return (
         <section className={classes.placesList}>
             {sortedPlaces && sortedPlaces.map((place) => {
@@ -13,5 +16,6 @@ const PlacesList: React.FC<{sortedPlaces: Place[]}> = ({sortedPlaces}) => {
             })}
         </section>
     )
-}
+})
+
 export default PlacesList

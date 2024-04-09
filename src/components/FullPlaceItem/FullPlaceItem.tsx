@@ -6,9 +6,10 @@ import GoogleMapsContainer from '../GoogleMapsContainer/GoogleMapsContainer.tsx'
 import {MdOutlineEdit} from "react-icons/md";
 import CurrentPlaceContext from '../../store/CurrentPlaceContext.tsx';
 import PlaceForm from '../PlaceForm/PlaceForm.tsx';
-import Modal, {Backdrop} from '../UI/Modal/Modal.tsx';
+import Modal from '../UI/Modal/Modal.tsx';
 import PlacesContext from '../../store/PlacesContext.tsx';
 import {useNavigate} from 'react-router-dom';
+import {Backdrop} from '../UI/Backdrop/Backdrop.tsx';
 
 // Component for displaying a complete place item with all its details
 const FullPlaceItem: React.FC = () => {
