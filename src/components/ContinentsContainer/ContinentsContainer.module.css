@@ -5,11 +5,11 @@
     flex-direction: column;
 }
 
-.placesListDiv {
+.continentWrapper {
     padding: 1rem 2rem 0 2rem;
 }
 
-.placesListDiv h2 {
+.continentWrapper h2 {
     font-size: 1.6rem;
     text-align: center;
     margin: 0 0 1rem 0;

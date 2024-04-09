@@ -16,7 +16,7 @@ const Login = () => {
             await signInWithEmailAndPassword(auth,email, password);
             setIsLoggedIn(true); // Set isLoggedIn to true after successful login
         } catch (error) {
-            setError('User does not exist.');
+            setError('User does not exist or the password is incorrect.');
         }
     };
 

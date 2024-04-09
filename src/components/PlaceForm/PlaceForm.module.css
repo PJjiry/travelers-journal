@@ -76,35 +76,36 @@
     color: var(--text-light)
 }
 
-.budgetDiv{
+.budgetDiv {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.budgetDiv label:first-child{
+.budgetDiv label:first-child {
     width: 73%;
 }
 
-.budgetDiv label:last-child{
+.budgetDiv label:last-child {
     width: 27%;
 }
 
-.budgetDiv input{
+.budgetDiv input {
     height: 37px;
 }
 
-.budgetDiv select{
+.budgetDiv select {
     width: 73%;
     height: 37px;
 }
 
-.budgetDiv svg{
+.budgetDiv svg {
     width: 23px;
     height: 23px;
-    margin-right:  0.5rem;
+    margin-right: 0.5rem;
 }
-.error{
+
+.error {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,7 +116,7 @@
     margin: 0.5rem 0;
 }
 
-.error svg{
+.error svg {
     margin-left: 0.5rem;
     width: 23px;
     height: 23px;
@@ -128,7 +129,7 @@
     margin-top: 1rem;
 }
 
-.actions input{
+.actions input {
     width: 40%;
     padding: 1rem;
     box-shadow: 0 0 5px var(--dark-grey);
@@ -139,7 +140,7 @@
     font-size: 1.2rem;
 }
 
-.cancelButton,.saveButton{
+.cancelButton, .saveButton {
     width: 40%;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -152,33 +153,33 @@
     align-items: center;
 }
 
-.cancelButton{
+.cancelButton {
     background-color: var(--error);
     color: var(--text-light);
 }
 
-.saveButton{
+.saveButton {
     background-color: var(--nature-color);
     color: var(--text-light);
 }
 
-.cancelButton svg, .saveButton svg{
+.cancelButton svg, .saveButton svg {
     width: 23px;
     height: 23px;
     margin-left: 0.5rem;
 }
 
-.saveButton:hover{
+.saveButton:hover {
     background-color: var(--dark-green);
     color: var(--background);
 }
 
-.cancelButton:hover{
+.cancelButton:hover {
     background-color: var(--dark-red);
     color: var(--background);
 }
 
-.reset{
+.reset {
     background-color: var(--dark-grey);
     color: var(--text-dark);
 }

@@ -4,13 +4,17 @@ import AddPackingItem from '../AddPackingItem/AddPackingItem.tsx';
 import PackingItemsList from '../PackingItemsList/PackingItemsList.tsx';
 import PackingListContext from '../../store/PackingListContext.tsx';
 
+// Component for the packing list section that contains the packing list items and add item form
 const PackingListSection: React.FC = () => {
-    const PackingListCtx = React.useContext(PackingListContext);
-    if (!PackingListCtx) {
+
+    // importing the packing list context to use its state
+    const packingListCtx = React.useContext(PackingListContext);
+    if (!packingListCtx) {
         return null;
     }
-    const {packingList} = PackingListCtx;
+    const {packingList} = packingListCtx;
 
+    // Render the packing list section with the title, add item form, and list of items
     return (
         <section className={classes.packingListSection}>
             <div className={classes.title}>
@@ -18,9 +22,9 @@ const PackingListSection: React.FC = () => {
             </div>
             <AddPackingItem/>
             <div className={classes.packingListItems}>
-                {packingList.length === 0 &&
-                    <p className={classes.emptyList}>Your list is empty. Add items to get started.</p>}
-                {packingList.length > 0 &&
+                {packingList.length === 0 ?
+                    <p className={classes.emptyList}>Your list is empty. Add items to get started.</p>
+                    :
                     <>
                         <p>Here is a list of items you may need to pack for your trips:</p>
                         <PackingItemsList/>
@@ -29,4 +33,5 @@ const PackingListSection: React.FC = () => {
         </section>
     )
 }
+
 export default PackingListSection

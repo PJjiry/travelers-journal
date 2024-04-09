@@ -1,4 +1,4 @@
-.listItem{
+.listItem {
     display: flex;
     border-radius: 5px;
     align-items: center;
@@ -9,7 +9,7 @@
     margin: 0.25rem;
 }
 
-.listItem input[type="checkbox"]{
+.listItem input[type="checkbox"] {
     width: 20%;
     height: 25px;
     padding: 0.5rem;
@@ -19,11 +19,11 @@
     border-radius: 0;
 }
 
-.listItem input:focus{
+.listItem input:focus {
     box-shadow: none;
 }
 
-.listItem span{
+.listItem span {
     font-size: 1.2rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -31,48 +31,48 @@
     color: var(--text-dark);
 }
 
-.actions{
+.actions {
     display: flex;
     justify-content: space-between;
     margin-left: auto;
 }
 
-.actions svg{
+.actions svg {
     cursor: pointer;
     width: 30px;
     height: 30px;
     margin-left: 0.5rem;
 }
 
-.editButton:hover{
+.editButton:hover {
     color: var(--primary);
 }
 
-.deleteButton:hover{
+.deleteButton:hover {
     color: var(--error);
 }
 
-.checkButton:hover{
+.checkButton:hover {
     color: var(--dark-green);
 }
 
-.packed{
+.packed {
     background-color: var(--dark-grey);
     color: var(--text-dark);
     border: none;
     text-decoration: line-through;
 }
 
-.packed svg{
+.packed svg {
     color: var(--text-dark);
     cursor: auto;
 }
 
-.packed svg:hover{
-    color: var(--text-dark)!important;
+.packed svg:hover {
+    color: var(--text-dark) !important;
 }
 
-.editInput{
+.editInput {
     width: 100%;
     border-radius: 0;
     padding: 0.5rem;
@@ -82,8 +82,8 @@
     transition: box-shadow 0.3s ease;
 }
 
-.editInput:hover, .editInput:focus{
+.editInput:hover, .editInput:focus {
     outline: none;
-    border:none;
+    border: none;
     border-bottom: 1px solid var(--primary);
 }
