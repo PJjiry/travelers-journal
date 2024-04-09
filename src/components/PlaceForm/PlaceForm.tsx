@@ -14,16 +14,23 @@ import PlacesContext from '../../store/PlacesContext.tsx';
 import {PlaceFormProps} from '../../types.ts';
 import {IoMdSave} from 'react-icons/io';
 
+// Component for the form to add or edit a place
 const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditing}) => {
-    const PlaceFormCtx = useContext(PlaceFormContext);
-    const PlaceCtx = useContext(PlacesContext);
-    const navigate = useNavigate();
 
+    // importing the place form and places context to use their state and functions
+    const placeFormCtx = useContext(PlaceFormContext);
+    const placeCtx = useContext(PlacesContext);
+
+// use error state to show error message if form is not filled correctly
     const [hasError, setHasError] = React.useState(false);
 
-    if (!PlaceFormCtx || !PlaceCtx) {
+    // using the navigate hook to redirect to the main page
+    const navigate = useNavigate();
+
+    if (!placeFormCtx || !placeCtx) {
         throw new Error('Context is null');
     }
+
     const {
         placeForm,
         setPlaceForm,
@@ -36,8 +43,9 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         handleImageChange,
         handleRemoveImage,
         handleReset
-    } = PlaceFormCtx;
+    } = placeFormCtx;
 
+    // using effect to set the form values when editing a place
     useEffect(() => {
         if (place) {
             setPlaceForm(place);
@@ -47,10 +55,10 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         }
     }, [place, setPlaceForm]);
 
-
+    // function to validate the form (check if the inputs are filled)
     const validateForm = () => {
         const {title, imageUrl, type, date, country, continent, description} = placeForm;
-        if (!title || !imageUrl || !type ||!date || !country || !continent || !description) {
+        if (!title || !imageUrl || !type || !date || !country || !continent || !description) {
             setHasError(true);
             return false;
         }
@@ -58,31 +66,33 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         return true;
     };
 
+    // function to handle the form submission...if there is no place, add a new place, otherwise update the current place
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (!validateForm()) {
             return;
         }
         if (!place) {
-            PlaceCtx.handleAddNewPlace(placeForm);
+            placeCtx.handleAddNewPlace(placeForm); // add new place
             handleReset()
             navigate('/')
         }
         if (place) {
-            PlaceCtx.handleUpdatePlace(placeForm);
+            placeCtx.handleUpdatePlace(placeForm); // update the current place
             if (typeof stopEditing === 'function') {
                 stopEditing();
             }
         }
     };
 
+    // Render the form with the input fields for the place details: title, image, type, date, country, continent, budget, description, special requirements, sights, and location
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <h3 className={classes.title}>{title}</h3>
             <Input title="Name of the place" name="title" value={placeForm.title} onInputChange={handleChange}
                    tooltip="Enter name of the city (London) or name of the place you want to visit (the Alps)."/>
             <BackgroundImageInput title="Background image" name="image"
-                                  tooltip="Click to choose a background image of the place. Allowed formats are: jpg, png, jpeg. Dropping of the image is not allowed."
+                                  tooltip="Click to choose or drop a background image of your place. Allowed formats are: jpg, png, jpeg. Maximum size is 1MB."
                                   imageUrl={placeForm.imageUrl} onRemoveImage={handleRemoveImage}
                                   onImageChange={handleImageChange} onImageDrop={handleImageDrop}/>
             <Select title="Type of place" name="type" value={placeForm.type}
@@ -93,7 +103,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                 <option className={`${classes.option} ${classes.natureOption}`} value="Nature">Nature</option>
             </Select>
             <Input title="Date of visit" name="date" value={placeForm.date} onInputChange={handleChange}
-                   tooltip="Pick a date you have visited the place or are planning to visit." type="date"/>
+                   tooltip="Pick a date you have visited the place or are planning to visit it." type="date"/>
             <Input title="Country" name="country" value={placeForm.country} onInputChange={handleChange}
                    tooltip="Type a country where is the place located."/>
             <Select title="Continent" name="continent" value={placeForm.continent}
@@ -105,6 +115,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                             value={continent}>{continent}</option>
                 ))}
             </Select>
+            {/*Show the budget input only if user have visited the place (according the date).*/}
             {(!placeForm.date || isPastDate(placeForm.date)) && <div className={classes.budgetDiv}>
                 <Input title="Budget for the whole trip (optional)" name="budget" value={placeForm.budget}
                        onInputChange={handleChange} hasNoIcon
@@ -124,6 +135,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                    value={placeForm.specialRequirements} onInputChange={handleChange}
                    tooltip="Mention special requirements that were needed to visit the place like visa or booking in advance."
                    isTextarea={true}/>
+            {/*Display the sights only if the type is equal to City.*/}
             {(placeForm.type === "City") &&
                 <SightForm sights={placeForm.sights} sightName={sight.sightName}
                            sightDescription={sight.sightDescription} onAddSight={() => {
@@ -132,6 +144,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
             <LocationForm/>
             {hasError && <div className={classes.error}>Please fill in all required
                 fields<MdError/></div>}
+            {/*If the user is editing the place display Cancel and Save buttons, otherwise Reset and Submit inputs.*/}
             {!isEditing && <div className={classes.actions}>
                 <input className={classes.reset} onClick={handleReset} type="reset" value="Reset"/>
                 <input className={classes.submit} type="submit" value="Submit"/>
@@ -143,4 +156,5 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         </form>
     )
 }
+
 export default PlaceForm

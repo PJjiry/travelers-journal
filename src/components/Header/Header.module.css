@@ -17,8 +17,8 @@
     height: 25px;
 }
 
-.logoutButton{
-    margin:0 3rem 0 auto;
+.logoutButton {
+    margin: 0 3rem 0 auto;
     width: 120px;
     padding: 0.5rem;
     background-color: var(--dark-grey);
@@ -26,7 +26,7 @@
     color: var(--text-light);
 }
 
-.logoutButton:hover{
+.logoutButton:hover {
     background-color: var(--dark-purple);
     color: var(--background);
 }

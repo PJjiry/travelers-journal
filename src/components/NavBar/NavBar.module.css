@@ -3,7 +3,7 @@
     color: var(--primary);
     display: flex;
     padding: 0.35rem;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.3);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
 }
 
 .links {
@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.links a{
+.links a {
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.4s;
@@ -26,22 +26,21 @@
     color: var(--primary);
 }
 
-.links li{
+.links li {
     margin-left: 0.5rem;
 }
 
-.links a:hover, a.active{
+.links a:hover, a.active {
     color: var(--text-light);
     background-color: var(--primary);
     text-shadow: 0 0 10px var(--text-light);
 }
 
-.home{
+.home {
     margin-right: auto;
 }
 
-.home svg{
+.home svg {
     width: 30px;
     height: 30px;
 }
-

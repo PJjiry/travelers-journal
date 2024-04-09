@@ -18,34 +18,36 @@ import AuthWrapper from './components/AuthWrapper/AuthWrapper.tsx';
 
 function App() {
     return (
-        <Routes>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="*" element={
-                <AuthWrapper>
-                    <PlacesProvider>
-                        <PlaceFormProvider>
-                            <CurrentPlaceProvider>
-                                <GoogleMapsProvider>
-                                    <PackingListProvider>
-                                        <Header/>
-                                        <NavBar/>
-                                        <Routes>
-                                            <Route path="/" element={<Main/>} index/>
-                                            <Route path="/new-place" element={<NewPlace/>}/>
-                                            <Route path="/packing-list" element={<PackingList/>}/>
-                                            <Route path="/edit-place/:id" element={<EditPlace/>}/>
-                                            <Route path="/about" element={<About/>}/>
-                                            <Route path="*" element={<Error/>}/>
-                                        </Routes>
-                                        <Footer/>
-                                    </PackingListProvider>
-                                </GoogleMapsProvider>
-                            </CurrentPlaceProvider>
-                        </PlaceFormProvider>
-                    </PlacesProvider>
-                </AuthWrapper>
-            }/>
-        </Routes>
+        <>
+            <PlacesProvider>
+                <PlaceFormProvider>
+                    <CurrentPlaceProvider>
+                        <GoogleMapsProvider>
+                            <PackingListProvider>
+                                <Routes>
+                                    <Route path="/login" element={<Login/>}/>
+                                    <Route path="*" element={
+                                        <AuthWrapper>
+                                            <Header/>
+                                            <NavBar/>
+                                            <Routes>
+                                                <Route path="/" element={<Main/>} index/>
+                                                <Route path="/new-place" element={<NewPlace/>}/>
+                                                <Route path="/packing-list" element={<PackingList/>}/>
+                                                <Route path="/edit-place/:id" element={<EditPlace/>}/>
+                                                <Route path="/about" element={<About/>}/>
+                                                <Route path="*" element={<Error/>}/>
+                                            </Routes>
+                                            <Footer/>
+                                        </AuthWrapper>
+                                    }/>
+                                </Routes>
+                            </PackingListProvider>
+                        </GoogleMapsProvider>
+                    </CurrentPlaceProvider>
+                </PlaceFormProvider>
+            </PlacesProvider>
+        </>
     )
 }
 

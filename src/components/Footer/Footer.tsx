@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {memo} from 'react';
 import classes from './Footer.module.css'
 
-const Footer:React.FC = () => {
-    const year = new Date().getFullYear();
-    return(
+// Component for the footer with copyright sign
+const Footer: React.FC = memo(() => {
+
+    // Get the current year
+    const currentYear = new Date().getFullYear();
+
+    // Render the footer with the current year
+    return (
         <div className={classes.footer}>
-            <p>© {year} Traveler's Journal. Author: Petr Jiránek. All rights reserved.</p>
+            <p>© {currentYear} Traveler's Journal. Author: Petr Jiránek. All rights reserved.</p>
         </div>
     )
-}
+})
+
 export default Footer

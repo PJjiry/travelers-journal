@@ -66,7 +66,7 @@ export interface PlaceFormItems {
     }
 }
 
-export type MapLocationProps = {
+export type GoogleMapsContainerProps = {
     place?: Place,
 };
 
@@ -169,3 +169,7 @@ export type PackingListContextType = {
     loading: boolean;
     error: string | null;
 }
+
+export type GroupedPlaces = Record<string, Place[]> | undefined;
+
+export type PlacesArray = [string, Place[]][] | undefined;
