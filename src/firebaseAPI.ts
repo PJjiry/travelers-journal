@@ -1,6 +1,6 @@
 import { doc, setDoc, getDocs, collection, updateDoc, deleteDoc } from "firebase/firestore";
 import db from './firebase';
-import {Place} from './types.ts';
+import {PackingListItem, Place} from './types.ts';
 
 // Load places
 export const loadPlaces = async (): Promise<Place[]> => {
@@ -25,23 +25,26 @@ export const deletePlace = async (id: string): Promise<void> => {
 }
 
 // Load packing list items
-// export const loadPackingListItems = async () => {
-//     const snapshot = await db.collection('packingList').get();
-//     return snapshot.docs.map(doc => doc.data());
-// }
-//
-// // Add a packing list item
-// export const addPackingListItem = async (item) => {
-//     const docRef = await db.collection('packingList').add(item);
-//     return docRef.id;
-// }
-//
-// // Edit a packing list item
-// export const editPackingListItem = async (id, updatedItem) => {
-//     await db.collection('packingList').doc(id).update(updatedItem);
-// }
-//
-// // Delete a packing list item
-// export const deletePackingListItem = async (id) => {
-//     await db.collection('packingList').doc(id).delete();
-// }
+export const loadPackingListItems = async (): Promise<PackingListItem[]> => {
+    const querySnapshot = await getDocs(collection(db, "packingList"));
+    return querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id } as PackingListItem));
+}
+
+// Add a packing list item
+export const addPackingListItem = async (item: Omit<PackingListItem, 'id'>): Promise<string> => {
+    const docRef = doc(collection(db, "packingList"), item.name);
+    await setDoc(docRef, item);
+    return docRef.id;
+}
+
+// Edit a packing list item
+export const editPackingListItem = async (id: string, updatedItem: Partial<PackingListItem>): Promise<void> => {
+    const itemRef = doc(db, "packingList", id);
+    await updateDoc(itemRef, updatedItem);
+}
+
+// Delete a packing list item
+export const deletePackingListItem = async (id: string): Promise<void> => {
+    const itemRef = doc(db, "packingList", id);
+    await deleteDoc(itemRef);
+}

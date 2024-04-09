@@ -14,7 +14,7 @@ const PackingItemsList: React.FC = () => {
         <ul className={classes.list}>
             {packingList.map((item) => (
                 <PackingItem
-                    key={item.name} item={item}
+                    key={item.id} item={item}
                 />
             ))}
         </ul>

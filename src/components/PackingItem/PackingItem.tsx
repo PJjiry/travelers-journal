@@ -18,26 +18,26 @@ const PackingItem: React.FC<{ item: PackingListItem }> = ({item}) => {
         editingItem,
         editedItemText,
         handleEditedItemChange,
-        handleSaveEditedItem
+        handleSaveEditedItem,
+        loading
     } = PackingListCtx;
 
     return (
-        <li key={item.name}
-            className={item.packed ? `${classes.listItem} ${classes.packed}` : classes.listItem}>
-            <input type="checkbox" onChange={() => handleCheckItem(item.name)}
+        <li className={item.packed ? `${classes.listItem} ${classes.packed}` : classes.listItem}>
+            <input type="checkbox" disabled={loading||editingItem===item.id} onChange={() => handleCheckItem(item.id)}
                    checked={item.packed}/>
-            {editingItem === item.name ?
+            {editingItem === item.id ?
                 <input className={classes.editInput} type="text" value={editedItemText}
                        onChange={handleEditedItemChange}/> :
                 <span>{item.name}</span>}
             <div className={classes.actions}>
-                {editingItem === item.name ?
-                    <FaCheck className={classes.checkButton} onClick={handleSaveEditedItem}/> :
+                {editingItem === item.id ?
+                    <FaCheck className={classes.checkButton} aria-disabled={loading} onClick={handleSaveEditedItem}/> :
                     <>
-                        <MdModeEdit className={classes.editButton}
-                                    onClick={() => handleEditMode(item.name)}/>
-                        <AiFillDelete className={classes.deleteButton}
-                                      onClick={() => handleDeleteItem(item.name)}/>
+                        <MdModeEdit aria-disabled={loading} className={classes.editButton}
+                                    onClick={() => handleEditMode(item.id)}/>
+                        <AiFillDelete className={classes.deleteButton} aria-disabled={loading}
+                                      onClick={() => handleDeleteItem(item.id)}/>
                     </>}
             </div>
         </li>
