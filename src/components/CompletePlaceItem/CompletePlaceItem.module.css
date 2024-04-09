@@ -17,12 +17,12 @@
     max-height: 450px;
 }
 
-.map{
+.map {
     width: 100%;
     height: auto;
 }
 
-.map h4{
+.map h4 {
     font-size: 1.6rem;
     color: var(--text-dark);
     margin: 0 1rem 0.5rem 0;
@@ -48,28 +48,28 @@
     align-items: center;
 }
 
-.editButton{
+.editButton {
     background-color: var(--primary);
     color: var(--text-light);
 }
 
-.editButton svg,.deleteButton svg{
+.editButton svg, .deleteButton svg {
     width: 23px;
     height: 23px;
     margin-left: 0.5rem;
 }
 
-.deleteButton{
+.deleteButton {
     background-color: var(--error);
     color: var(--text-light)
 }
 
-.deleteButton:hover{
+.deleteButton:hover {
     background-color: var(--dark-red);
     color: var(--background);
 }
 
-.editButton:hover{
+.editButton:hover {
     background-color: var(--text-light);
     border: 1px solid var(--primary);
     color: var(--primary);

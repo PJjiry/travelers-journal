@@ -30,6 +30,8 @@ export type PlacesContextProps = {
     handleAddNewPlace: (newPlace: PlaceFormItems) => void;
     handleUpdatePlace: (updatedPlace: Place) => void;
     handleDeletePlace: (placeId: string) => void;
+    loading: boolean;
+    error: string | null;
 }
 
 export interface CurrentPlaceContextProps {
