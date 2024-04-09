@@ -1,4 +1,4 @@
-.background{
+.loginPage {
     background-image: url('../../assets/login-background.jpg');
     background-size: cover;
     background-attachment: fixed;
@@ -9,23 +9,23 @@
     align-items: center;
 }
 
-.loginPage {
+.loginModal {
     max-width: 500px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: var(--background);
 }
 
-.loginPage h2{
+.loginModal h2 {
     text-align: center;
     color: var(--text-dark);
     margin-bottom: 20px;
 }
 
-.loginPage input{
+.loginModal input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -33,7 +33,7 @@
     border-radius: 5px;
 }
 
-.loginPage button{
+.loginModal button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -44,12 +44,12 @@
     font-weight: bold;
 }
 
-.loginPage button:hover{
+.loginModal button:hover {
     background-color: var(--dark-green);
     color: var(--background);
 }
 
-.loginPage p{
+.loginModal p {
     text-align: center;
     color: var(--error);
 }

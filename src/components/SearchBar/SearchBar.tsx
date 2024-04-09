@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {memo} from 'react';
 import classes from './SearchBar.module.css'
 import { MdSearch } from "react-icons/md";
 
-const SearchBar: React.FC<{value: string, onSearch:(text:string)=>void}> = ({value, onSearch}) => {
+// Component for displaying the search bar with a search input
+const SearchBar: React.FC<{value: string, onSearch:(text:string)=>void}> = memo(({value, onSearch}) => {
 
+    // function to handle the search input change
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
         onSearch(newValue);
     }
 
+    // Render the title and search bar with a search input
     return (
         <section className={classes.searchBar}>
             <h2>Your places:</h2>
@@ -18,5 +21,6 @@ const SearchBar: React.FC<{value: string, onSearch:(text:string)=>void}> = ({val
             </div>
         </section>
     )
-}
+})
+
 export default SearchBar

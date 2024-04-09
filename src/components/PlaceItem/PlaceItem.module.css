@@ -31,13 +31,13 @@
     align-items: center;
 }
 
-.placeInfo h3{
+.placeInfo h3 {
     margin: 0.25rem;
     font-size: 1.4em;
     color: var(--text-light);
 }
 
-.placeInfo p{
+.placeInfo p {
     margin: 0.15rem;
     font-size: 1.1em;
     color: var(--text-dark);

@@ -1,9 +1,13 @@
-import React, {useState, createContext, ReactNode} from 'react';
+import React, {useState, createContext, ReactNode, useCallback} from 'react';
 import {Place, PlaceFormContextType, PlaceFormItems, SightState} from '../types.ts';
 
+// Context for the place form items...it provides the place form items and functions to manage them
 const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
 
+// Provider for the place form context...it contains values and functions to manage the place form items
 export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+
+    // using state to manage the place form items and set their initial value: id, title, imageUrl, type, date, country, continent, budget, currency, description, specialRequirements, sights, location, markerPosition
     const [placeForm, setPlaceForm] = useState<PlaceFormItems>({
         id: '',
         title: '',
@@ -27,11 +31,13 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         }
     });
 
+    // using state to manage the sight items and set their initial value, the sight item contains sightName and sightDescription
     const [sight, setSight] = useState<SightState>({
         sightName: '',
         sightDescription: '',
     });
 
+    // function to handle the change of the place form item inputs, text areas, and select elements
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setPlaceForm({
             ...placeForm,
@@ -39,20 +45,24 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         });
     };
 
+    // function to handle the change of the image input
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
+        const file = event.target.files?.[0]; // Get the first file from the input
+
         if (!file) return;
 
-        const reader = new FileReader();
+        const reader = new FileReader();// Create a new FileReader object
         reader.onload = () => {
-            setPlaceForm({...placeForm, imageUrl: reader.result as string});
+            setPlaceForm({...placeForm, imageUrl: reader.result as string}); // Set the image URL to the result of the reader
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // Read the file as a data URL
     }
 
+    // function to handle the drop of the image
     const handleImageDrop = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
-        const file = event.dataTransfer.files[0];
+        const file = event.dataTransfer.files[0]; // Get the first file from the data transfer
+
         if (!file) return;
 
         const reader = new FileReader();
@@ -62,10 +72,12 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         reader.readAsDataURL(file);
     }
 
+    // function to handle the removal of the image
     const handleRemoveImage = () => {
         setPlaceForm({...placeForm, imageUrl: ''});
     }
 
+    // function to handle the change of the sight item inputs
     const handleSightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSight({
             ...sight,
@@ -73,8 +85,9 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         });
     }
 
-    const addSight = (sightName: string, sightDescription: string) => {
-        if (placeForm.sights?.length === 0) {
+    // function to add a new sight to the place form
+    const addSightToTheForm = useCallback((sightName: string, sightDescription: string) => {
+        if (placeForm.sights?.length === 0) { // If there are no sights yet, add the first sight
             setPlaceForm(prevPlaceForm => ({
                 ...prevPlaceForm,
                 sights: [{sightName: sightName, sightDescription: sightDescription}]
@@ -82,30 +95,34 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         } else {
             setPlaceForm(prevPlaceForm => ({
                 ...prevPlaceForm,
-                sights: [...prevPlaceForm.sights!, {sightName: sightName, sightDescription: sightDescription}]
+                sights: [...prevPlaceForm.sights!, {sightName: sightName, sightDescription: sightDescription}] // Add the new sight to the existing sights
             }));
         }
+    }, [placeForm]);
 
-    };
-
-    const handleRemoveSight = (sightName: string) => {
+    // function to remove a sight from the place form
+    const handleRemoveSight = useCallback((sightName: string) => {
         setPlaceForm(prevPlaceForm => {
             return {
                 ...prevPlaceForm,
-                sights: prevPlaceForm.sights!.filter(sight => sight.sightName !== sightName)
+                sights: prevPlaceForm.sights!.filter(sight => sight.sightName !== sightName) // Filter out the sight to remove
             };
         });
-    }
+    }, []);
 
+    // function to add new sight to the form if they are filled and reset the sight input fields
     const handleAddSight = (sightName: string, sightDescription: string) => {
-        if (sightName.trim() === '' || sightDescription.trim() === '') return;
-        addSight(sightName, sightDescription);
-        setSight({
+        if (sightName.trim() === '' || sightDescription.trim() === '') return; // Check if the sight name and description are not empty
+
+        addSightToTheForm(sightName, sightDescription); // Add the new sight to the place form
+
+        setSight({ // Reset the sight input fields
             sightName: '',
             sightDescription: '',
         });
     }
 
+    // function to handle the change of the location of the place by moving on the map
     const handleLocationChange = (newLocation: { lat: number, lng: number }) => {
         setPlaceForm(prevPlaceForm => {
             return {
@@ -115,6 +132,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         });
     }
 
+    // function to handle the change of the marker position on the map by clicking on the map
     const handleMarkerPositionChange = (newMarkerPosition: { lat: number, lng: number }) => {
         setPlaceForm(prevPlaceForm => {
             return {
@@ -124,6 +142,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         });
     }
 
+    // function to reset the place form and sight input fields
     const handleReset = () => {
         setPlaceForm({
             id: '',
@@ -153,6 +172,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         });
     }
 
+    // values and functions to be provided by the context
     const PlaceFormContextValue: {
         placeForm: PlaceFormItems,
         setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems | Place>>,
@@ -185,6 +205,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         handleMarkerPositionChange,
     };
 
+    // return the provider with the context value
     return (
         <PlaceFormContext.Provider value={PlaceFormContextValue}>
             {children}

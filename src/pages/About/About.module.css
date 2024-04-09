@@ -1,4 +1,4 @@
-.main{
+.main {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -7,7 +7,7 @@
     background: linear-gradient(to right, var(--secondary-transparent), var(--primary-transparent));
 }
 
-.main h3{
+.main h3 {
     font-size: 2em;
     font-weight: 700;
     margin: 1em;
@@ -15,14 +15,14 @@
     text-shadow: 2px 2px 2px var(--secondary);
 }
 
-.article{
+.article {
     display: flex;
     flex-direction: column;
     width: 80%;
     padding: 1rem;
 }
 
-.article h4{
+.article h4 {
     font-size: 1.6em;
     font-weight: 750;
     margin: 1rem 0;
@@ -30,7 +30,7 @@
     text-shadow: 2px 2px 2px var(--dark-grey);
 }
 
-.article p{
+.article p {
     font-size: 1.2em;
     font-weight: 500;
     margin: 1rem 0;

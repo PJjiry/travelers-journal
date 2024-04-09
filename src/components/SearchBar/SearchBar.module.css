@@ -1,10 +1,10 @@
-.searchBar{
+.searchBar {
     display: flex;
     align-items: center;
     margin-top: 13px;
 }
 
-.searchBar h2{
+.searchBar h2 {
     margin: 0 0 0 5rem;
     color: var(--text-dark);
     font-size: 1.8em;
@@ -19,7 +19,7 @@
     transition: border-bottom-color 0.4s ease;
 }
 
-.searchContainer svg{
+.searchContainer svg {
     width: 22px;
     height: 22px;
 }
@@ -31,7 +31,7 @@
     outline: none;
 }
 
-.searchInput:focus{
+.searchInput:focus {
     box-shadow: none;
 }
 

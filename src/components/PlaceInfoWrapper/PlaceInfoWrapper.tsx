@@ -1,7 +1,10 @@
 import React, {ReactNode} from 'react';
 import classes from './PlaceInfoWrapper.module.css'
 
-const PlaceInfoWrapper: React.FC<{label:string, children:ReactNode}> = ({label, children}) => {
+// Component for displaying the place information with a label
+const PlaceInfoWrapper: React.FC<{ label: string, children: ReactNode }> = ({label, children}) => {
+
+    // Component for displaying the place information with a label
     return (
         <div className={classes.placeInfoWrapper}>
             <span className={classes.label}>{label}</span>
@@ -9,4 +12,5 @@ const PlaceInfoWrapper: React.FC<{label:string, children:ReactNode}> = ({label, 
         </div>
     )
 }
+
 export default PlaceInfoWrapper

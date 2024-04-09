@@ -1,5 +1,4 @@
-
-.label{
+.label {
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--secondary);
@@ -13,13 +12,13 @@
     margin: 0 auto;
 }
 
-.placeInfoWrapper p{
+.placeInfoWrapper p {
     margin-left: 1rem;
     max-width: 450px;
     display: flex;
 }
 
-.placeInfoWrapper svg{
+.placeInfoWrapper svg {
     width: 22px;
     height: 22px;
     margin: 0 0.25rem;
