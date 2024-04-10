@@ -26,13 +26,13 @@
     font-size: 20px;
     padding: 0.6rem;
     border-radius: 4px;
-    color: var(--text-light);
+    color: var(--light-grey);
     background-color: var(--primary);
-    text-shadow: 0 0 10px var(--text-light);
+    text-shadow: 0 0 10px var(--light-grey);
 }
 
 .linkButton:hover, .linkButton.active {
     border: 1px solid var(--primary);
     color: var(--primary);
-    background-color: var(--text-light);
+    background-color: var(--light-grey);
 }

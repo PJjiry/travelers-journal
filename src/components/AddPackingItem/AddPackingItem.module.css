@@ -11,18 +11,18 @@
     height: 47px;
     font-size: 1.5rem;
     background-color: var(--primary);
-    color: var(--text-light);
+    color: var(--light-grey);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     padding: 0.5rem;
-    box-shadow: 0 0 5px var(--dark-grey);
+    box-shadow: 0 0 5px var(--grey-transparent);
     transition: background-color 0.3s ease;
     margin-top: 0.5rem;
 }
 
 .addItemContainer button:hover {
-    background-color: var(--text-light);
+    background-color: var(--light-grey);
     border: 1px solid var(--primary);
     color: var(--primary);
 }
@@ -42,7 +42,7 @@
 }
 
 .errorMessage {
-    color: var(--error);
+    color: var(--red);
     margin: 0.5rem 0 0 0;
     font-size: 1rem;
 }

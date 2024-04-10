@@ -3,20 +3,20 @@
     padding: 1.5rem;
     width: 500px;
     border-radius: 10px;
-    background-color: var(--city-color);
-    box-shadow: 0 3px 6px var(--dark-grey);
+    background-color: var(--light-blue);
+    box-shadow: 0 3px 6px var(--grey-transparent);
 }
 
 .sightsTitle {
     font-size: 1.6rem;
     align-self: flex-start;
-    color: var(--text-dark);
+    color: var(--black);
     margin: 0.5rem 2rem;
 }
 
 .sight h5 {
     font-size: 1.4rem;
-    color: var(--text-dark);
+    color: var(--black);
     margin: 0 0 0.5rem 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -35,6 +35,6 @@
 
 .sight p {
     font-size: 1.1rem;
-    color: var(--text-light);
+    color: var(--light-grey);
     line-height: 1.6;
 }

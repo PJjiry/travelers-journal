@@ -1,30 +1,12 @@
-# React + TypeScript + Vite
+# Traveler's journal
+This is an application that allows users to create, read, update, and delete trips.
+Each place has several details like the name, description, and the date of the trip and so on.
+The places are rendered in the main page and the user can click on them to see the details of each trip.
+User can also modify and delete the trips or create new ones.
+Next functionality of the app is to add a map to each trip.
+There is also packing list of things to take with you on the trips.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Run the app
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To run the app you need to start the npm run dev command in the terminal
+or click on the green button next to the dev command in package.json file.

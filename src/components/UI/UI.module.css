@@ -13,7 +13,7 @@
 
 .icon {
     width: 23px;
-    color: var(--text-dark);
+    color: var(--black);
     height: 23px;
     margin-right: 0.5rem;
 }
@@ -33,20 +33,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--background);
+    background-color: var(--white);
     z-index: 100;
     backdrop-filter: blur(5px);
 }
 
 .modal h3 {
     font-size: 1.6rem;
-    color: var(--text-dark);
+    color: var(--black);
     margin: 0 1rem 0.5rem 0;
 }
 
 .modal p {
     font-size: 1.2rem;
-    color: var(--text-dark);
+    color: var(--black);
     margin: 0 1rem 0.5rem 0;
 }
 

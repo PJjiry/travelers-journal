@@ -31,7 +31,7 @@ export type Place = {
 export type PlacesContextProps = {
     places: Place[],
     setPlaces: (places: Place[]) => void;
-    handleAddNewPlace: (newPlace: PlaceFormItems) => void;
+    handleAddNewPlace: (newPlace: PlaceFormItem) => void;
     handleUpdatePlace: (updatedPlace: Place) => void;
     handleDeletePlace: (placeId: string) => void;
     loading: boolean;
@@ -43,7 +43,7 @@ export interface CurrentPlaceContextProps {
     setCurrentPlace: (place: Place | null) => void;
 }
 
-export interface PlaceFormItems {
+export interface PlaceFormItem {
     id: string;
     title: string;
     imageUrl: string;
@@ -70,17 +70,11 @@ export type GoogleMapsContainerProps = {
     place?: Place,
 };
 
-export type SightState = {
-    sightName: string;
-    sightDescription: string;
-}
-
-
-export type PlaceFormContextType = {
-    placeForm: PlaceFormItems;
-    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems | Place>>;
-    sight: SightState;
-    setSight: React.Dispatch<React.SetStateAction<SightState>>;
+export type PlaceFormContextProps = {
+    placeForm: PlaceFormItem;
+    setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItem | Place>>;
+    sight: Sight;
+    setSight: React.Dispatch<React.SetStateAction<Sight>>;
     handleAddSight: (sightName: string, sightDescription: string) => void;
     handleRemoveSight: (sightName: string) => void;
     handleSightChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -153,7 +147,7 @@ export type PackingListItem = {
     packed: boolean
 }
 
-export type PackingListContextType = {
+export type PackingListContextProps = {
     packingList: PackingListItem[],
     newItem: string,
     hasSameName: boolean,

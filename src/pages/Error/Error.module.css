@@ -8,12 +8,12 @@
 
 .errorContainer h3 {
     font-size: 2.5rem;
-    color: var(--error);
+    color: var(--red);
     margin: 2rem 0 1rem 0;
 }
 
 .errorContainer p {
     font-size: 1.5rem;
-    color: var(--text-dark);
+    color: var(--black);
     text-align: center;
 }

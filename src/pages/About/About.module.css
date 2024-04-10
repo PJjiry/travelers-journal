@@ -11,7 +11,7 @@
     font-size: 2em;
     font-weight: 700;
     margin: 1em;
-    color: var(--text-dark);
+    color: var(--black);
     text-shadow: 2px 2px 2px var(--secondary);
 }
 
@@ -26,13 +26,13 @@
     font-size: 1.6em;
     font-weight: 750;
     margin: 1rem 0;
-    color: var(--text-dark);
-    text-shadow: 2px 2px 2px var(--dark-grey);
+    color: var(--black);
+    text-shadow: 2px 2px 2px var(--grey-transparent);
 }
 
 .article p {
     font-size: 1.2em;
     font-weight: 500;
     margin: 1rem 0;
-    color: var(--text-dark);
+    color: var(--black);
 }

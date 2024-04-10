@@ -1,7 +1,8 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import {initializeApp} from "firebase/app";
+import {getFirestore} from "firebase/firestore";
+import {getAuth} from "firebase/auth";
 
+// Web app's Firebase configuration with API key and other details
 const firebaseConfig = {
     apiKey: "AIzaSyC6eIr3O5ps43tlSter0V0Zb24ziKgaxI8",
     authDomain: "travelers-journal-32ae2.firebaseapp.com",
@@ -12,8 +13,9 @@ const firebaseConfig = {
     measurementId: "G-JSZETQKQSN"
 };
 
-// Initialize Firebase
+// Initialize Firebase and export the database and authentication
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 export default db;
 export const auth = getAuth(app);
