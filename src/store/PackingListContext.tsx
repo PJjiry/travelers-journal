@@ -75,7 +75,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
             return;
         }
 
-        if (packingList.find(item => item.name === newItem)) { //if the item already exists in the packing list, it doesn't allow user to add it
+        if (packingList.find(item => item.name.toLowerCase() === newItem.toLowerCase())) { //if the item already exists in the packing list, it doesn't allow user to add it
             setHasSameName(true);
             return;
         }
