@@ -35,7 +35,13 @@ const Login = () => {
     // useEffect to redirect to the main page if the user is logged in
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/');
+            // Set a delay of 1.5 seconds before navigating to the main page
+            const timer = setTimeout(() => {
+                navigate('/');
+            }, 1500);
+
+            // Clear the timer when the component is unmounted
+            return () => clearTimeout(timer);
         }
     }, [isLoggedIn, navigate]);
 
