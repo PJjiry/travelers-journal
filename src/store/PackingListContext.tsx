@@ -1,9 +1,9 @@
 import React, {ChangeEvent, createContext, ReactNode, useCallback, useEffect} from 'react';
-import {PackingListContextType, PackingListItem} from '../types.ts';
+import {PackingListContextProps, PackingListItem} from '../types.ts';
 import {addPackingListItem, deletePackingListItem, editPackingListItem, loadPackingListItems} from '../firebaseAPI.ts';
 
 // Context for the packing list items...it provides the packing list items and functions to manage them
-const PackingListContext = createContext<PackingListContextType | null>(null);
+const PackingListContext = createContext<PackingListContextProps | null>(null);
 
 // Provider for the packing list context...it provides the packing list functions to the components
 export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children}) => {
@@ -188,7 +188,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
     }
 
     // providing the packing list context value
-    const packingListContextValue: PackingListContextType = {
+    const packingListContextValue: PackingListContextProps = {
         packingList,
         newItem,
         hasSameName,

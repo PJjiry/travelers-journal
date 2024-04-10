@@ -56,7 +56,7 @@ const FullPlaceItem: React.FC = () => {
 
     //if the places context is loading, display a loading message
     if (placesCtx?.loading) {
-        return <div className="loading" style={{color: 'var(--text-light)'}}>Loading...</div>
+        return <div className="loading" style={{color: 'var(--light-grey)'}}>Loading...</div>
     }
 
     //if there is an error in the places context, display an error message

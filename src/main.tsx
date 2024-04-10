@@ -4,6 +4,7 @@ import {BrowserRouter} from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 
+// Render the App component in the root element in index.html
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <BrowserRouter>

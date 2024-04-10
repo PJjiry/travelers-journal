@@ -1,10 +1,10 @@
 .packingListSection {
     width: 60%;
-    background-color: var(--background);
+    background-color: var(--white);
     border-radius: 10px;
     font-size: 2.5rem;
     margin: 1rem;
-    box-shadow: 0 0 10px var(--dark-grey);
+    box-shadow: 0 0 10px var(--grey-transparent);
 }
 
 .title h3 {
@@ -22,7 +22,7 @@
 
 .packingListItems p {
     font-size: 1.5rem;
-    color: var(--text-dark);
+    color: var(--black);
     margin: 1rem;
 }
 

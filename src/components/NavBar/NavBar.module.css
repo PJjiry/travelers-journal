@@ -31,9 +31,9 @@
 }
 
 .links a:hover, a.active {
-    color: var(--text-light);
+    color: var(--light-grey);
     background-color: var(--primary);
-    text-shadow: 0 0 10px var(--text-light);
+    text-shadow: 0 0 10px var(--light-grey);
 }
 
 .home {

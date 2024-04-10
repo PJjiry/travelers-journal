@@ -16,12 +16,12 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: var(--background);
+    background-color: var(--white);
 }
 
 .loginModal h2 {
     text-align: center;
-    color: var(--text-dark);
+    color: var(--black);
     margin-bottom: 20px;
 }
 
@@ -29,7 +29,7 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid var(--dark-grey);
+    border: 1px solid var(--grey-transparent);
     border-radius: 5px;
 }
 
@@ -37,19 +37,19 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid var(--text-light);
+    border: 1px solid var(--light-grey);
     border-radius: 5px;
-    background-color: var(--nature-color);
-    color: var(--text-light);
+    background-color: var(--light-green);
+    color: var(--light-grey);
     font-weight: bold;
 }
 
 .loginModal button:hover {
     background-color: var(--dark-green);
-    color: var(--background);
+    color: var(--white);
 }
 
 .loginModal p {
     text-align: center;
-    color: var(--error);
+    color: var(--red);
 }

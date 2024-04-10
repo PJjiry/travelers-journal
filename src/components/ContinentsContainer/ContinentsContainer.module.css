@@ -16,8 +16,8 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 10px;
-    border-bottom: 3px solid var(--text-dark);
-    color: var(--text-dark);
+    border-bottom: 3px solid var(--black);
+    color: var(--black);
 }
 
 .noResult{

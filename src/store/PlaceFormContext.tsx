@@ -1,14 +1,14 @@
 import React, {useState, createContext, ReactNode, useCallback} from 'react';
-import {Place, PlaceFormContextType, PlaceFormItems, SightState} from '../types.ts';
+import {Place, PlaceFormContextProps, PlaceFormItem, Sight} from '../types.ts';
 
 // Context for the place form items...it provides the place form items and functions to manage them
-const PlaceFormContext = createContext<PlaceFormContextType | null>(null)
+const PlaceFormContext = createContext<PlaceFormContextProps | null>(null)
 
 // Provider for the place form context...it contains values and functions to manage the place form items
 export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children}) => {
 
     // using state to manage the place form items and set their initial value: id, title, imageUrl, type, date, country, continent, budget, currency, description, specialRequirements, sights, location, markerPosition
-    const [placeForm, setPlaceForm] = useState<PlaceFormItems>({
+    const [placeForm, setPlaceForm] = useState<PlaceFormItem>({
         id: '',
         title: '',
         imageUrl: '',
@@ -32,7 +32,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
     });
 
     // using state to manage the sight items and set their initial value, the sight item contains sightName and sightDescription
-    const [sight, setSight] = useState<SightState>({
+    const [sight, setSight] = useState<Sight>({
         sightName: '',
         sightDescription: '',
     });
@@ -174,10 +174,10 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
 
     // values and functions to be provided by the context
     const PlaceFormContextValue: {
-        placeForm: PlaceFormItems,
-        setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItems | Place>>,
-        sight: SightState,
-        setSight: React.Dispatch<React.SetStateAction<SightState>>,
+        placeForm: PlaceFormItem,
+        setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItem | Place>>,
+        sight: Sight,
+        setSight: React.Dispatch<React.SetStateAction<Sight>>,
         handleAddSight: (sightName: string, sightDescription: string) => void,
         handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void,
         handleRemoveSight: (sightName: string) => void,

@@ -3,18 +3,18 @@
     flex-direction: column;
     width: 50%;
     margin: 3rem auto;
-    background-color: var(--background);
+    background-color: var(--white);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px var(--dark-grey);
+    box-shadow: 0 0 10px var(--grey-transparent);
 }
 
 .title {
     font-size: 2rem;
     margin: 0 0 1rem 0;
     text-align: center;
-    text-shadow: 2px 2px 4px var(--dark-grey);
-    color: var(--text-dark);
+    text-shadow: 2px 2px 4px var(--grey-transparent);
+    color: var(--black);
 }
 
 .label {
@@ -26,54 +26,54 @@
 
 .icon {
     width: 23px;
-    color: var(--text-dark);
+    color: var(--black);
     height: 23px;
     margin-right: 0.5rem;
 }
 
 .cityOption {
-    background-color: var(--city-color);
-    color: var(--background)
+    background-color: var(--light-blue);
+    color: var(--white)
 }
 
 .natureOption {
-    background-color: var(--nature-color);
-    color: var(--background)
+    background-color: var(--light-green);
+    color: var(--white)
 }
 
 .continent0 {
     background-color: #A0522D;
-    color: var(--text-light)
+    color: var(--light-grey)
 }
 
 .continent1 {
     background-color: #B0E0E6;
-    color: var(--text-dark);
+    color: var(--black);
 }
 
 .continent2 {
     background-color: #DC143C;
-    color: var(--text-dark)
+    color: var(--black)
 }
 
 .continent3 {
     background-color: #4169E1;
-    color: var(--text-dark);
+    color: var(--black);
 }
 
 .continent4 {
     background-color: #FFBF00;
-    color: var(--text-dark);
+    color: var(--black);
 }
 
 .continent5 {
     background-color: #F88379;
-    color: var(--text-dark);
+    color: var(--black);
 }
 
 .continent6 {
     background-color: #046307;
-    color: var(--text-light)
+    color: var(--light-grey)
 }
 
 .budgetDiv {
@@ -110,7 +110,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--error);
+    color: var(--red);
     text-transform: uppercase;
     font-size: 1.2rem;
     margin: 0.5rem 0;
@@ -132,7 +132,7 @@
 .actions input {
     width: 40%;
     padding: 1rem;
-    box-shadow: 0 0 5px var(--dark-grey);
+    box-shadow: 0 0 5px var(--grey-transparent);
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -154,13 +154,13 @@
 }
 
 .cancelButton {
-    background-color: var(--error);
-    color: var(--text-light);
+    background-color: var(--red);
+    color: var(--light-grey);
 }
 
 .saveButton {
-    background-color: var(--nature-color);
-    color: var(--text-light);
+    background-color: var(--light-green);
+    color: var(--light-grey);
 }
 
 .cancelButton svg, .saveButton svg {
@@ -171,30 +171,30 @@
 
 .saveButton:hover {
     background-color: var(--dark-green);
-    color: var(--background);
+    color: var(--white);
 }
 
 .cancelButton:hover {
     background-color: var(--dark-red);
-    color: var(--background);
+    color: var(--white);
 }
 
 .reset {
-    background-color: var(--dark-grey);
-    color: var(--text-dark);
+    background-color: var(--grey-transparent);
+    color: var(--black);
 }
 
 .submit {
-    background-color: var(--nature-color);
-    color: var(--text-dark);
+    background-color: var(--light-green);
+    color: var(--black);
 }
 
 .submit:hover {
     background-color: var(--dark-green);
-    color: var(--text-light);
+    color: var(--light-grey);
 }
 
 .reset:hover {
     background-color: var(--grey);
-    color: var(--text-light);
+    color: var(--light-grey);
 }
