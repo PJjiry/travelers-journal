@@ -3,8 +3,7 @@
     position: relative;
     display: flex;
     width: 100%;
-    height: auto;
-    min-height: 250px;
+    height: 93%;
     align-items: center;
     overflow: hidden;
     flex-direction: column;
@@ -22,7 +21,7 @@
 
 .place img {
     width: 100%;
-    max-height: 200px;
+    height: 180px;
     object-fit: cover;
 }
 
@@ -34,7 +33,7 @@
 }
 
 .placeInfo h3 {
-    margin: 0.25rem;
+    margin: 0.3rem;
     font-size: 1.4em;
     color: var(--light-grey);
 }
