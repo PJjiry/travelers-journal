@@ -38,7 +38,7 @@ const Login = () => {
             // Set a delay of 1.5 seconds before navigating to the main page
             const timer = setTimeout(() => {
                 navigate('/');
-            }, 1500);
+            }, 2000);
 
             // Clear the timer when the component is unmounted
             return () => clearTimeout(timer);
