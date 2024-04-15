@@ -35,13 +35,20 @@
 .placeInfo h3 {
     margin: 0.3rem;
     font-size: 1.4em;
+    max-width: 260px;
     color: var(--light-grey);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: break-spaces;
 }
 
 .placeInfo p {
     margin: 0.15rem;
     font-size: 1.1em;
     color: var(--black);
+    text-overflow: ellipsis;
+    max-width: 250px;
+    overflow: hidden;
 }
 
 .placeLink {
