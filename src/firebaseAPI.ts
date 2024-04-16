@@ -1,4 +1,4 @@
-import {doc, addDoc, setDoc, getDocs, collection, deleteDoc} from "firebase/firestore";
+import {addDoc, collection, deleteDoc, doc, getDocs, setDoc} from "firebase/firestore";
 import db from './firebase';
 import {PackingListItem, Place} from './types.ts';
 
@@ -14,8 +14,9 @@ export const loadPlaces = async (userId: string) => {
 export const addPlace = async (userId: string, newPlace: Place) => {
     const userRef = doc(db, 'users', userId);
     const placesRef = collection(userRef, 'places');
-    const placeDoc = await addDoc(placesRef, newPlace);
-    return placeDoc.id;
+    const placeDocRef = await addDoc(placesRef, newPlace);
+    const placeId = placeDocRef.id;
+    return {...newPlace, id: placeId};
 };
 
 // Function to edit a place for a specific user

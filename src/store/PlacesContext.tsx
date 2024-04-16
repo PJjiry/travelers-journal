@@ -1,6 +1,6 @@
 import React, {createContext, ReactNode, useCallback, useEffect, useState} from 'react';
 import {Place, PlacesContextProps} from '../types.ts';
-import {addPlace, editPlace, loadPlaces, deletePlace} from '../firebaseAPI.ts';
+import {addPlace, deletePlace, editPlace, loadPlaces} from '../firebaseAPI.ts';
 import {auth} from '../firebase.ts';
 import {onAuthStateChanged, User} from 'firebase/auth';
 
@@ -51,12 +51,10 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
             return;
         }
 
-        newPlace.id = newPlace.title.toLowerCase() + (Math.floor(Math.random() * 1000000)).toString(); // setting the id of the new place
-
         try {
             setLoading(true);
-            await addPlace(auth.currentUser.uid, newPlace); // function to add the new place to the database
-            setPlaces((prevState) => [...prevState, newPlace]); // setting the new place to the places
+            const addedPlace = await addPlace(auth.currentUser.uid, newPlace); // function to add the new place to the database
+            setPlaces((prevState) => [...prevState, addedPlace]); // setting the new place to the places
         } catch (error) {
             console.error('Error adding new place to DB:', error);
             setError('Error adding new place to DB') // setting the error message if any complications with the server appear
@@ -71,15 +69,14 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
             return;
         }
 
-        const id = updatedPlace.id; // getting the id of the updated place
         try {
             setLoading(true);
-            await editPlace(auth.currentUser.uid, id, updatedPlace); // function to update the place in the database
+            await editPlace(auth.currentUser.uid, updatedPlace.id, updatedPlace); // function to update the place in the database
             setPlaces((prevState) => {
-                const updatedPlaces = prevState.map((place) =>
+                // map through the places and replace the updated place
+                return prevState.map((place) =>
                     place.id === updatedPlace.id ? updatedPlace : place
-                ); // map through the places and replace the updated place
-                return updatedPlaces;
+                );
             });
         } catch (error) {
             console.error('Error updating the place in DB:', error);
