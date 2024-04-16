@@ -53,3 +53,8 @@
     text-align: center;
     color: var(--red);
 }
+
+.changeModeText {
+    margin-top: 2.5rem;
+    color: var(--black)!important;
+}
