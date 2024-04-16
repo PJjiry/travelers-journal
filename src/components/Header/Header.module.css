@@ -6,6 +6,7 @@
     justify-content: flex-start;
     color: var(--light-grey);
     align-items: center;
+    position: relative;
 }
 
 .header h1 {
@@ -17,16 +18,62 @@
     height: 25px;
 }
 
-.logoutButton {
+.userName {
     margin: 0 3rem 0 auto;
-    width: 120px;
-    padding: 0.5rem;
+    padding: 0.7rem;
     background-color: var(--grey-transparent);
+    border-radius: 5px;
+    color: var(--light-grey);
+    cursor: pointer;
+}
+
+.userName:hover {
+    background-color: var(--dark-purple);
+    color: var(--white);
+}
+
+.menu {
+    position: absolute;
+    top: 65%;
+    right: 0;
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: 0 0 10px var(--grey-transparent);
+    width: 250px;
+    background-color: var(--white);
+    border-radius: 5px;
+    color: var(--black);
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    /*flex-wrap: wrap;*/
+}
+
+.info span{
+    color: var(--primary)!important;
+}
+
+.info label{
+    font-weight: bold;
+    margin: 0.5rem 0.3rem 0.5rem 0;
+    color: var(--black);
+    min-width: 87px;
+}
+
+.logoutButton {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: var(--red);
     border-radius: 5px;
     color: var(--light-grey);
 }
 
 .logoutButton:hover {
-    background-color: var(--dark-purple);
+    background-color: var(--dark-red);
     color: var(--white);
 }

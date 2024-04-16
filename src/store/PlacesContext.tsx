@@ -1,6 +1,8 @@
 import React, {createContext, ReactNode, useCallback, useEffect, useState} from 'react';
 import {Place, PlacesContextProps} from '../types.ts';
 import {addPlace, editPlace, loadPlaces, deletePlace} from '../firebaseAPI.ts';
+import {auth} from '../firebase.ts';
+import {onAuthStateChanged, User} from 'firebase/auth';
 
 // Context for the places...it provides the places and functions to manage them
 const PlacesContext = createContext<PlacesContextProps | null>(null);
@@ -19,28 +21,41 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
 
     // loading the places from the database when the component mounts and set them as a default state
     useEffect(() => {
-        const loadPlacesFromDB = async () => {
-            try {
-                setLoading(true);
-                const placesFromDB = await loadPlaces(); // function to load the places from the database
-                setPlaces(placesFromDB); // setting the places as the default state
-            } catch (error) {
-                console.error('Error loading places from DB:', error);
-                setError('Error loading places from DB'); // setting the error message if any complications with the server appear
-            } finally {
-                setLoading(false);
+        const loadPlacesFromDB = async (user: User | null) => {
+            if (user) {
+                try {
+                    setLoading(true);
+                    const placesFromDB = await loadPlaces(user.uid);
+                    setPlaces(placesFromDB as Place[]);
+                } catch (error) {
+                    console.error('Error loading places from DB:', error);
+                    setError('Error loading places from DB');
+                } finally {
+                    setLoading(false);
+                }
             }
         }
-        loadPlacesFromDB()
+
+        const unsubscribe = onAuthStateChanged(auth, user => {
+            loadPlacesFromDB(user);
+        });
+
+        return () => {
+            unsubscribe();
+        }
     }, []);
 
     // function to handle adding a new place
     const handleAddNewPlace = async (newPlace: Place) => {
+        if (!auth.currentUser) {
+            return;
+        }
+
         newPlace.id = newPlace.title.toLowerCase() + (Math.floor(Math.random() * 1000000)).toString(); // setting the id of the new place
 
         try {
             setLoading(true);
-            await addPlace(newPlace); // function to add the new place to the database
+            await addPlace(auth.currentUser.uid, newPlace); // function to add the new place to the database
             setPlaces((prevState) => [...prevState, newPlace]); // setting the new place to the places
         } catch (error) {
             console.error('Error adding new place to DB:', error);
@@ -52,14 +67,18 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
 
     // function to handle updating a place
     const handleUpdatePlace = useCallback(async (updatedPlace: Place) => {
+        if (!auth.currentUser) {
+            return;
+        }
+
         const id = updatedPlace.id; // getting the id of the updated place
         try {
             setLoading(true);
-            await editPlace(id, updatedPlace); // function to update the place in the database
+            await editPlace(auth.currentUser.uid, id, updatedPlace); // function to update the place in the database
             setPlaces((prevState) => {
-                const index = prevState.findIndex((place) => place.id === updatedPlace.id); // finding the index of the updated place
-                const updatedPlaces = [...prevState]; // creating a copy of the places
-                updatedPlaces[index] = updatedPlace; // updating the place in the copy
+                const updatedPlaces = prevState.map((place) =>
+                    place.id === updatedPlace.id ? updatedPlace : place
+                ); // map through the places and replace the updated place
                 return updatedPlaces;
             });
         } catch (error) {
@@ -72,9 +91,13 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
 
     // function to handle deleting a place
     const handleDeletePlace = async (placeId: string) => {
+        if (!auth.currentUser) {
+            return;
+        }
+
         try {
             setLoading(true);
-            await deletePlace(placeId); // function to delete the place from the database
+            await deletePlace(auth.currentUser.uid, placeId); // function to delete the place from the database
             setPlaces((prevState) => {
                 return prevState.filter((place) => place.id !== placeId); // filtering out the deleted place
             });

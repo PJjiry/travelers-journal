@@ -1,6 +1,8 @@
 import React, {ChangeEvent, createContext, ReactNode, useCallback, useEffect} from 'react';
 import {PackingListContextProps, PackingListItem} from '../types.ts';
 import {addPackingListItem, deletePackingListItem, editPackingListItem, loadPackingListItems} from '../firebaseAPI.ts';
+import {auth,} from '../firebase';
+import {onAuthStateChanged, User} from 'firebase/auth';
 
 // Context for the packing list items...it provides the packing list items and functions to manage them
 const PackingListContext = createContext<PackingListContextProps | null>(null);
@@ -36,19 +38,27 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
 
     // loading the packing list items from the database when the component mounts and set it as a default state
     useEffect(() => {
-        const loadPackingListFromDB = async () => {
-            try {
-                setLoading(true);
-                const packingListFromDB = await loadPackingListItems(); // function to load the packing list items from the database
-                setPackingList(packingListFromDB); // setting the packing list items as the default state
-            } catch (error) {
-                console.error('Error loading packing list from DB:', error);
-                setError('Error loading packing list from DB'); // setting the error message if any complications with the server appear
-            } finally {
-                setLoading(false);
+        const loadPackingListFromDB = async (user: User | null) => {
+            if (user) {
+                try {
+                    setLoading(true);
+                    const packingListFromDB = await loadPackingListItems(user.uid); // function to load the packing list items from the database according the user
+                    setPackingList(packingListFromDB as PackingListItem[]); // setting the packing list items as the default state
+                } catch (error) {
+                    console.error('Error loading packing list from DB:', error);
+                    setError('Error loading packing list from DB'); // setting the error message if any complications with the server appear
+                } finally {
+                    setLoading(false);
+                }
             }
         }
-        loadPackingListFromDB()
+        const unsubscribe = onAuthStateChanged(auth, user => {
+            loadPackingListFromDB(user);
+        });
+
+        return () => {
+            unsubscribe();
+        }
     }, []);
 
     // function to handle which item enters the edit mode
@@ -71,7 +81,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
 
     // function to handle adding a new item to the packing list
     const handleAddItem = async () => {
-        if (loading || !newItem) {
+        if (loading || !newItem || !auth.currentUser) {
             return;
         }
 
@@ -89,9 +99,9 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
         }
 
         try {
-            await addPackingListItem(newListItem);// function to add the new item to the database
-            const packingListFromDB = await loadPackingListItems();// function to load the packing list items from the database to enable new item to be edited
-            setPackingList(packingListFromDB); // setting the packing list items as the current state
+            await addPackingListItem(auth.currentUser.uid, newListItem);// function to add the new item to the database for specific user
+            const packingListFromDB = await loadPackingListItems(auth.currentUser.uid);// function to load the packing list items from the database to enable new item to be edited
+            setPackingList(packingListFromDB as PackingListItem[]); // setting the packing list items as the current state
         } catch (error) {
             console.error('Error adding new item to DB:', error);
             setError('Error adding new item to DB');// setting the error message if any complications with the server appear
@@ -102,7 +112,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
 
     // function to handle checking an item in the packing list
     const handleCheckItem = async (itemId: string) => {
-        if (loading) {
+        if (loading || !auth.currentUser) {
             return;
         }
 
@@ -118,7 +128,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
         }
 
         try {
-            await editPackingListItem(itemToCheck.id, updatedItem);// function to update the item in the database
+            await editPackingListItem(auth.currentUser.uid, itemToCheck.id, updatedItem);// function to update the item in the database
             itemToCheck.packed = !itemToCheck.packed;// updating the item in the packing list
             setPackingList([...packingList]);
         } catch (error) {
@@ -129,7 +139,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
 
     // function to handle saving the edited item and update it in the packing list
     const handleSaveEditedItem = async () => {
-        if (loading) {
+        if (loading || !auth.currentUser) {
             return;
         }
 
@@ -149,7 +159,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
         }
 
         try {
-            await editPackingListItem(itemToEdit.id, updatedItem);// function to update the item in the database
+            await editPackingListItem(auth.currentUser.uid, itemToEdit.id, updatedItem);// function to update the item in the database for a specific user
             itemToEdit.name = editedItemText;// updating the item text in the packing list
             setPackingList([...packingList]);
             setEditedItemText('');// resetting the edited item text and edited item
@@ -162,7 +172,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
 
     // function to handle deleting an item from the packing list
     const handleDeleteItem = async (itemId: string) => {
-        if (loading) {
+        if (loading || !auth.currentUser) {
             return;
         }
 
@@ -173,7 +183,7 @@ export const PackingListProvider: React.FC<{ children: ReactNode }> = ({children
         }
 
         try {
-            await deletePackingListItem(itemToDelete.id);// function to delete the item from the database
+            await deletePackingListItem(auth.currentUser.uid, itemToDelete.id);// function to delete the item from the database for a specific user
             const newPackingList = packingList.filter(item => item.id !== itemId);// updating the packing list without the deleted item
             setPackingList(newPackingList);
         } catch (error) {

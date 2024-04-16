@@ -1,50 +1,59 @@
-import {doc, setDoc, getDocs, collection, updateDoc, deleteDoc} from "firebase/firestore";
+import {doc, addDoc, setDoc, getDocs, collection, deleteDoc} from "firebase/firestore";
 import db from './firebase';
 import {PackingListItem, Place} from './types.ts';
 
-// function to load places from the database
-export const loadPlaces = async (): Promise<Place[]> => {
-    const querySnapshot = await getDocs(collection(db, "places"));
-    return querySnapshot.docs.map(doc => doc.data() as Place);
-}
+// Function to load all places for a specific user
+export const loadPlaces = async (userId: string) => {
+    const userRef = doc(db, 'users', userId);
+    const placesRef = collection(userRef, 'places');
+    const placeDocs = await getDocs(placesRef);
+    return placeDocs.docs.map(doc => ({...doc.data(), id: doc.id}));
+};
 
-// function to add a place to the database
-export const addPlace = async (place: Place): Promise<void> => {
-    await setDoc(doc(db, "places", place.id), place);
-}
+// Function to add a new place for a specific user
+export const addPlace = async (userId: string, newPlace: Place) => {
+    const userRef = doc(db, 'users', userId);
+    const placesRef = collection(userRef, 'places');
+    const placeDoc = await addDoc(placesRef, newPlace);
+    return placeDoc.id;
+};
 
-// function to edit a place in the database
-export const editPlace = async (id: string, updatedPlace: Partial<Place>): Promise<void> => {
-    const placeRef = doc(db, "places", id);
-    await updateDoc(placeRef, updatedPlace);
-}
+// Function to edit a place for a specific user
+export const editPlace = async (userId: string, placeId: string, updatedPlace: Place) => {
+    const placeRef = doc(db, 'users', userId, 'places', placeId);
+    await setDoc(placeRef, updatedPlace, {merge: true});
+};
 
-// function to delete a place from the database
-export const deletePlace = async (id: string): Promise<void> => {
-    await deleteDoc(doc(db, "places", id));
-}
+// Function to delete a place for a specific user
+export const deletePlace = async (userId: string, placeId: string) => {
+    const placeRef = doc(db, 'users', userId, 'places', placeId);
+    await deleteDoc(placeRef);
+};
 
-// function to load packing list items from the database
-export const loadPackingListItems = async (): Promise<PackingListItem[]> => {
-    const querySnapshot = await getDocs(collection(db, "packingList"));
-    return querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id} as PackingListItem));
-}
+// Function to load all packing list items for a specific user
+export const loadPackingListItems = async (userId: string) => {
+    const userRef = doc(db, 'users', userId);
+    const packingListRef = collection(userRef, 'packingList');
+    const packingListDocs = await getDocs(packingListRef);
+    return packingListDocs.docs.map(doc => ({...doc.data(), id: doc.id}));
+};
 
-// function to add a packing list item to the database
-export const addPackingListItem = async (item: Omit<PackingListItem, 'id'>): Promise<string> => {
-    const docRef = doc(collection(db, "packingList"), item.name);
-    await setDoc(docRef, item);
-    return docRef.id;
-}
+// Function to add a new packing list item for a specific user
+export const addPackingListItem = async (userId: string, newItem: PackingListItem) => {
+    const userRef = doc(db, 'users', userId);
+    const packingListRef = collection(userRef, 'packingList');
+    const packingListItemDoc = await addDoc(packingListRef, newItem);
+    return packingListItemDoc.id;
+};
 
-// function to edit a packing list item
-export const editPackingListItem = async (id: string, updatedItem: Partial<PackingListItem>): Promise<void> => {
-    const itemRef = doc(db, "packingList", id);
-    await updateDoc(itemRef, updatedItem);
-}
+// Function to edit a packing list item for a specific user
+export const editPackingListItem = async (userId: string, itemId: string, updatedItem: PackingListItem) => {
+    const itemRef = doc(db, 'users', userId, 'packingList', itemId);
+    await setDoc(itemRef, updatedItem, {merge: true});
+};
 
-// function to delete a packing list item
-export const deletePackingListItem = async (id: string): Promise<void> => {
-    const itemRef = doc(db, "packingList", id);
+// Function to delete a packing list item for a specific user
+export const deletePackingListItem = async (userId: string, itemId: string) => {
+    const itemRef = doc(db, 'users', userId, 'packingList', itemId);
     await deleteDoc(itemRef);
-}
+};
