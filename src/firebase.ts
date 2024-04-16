@@ -4,13 +4,13 @@ import {getAuth} from "firebase/auth";
 
 // Web app's Firebase configuration with API key and other details
 const firebaseConfig = {
-    apiKey: "AIzaSyC6eIr3O5ps43tlSter0V0Zb24ziKgaxI8",
-    authDomain: "travelers-journal-32ae2.firebaseapp.com",
-    projectId: "travelers-journal-32ae2",
-    storageBucket: "travelers-journal-32ae2.appspot.com",
-    messagingSenderId: "966946228033",
-    appId: "1:966946228033:web:d4d2078d7a40b3a05d03c0",
-    measurementId: "G-JSZETQKQSN"
+    apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase and export the database and authentication
