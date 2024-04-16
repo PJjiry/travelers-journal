@@ -102,6 +102,7 @@ option {
     text-align: center;
     font-size: 1rem;
     color: var(--black);
+    padding: 0.5rem;
 }
 
 

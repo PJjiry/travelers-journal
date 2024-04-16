@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import classes from './PlaceForm.module.css';
 import {isPastDate} from '../../utils/utils.ts';
 import {MdCancel, MdError} from "react-icons/md";
-import {CONTINENTS} from '../../utils/constants.ts';
+import {CONTINENTS, COUNTRIES} from '../../utils/constants.ts';
 import Input from '../UI/Input/Input.tsx';
 import BackgroundImageInput from '../BackgroundImageInput/BackgroundImageInput.tsx';
 import Select from '../UI/Select/Select.tsx';
@@ -98,18 +98,23 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
             <Select title="Type of place" name="type" value={placeForm.type}
                     tooltip="Type of the place determines the appearance of the place. City type allows you to enter sights."
                     onSelectChange={handleChange}>
-                <option className={classes.option} value="">--Please choose an option--</option>
-                <option className={`${classes.option} ${classes.cityOption}`} value="City">City</option>
-                <option className={`${classes.option} ${classes.natureOption}`} value="Nature">Nature</option>
+                <option value="">--Please choose an option--</option>
+                <option className={classes.cityOption} value="City">City</option>
+                <option className={classes.natureOption} value="Nature">Nature</option>
             </Select>
             <Input title="Date of visit" name="date" value={placeForm.date} onInputChange={handleChange}
                    tooltip="Pick a date you have visited the place or are planning to visit it." type="date"/>
-            <Input title="Country" name="country" value={placeForm.country} onInputChange={handleChange}
-                   tooltip="Type a country where is the place located."/>
+            <Select title="Country" name="country" value={placeForm.country} onSelectChange={handleChange}
+                    tooltip="Select a country where the place is located.">
+                <option value="">--Please choose a country--</option>
+                {COUNTRIES.map((country, index) => (
+                    <option key={index} value={country}>{country}</option>
+                ))}
+            </Select>
             <Select title="Continent" name="continent" value={placeForm.continent}
                     tooltip="Select place's continent. Name of the country should belong to the selected continent."
                     onSelectChange={handleChange}>
-                <option value="">--Please choose an option--</option>
+                <option value="">--Please choose a continent--</option>
                 {CONTINENTS.map((continent, index) => (
                     <option key={continent} className={`${classes['continent' + index]}`}
                             value={continent}>{continent}</option>

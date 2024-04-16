@@ -9,7 +9,7 @@ export const GoogleMapsProvider: React.FC<{ children: ReactNode }> = ({children}
 
     // providing the boolean value to check if the script is loaded...script is loaded just once
     return (
-        <LoadScript googleMapsApiKey="AIzaSyAkJEGW4P__lSJITHtP_jSJl542ean0QIQ">
+        <LoadScript googleMapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY!}>
             <GoogleMapsContext.Provider value={true}>
                 {children}
             </GoogleMapsContext.Provider>
