@@ -37,7 +37,7 @@ const Header: React.FC = memo(() => {
         return () => unsubscribe();
     }, []);
 
-    // Render the header with the title, airplane icon and logout button
+    // Render the header with the title, airplane icon and user email
     return (
         <header className={classes.header}>
             <h1>Traveler's journal</h1>
@@ -45,10 +45,15 @@ const Header: React.FC = memo(() => {
             <span onClick={() => setShowLogout(!showLogout)} className={classes.userName}>
                 {userEmail}
             </span>
-            {showLogout && <menu className={classes.menu}>
-                <span>User email: {userEmail}</span>
-                <button onClick={handleLogout} className={classes.logoutButton}>Logout</button>
-            </menu>
+            {/* if user clicks the button it shows the menu item*/}
+            {showLogout &&
+                <menu className={classes.menu}>
+                    <div className={classes.info}>
+                        <label>User email:</label>
+                        <span>{userEmail}</span>
+                    </div>
+                    <button onClick={handleLogout} className={classes.logoutButton}>Logout</button>
+                </menu>
             }
         </header>
     )

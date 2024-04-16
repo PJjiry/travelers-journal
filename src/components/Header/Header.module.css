@@ -36,14 +36,33 @@
     position: absolute;
     top: 65%;
     right: 0;
+    margin-right: 2rem;
     display: flex;
     flex-direction: column;
     padding: 2rem;
     box-shadow: 0 0 10px var(--grey-transparent);
-    width: 200px;
+    width: 250px;
     background-color: var(--white);
     border-radius: 5px;
     color: var(--black);
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    /*flex-wrap: wrap;*/
+}
+
+.info span{
+    color: var(--primary)!important;
+}
+
+.info label{
+    font-weight: bold;
+    margin: 0.5rem 0.3rem 0.5rem 0;
+    color: var(--black);
+    min-width: 87px;
 }
 
 .logoutButton {

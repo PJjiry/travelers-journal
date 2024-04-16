@@ -36,7 +36,7 @@ const Login = () => {
         }
     };
 
-    // function to sign up the user...it uses the email and password entered by the user, if the user already exists, it displays an error message
+    // function to sign up the user...it uses the email and password entered by the user, if the user already exists or there are other mistakes, it displays an error message
     const signUp = async () => {
         if (email === '' || password === '') {
             setError('Please enter email and password.');
@@ -98,7 +98,7 @@ const Login = () => {
                         <button onClick={signIn}>Sign In</button>
                         {error && <p>{error}</p>}
                         <p className={classes.changeModeText}>You do not have any account? Sign up!</p>
-                        <button onClick={() => {
+                        <button className={classes.secondButton} onClick={() => {
                             setMode('sign-up')
                             setError('')
                         }
@@ -118,10 +118,10 @@ const Login = () => {
                             setError('')
                         }
                         }/>
-                        <button onClick={signUp}>Sign Up</button>
+                        <button onClick={signUp}>Create an account</button>
                         {error && <p>{error}</p>}
-                        <p className={classes.changeModeText}>Do you already have an account? Login in to the app!</p>
-                        <button onClick={() => {
+                        <p className={classes.changeModeText}>Do you already have an account? Login to the app!</p>
+                        <button className={classes.secondButton} onClick={() => {
                             setMode('login')
                             setError('')
                         }}>Login

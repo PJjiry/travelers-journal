@@ -58,3 +58,13 @@
     margin-top: 2.5rem;
     color: var(--black)!important;
 }
+
+.secondButton {
+    background-color: var(--light-grey)!important;
+    color: var(--light-green)!important;
+}
+
+.secondButton:hover {
+    background-color: var(--grey)!important;
+    color: var(--light-green)!important;
+}
