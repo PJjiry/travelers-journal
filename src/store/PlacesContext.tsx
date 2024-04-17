@@ -57,7 +57,7 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
             setPlaces((prevState) => [...prevState, addedPlace]); // setting the new place to the places
         } catch (error) {
             console.error('Error adding new place to DB:', error);
-            setError('Error adding new place to DB') // setting the error message if any complications with the server appear
+            setError('Error adding new place to DB. The image is too large. Try image with less quality.') // setting the error message if any complications with the server appear
         } finally {
             setLoading(false);
         }
