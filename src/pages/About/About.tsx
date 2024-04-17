@@ -17,16 +17,16 @@ const About: React.FC = () => {
                 <p>
                     For author of this project, it was a great opportunity to learn modern web development technologies
                     and improve his skills of programming.
-                    This application will be useful mainly for author, who likes to travel and wants to keep track of
-                    his trips and plan his future trips. Author is planning to mainly use this application during his
+                    This application will be useful for author, his friends, family and for everyone who likes to travel and wants to keep track of
+                    his/her trips and plan the future trips. Author is planning to mainly use this application during his
                     next exchange programme on his Master's degree.
                 </p>
             </article>
             <article className={classes.article}>
                 <h4>Functionality</h4>
                 <p>
-                    Traveller's journal is a web application that allows user to create his own trips (places that he
-                    visited or is planning to visit). Users can add, edit and delete trips.
+                    Traveller's journal is a web application that allows users to create their own trips (places that he or she
+                    has visited or is planning to visit). Users can add, edit and delete trips.
                 </p>
                 <p>
                     Each trip has several attributes like name of destination, date, description, country and continent,
@@ -41,7 +41,7 @@ const About: React.FC = () => {
                     he needs to pack for the
                     trips. He can also add, edit, delete items from the list and check them as packed. In the future,
                     author is planning to add more
-                    features like creating a profile, sharing trips with other users, adding comments and ratings to the
+                    features like sharing trips with other users, adding comments and ratings to the
                     trips and sights.
                 </p>
             </article>
