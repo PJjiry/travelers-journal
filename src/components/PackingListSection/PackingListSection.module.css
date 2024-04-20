@@ -29,3 +29,13 @@
 .emptyList {
     text-align: center;
 }
+
+@media (max-width: 600px) {
+    .packingListSection {
+        width: 100%;
+    }
+
+    .packingListItems p {
+        font-size: 1rem;
+    }
+}
