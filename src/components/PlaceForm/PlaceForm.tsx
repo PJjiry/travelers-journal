@@ -36,6 +36,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
         setPlaceForm,
         handleChange,
         sight,
+        isImageTooLarge,
         handleAddSight,
         handleRemoveSight,
         handleSightChange,
@@ -58,7 +59,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
     // function to validate the form (check if the inputs are filled)
     const validateForm = () => {
         const {title, imageUrl, type, date, country, continent, description} = placeForm;
-        if (!title || !imageUrl || !type || !date || !country || !continent || !description) {
+        if (!title || !imageUrl || !type || !date || !country || !continent || !description || isImageTooLarge) {
             setHasError(true);
             return false;
         }
@@ -95,6 +96,7 @@ const PlaceForm: React.FC<PlaceFormProps> = ({place, title, isEditing, stopEditi
                                   tooltip="Click to choose or drop a background image of your place. Allowed formats are: jpg, png, jpeg. Maximum size is 1MB."
                                   imageUrl={placeForm.imageUrl} onRemoveImage={handleRemoveImage}
                                   onImageChange={handleImageChange} onImageDrop={handleImageDrop}/>
+            {isImageTooLarge && <p className={classes.error}>The image is too large<MdError/></p>}
             <Select title="Type of place" name="type" value={placeForm.type}
                     tooltip="Type of the place determines the appearance of the place. City type allows you to enter sights."
                     onSelectChange={handleChange}>

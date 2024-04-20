@@ -199,3 +199,5 @@ export const COUNTRIES = [
     "Zambia",
     "Zimbabwe"
 ];
+
+export const MAX_SIZE = 1048576; // 1MB in bytes is maximum size for the image in Firebase
