@@ -3,6 +3,7 @@ import {Place, PlacesContextProps} from '../types.ts';
 import {addPlace, deletePlace, editPlace, loadPlaces} from '../firebaseAPI.ts';
 import {auth} from '../firebase.ts';
 import {onAuthStateChanged, User} from 'firebase/auth';
+import {readAndCompressImage} from 'browser-image-resizer';
 
 // Context for the places...it provides the places and functions to manage them
 const PlacesContext = createContext<PlacesContextProps | null>(null);
@@ -53,6 +54,18 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
 
         try {
             setLoading(true);
+
+            // Fetch the image from the URL and convert it to a Blob
+            const response = await fetch(newPlace.imageUrl);
+            let imageBlob = await response.blob();
+
+            // Compress the image Blob only if it's larger than 900 KB (that is Firebase's limit)
+            if (imageBlob.size > 900 * 1024) {
+                imageBlob = await readAndCompressImage(imageBlob as File);
+                // Replace the image in newPlace with the compressed image
+                newPlace.imageUrl = URL.createObjectURL(imageBlob);
+            }
+
             const addedPlace = await addPlace(auth.currentUser.uid, newPlace); // function to add the new place to the database
             setPlaces((prevState) => [...prevState, addedPlace]); // setting the new place to the places
         } catch (error) {
