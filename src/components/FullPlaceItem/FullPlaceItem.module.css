@@ -84,3 +84,23 @@
     background-color: var(--grey);
     color: var(--light-grey);
 }
+
+/* Styles for mobile phones */
+@media (max-width: 600px) {
+    .place {
+        width: 90%;
+    }
+
+    .place img {
+        max-height: 300px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .editButton, .deleteButton {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
