@@ -87,3 +87,19 @@
     border: none;
     border-bottom: 1px solid var(--primary);
 }
+
+@media (max-width: 600px) {
+
+    .listItem {
+        width: 100%;
+    }
+
+    .actions svg {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .editInput {
+        margin: 0;
+    }
+}

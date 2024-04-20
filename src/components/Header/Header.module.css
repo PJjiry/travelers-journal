@@ -77,3 +77,36 @@
     background-color: var(--dark-red);
     color: var(--white);
 }
+
+/* Styles for mobile phones */
+@media (max-width: 600px) {
+    .header {
+        padding: 0.5rem;
+        display: flex;
+    }
+
+    .header h1 {
+        width: 150px;
+    }
+
+    .header svg{
+        width: 20px;
+        height: 20px;
+        margin-left: 0.5rem;
+    }
+
+    .userName {
+        margin: 0 1rem 0 auto;
+    }
+
+    .menu {
+        width: 130px;
+        padding: 1rem;
+    }
+
+    .info {
+        margin: 0.3rem 0;
+        display: flex;
+        flex-direction: column;
+    }
+}

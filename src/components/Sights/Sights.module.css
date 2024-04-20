@@ -42,3 +42,10 @@
     max-width: 450px;
     word-wrap: break-word;
 }
+
+/* Styles for mobile phones */
+@media (max-width: 600px) {
+    .sight {
+        width: 90%;
+    }
+}

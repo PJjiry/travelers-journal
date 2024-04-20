@@ -60,3 +60,18 @@
     height: 23px;
     margin-right: 0.5rem;
 }
+
+@media (max-width: 600px) {
+    .customFileInput {
+        width: 100%;
+    }
+
+    .imagePreview {
+        width: 40%;
+        margin-right: 1rem;
+    }
+
+    .customFileInput svg {
+        margin-left: 0.5rem;
+    }
+}
