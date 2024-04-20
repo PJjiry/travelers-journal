@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
     "@types/react-router-dom": "^5.3.3",
+    "browser-image-resizer": "^2.4.1",
     "date-fns": "^3.6.0",
     "firebase": "^10.9.0",
     "react": "^18.2.0",
