@@ -1,5 +1,6 @@
 import React, {useState, createContext, ReactNode, useCallback} from 'react';
 import {Place, PlaceFormContextProps, PlaceFormItem, Sight} from '../types.ts';
+import {MAX_SIZE} from '../utils/constants.ts';
 
 // Context for the place form items...it provides the place form items and functions to manage them
 const PlaceFormContext = createContext<PlaceFormContextProps | null>(null)
@@ -37,6 +38,9 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         sightDescription: '',
     });
 
+    // using state to manage the image size error
+    const [isImageTooLarge, setIsImageTooLarge] = useState(false);
+
     // function to handle the change of the place form item inputs, text areas, and select elements
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setPlaceForm({
@@ -47,9 +51,15 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
 
     // function to handle the change of the image input
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsImageTooLarge(false); // Reset the image size error
         const file = event.target.files?.[0]; // Get the first file from the input
 
         if (!file) return;
+
+        // Check the file size
+        if (file.size > MAX_SIZE) {
+            setIsImageTooLarge(true);
+        }
 
         const reader = new FileReader();// Create a new FileReader object
         reader.onload = () => {
@@ -61,9 +71,15 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
     // function to handle the drop of the image
     const handleImageDrop = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
+        setIsImageTooLarge(false); // Reset the image size error
         const file = event.dataTransfer.files[0]; // Get the first file from the data transfer
 
         if (!file) return;
+
+        // Check the file size
+        if (file.size > MAX_SIZE) {
+            setIsImageTooLarge(true);
+        }
 
         const reader = new FileReader();
         reader.onload = () => {
@@ -178,6 +194,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItem | Place>>,
         sight: Sight,
         setSight: React.Dispatch<React.SetStateAction<Sight>>,
+        isImageTooLarge: boolean,
         handleAddSight: (sightName: string, sightDescription: string) => void,
         handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void,
         handleRemoveSight: (sightName: string) => void,
@@ -193,6 +210,7 @@ export const PlaceFormProvider: React.FC<{ children: ReactNode }> = ({children})
         setPlaceForm,
         sight,
         setSight,
+        isImageTooLarge,
         handleAddSight,
         handleChange,
         handleRemoveSight,

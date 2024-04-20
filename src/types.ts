@@ -75,6 +75,7 @@ export type PlaceFormContextProps = {
     setPlaceForm: React.Dispatch<React.SetStateAction<PlaceFormItem | Place>>;
     sight: Sight;
     setSight: React.Dispatch<React.SetStateAction<Sight>>;
+    isImageTooLarge: boolean;
     handleAddSight: (sightName: string, sightDescription: string) => void;
     handleRemoveSight: (sightName: string) => void;
     handleSightChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
