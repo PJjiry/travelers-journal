@@ -84,6 +84,18 @@ export const PlacesProvider: React.FC<{ children: ReactNode }> = ({children}) =>
 
         try {
             setLoading(true);
+
+            // Fetch the image from the URL and convert it to a Blob
+            const response = await fetch(updatedPlace.imageUrl);
+            let imageBlob = await response.blob();
+
+            // Compress the image Blob only if it's larger than 900 KB (that is Firebase's limit)
+            if (imageBlob.size > 900 * 1024) {
+                imageBlob = await readAndCompressImage(imageBlob as File);
+                // Replace the image in updatedPlace with the compressed image
+                updatedPlace.imageUrl = URL.createObjectURL(imageBlob);
+            }
+
             await editPlace(auth.currentUser.uid, updatedPlace.id, updatedPlace); // function to update the place in the database
             setPlaces((prevState) => {
                 // map through the places and replace the updated place
