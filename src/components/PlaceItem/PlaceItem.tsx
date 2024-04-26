@@ -5,7 +5,7 @@ import {Place} from '../../types.ts';
 import {Link} from 'react-router-dom';
 
 // Component for displaying the place item with just the title, image, country, and visited banner
-const PlacesItem: React.FC<{ place: Place }> = ({place}) => {
+const PlaceItem: React.FC<{ place: Place }> = ({place}) => {
 
     // Check if the place type is city or nature
     const isNature = place.type === "Nature";
@@ -26,4 +26,4 @@ const PlacesItem: React.FC<{ place: Place }> = ({place}) => {
     )
 }
 
-export default PlacesItem
+export default PlaceItem
