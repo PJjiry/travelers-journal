@@ -23,6 +23,9 @@ const Login = () => {
     // state to manage the mode of the login page (sign-up or login)
     const [mode, setMode] = useState<string>('sign-up');
 
+    // state to manage the submitting status to disable the buttons and show a loading message
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
     // using the navigate hook to redirect to the main page
     const navigate = useNavigate();
 
@@ -30,6 +33,7 @@ const Login = () => {
     const signIn = async () => {
         try {
             await signInWithEmailAndPassword(auth, email, password); // Sign in the user with the email and password (firebase function)
+            setIsSubmitting(true); // Set isSubmitting to true to show a loading message
             setIsLoggedIn(true); // Set isLoggedIn to true after successful login
         } catch (error) {
             setError('User does not exist or the password is incorrect.');
@@ -45,6 +49,7 @@ const Login = () => {
 
         try {
             await createUserWithEmailAndPassword(auth, email, password); // Create a new user with the email and password (firebase function)
+            setIsSubmitting(true); // Set isSubmitting to true to show a loading message
             setIsLoggedIn(true); // Set isLoggedIn to true after successful sign up
         } catch (error) {
             const firebaseError = error as FirebaseError;
@@ -72,6 +77,7 @@ const Login = () => {
         if (isLoggedIn) {
             // Set a delay of 1.5 seconds before navigating to the main page
             const timer = setTimeout(() => {
+                setIsSubmitting(false); // Set isSubmitting to false
                 navigate('/');
             }, 2000);
 
@@ -95,7 +101,8 @@ const Login = () => {
                             setPassword(e.target.value)
                             setError('')
                         }}/>
-                        <button onClick={signIn}>Sign In</button>
+                        <button disabled={isSubmitting}
+                                onClick={signIn}>{isSubmitting ? 'Submitting...' : 'Sign In'}</button>
                         {error && <p>{error}</p>}
                         <p className={classes.changeModeText}>You do not have any account? Sign up!</p>
                         <button className={classes.secondButton} onClick={() => {
@@ -118,7 +125,8 @@ const Login = () => {
                             setError('')
                         }
                         }/>
-                        <button onClick={signUp}>Create an account</button>
+                        <button disabled={isSubmitting}
+                                onClick={signUp}>{isSubmitting ? 'Submitting...' : 'Create an account'}</button>
                         {error && <p>{error}</p>}
                         <p className={classes.changeModeText}>Do you already have an account? Login to the app!</p>
                         <button className={classes.secondButton} onClick={() => {
